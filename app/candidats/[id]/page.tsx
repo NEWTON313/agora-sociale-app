@@ -13,8 +13,9 @@ export function generateStaticParams() {
   return CANDIDATS.map((c) => ({ id: c.id }));
 }
 
-export default function FicheCandidatPage({ params }: { params: { id: string } }) {
-  const candidat = getCandidat(params.id);
+export default async function FicheCandidatPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const candidat = getCandidat(id);
   if (!candidat) notFound();
 
   return (
