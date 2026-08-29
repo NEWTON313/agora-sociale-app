@@ -51,7 +51,17 @@ export const CLASSES_SOCIALES: ClasseSociale[] = [
   },
 ];
 
-export const THEMES = ["Pouvoir d'achat", "Fiscalité", "Travail & emploi", "Services publics"] as const;
+export const THEMES = [
+  "Pouvoir d'achat et économie",
+  "Retraites et modèle social",
+  "Immigration et intégration",
+  "Sécurité et justice",
+  "Services publics",
+  "Écologie et énergie",
+  "Souveraineté et industrie",
+  "Institutions et démocratie",
+  "Europe et géopolitique",
+] as const;
 export type Theme = (typeof THEMES)[number];
 
 export interface ImpactClasse {
@@ -92,6 +102,15 @@ export const AVIS_DONNEES_REELLES: AvisDonnees = {
     "Liste partielle et provisoire : aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027). La primaire du Parti socialiste (11-18/10/2026) n'a pas eu lieu ; les écologistes n'ont pas encore de candidat déclaré. La candidature de Marine Le Pen dépend d'un pourvoi en cassation en cours. Chaque mesure indique sa source et son niveau de confiance.",
 };
 
+// Remapping vers la taxonomie à 9 thèmes (2026-08-29) : les 9 mesures existantes ont été
+// écrites sous l'ancienne taxonomie à 4 thèmes et sont réparties ici sur leur thème le plus
+// proche. Deux choix sont discutables et à revoir lors d'une prochaine relecture éditoriale :
+// `br-rsa` (RSA/emploi) est classée en "Pouvoir d'achat et économie" plutôt que "Retraites et
+// modèle social", et `ep-regle-or` (règle d'or budgétaire, à valeur quasi institutionnelle)
+// y est classée plutôt qu'en "Institutions et démocratie", car leur contenu chiffré reste
+// avant tout économique/budgétaire. Les 6 autres thèmes (immigration, sécurité, écologie,
+// souveraineté, institutions, Europe) n'ont aujourd'hui aucune mesure sourcée : case vide
+// assumée plutôt qu'invention de contenu (voir méthodologie).
 export const CANDIDATS: Candidat[] = [
   {
     id: "melenchon",
@@ -100,7 +119,7 @@ export const CANDIDATS: Candidat[] = [
     mesures: [
       {
         id: "jlm-retraites",
-        theme: "Pouvoir d'achat",
+        theme: "Retraites et modèle social",
         titre: "Retour de la retraite à 60 ans avec 40 annuités de cotisation",
         resumeOfficiel:
           "Mesure phare reconduite depuis les campagnes 2012, 2017 et 2022 : abroger le report de l'âge légal et revenir à un départ à 60 ans pour une carrière complète de 40 ans, avec alignement des petites pensions sur un Smic revalorisé.",
@@ -116,7 +135,7 @@ export const CANDIDATS: Candidat[] = [
       },
       {
         id: "jlm-fiscalite",
-        theme: "Fiscalité",
+        theme: "Pouvoir d'achat et économie",
         titre: "Nouvelles tranches d'impôt sur le revenu et alignement de la fiscalité du capital sur celle du travail",
         resumeOfficiel:
           "Création de tranches supplémentaires d'impôt sur le revenu pour les hauts revenus et taxation des revenus du capital au même barème que les revenus du travail, pour financer les services publics et réduire les inégalités.",
@@ -155,7 +174,7 @@ export const CANDIDATS: Candidat[] = [
       },
       {
         id: "ga-salaires",
-        theme: "Pouvoir d'achat",
+        theme: "Pouvoir d'achat et économie",
         titre: "Réduire l'écart entre salaire brut et salaire net",
         resumeOfficiel:
           "Annoncé comme l'un des quatre « chantiers capitaux » de la campagne (avec l'école, les frontières et l'IA) : augmenter le salaire net à coût du travail constant pour l'employeur, sans mécanisme précis encore détaillé.",
@@ -178,7 +197,7 @@ export const CANDIDATS: Candidat[] = [
     mesures: [
       {
         id: "ep-chomage",
-        theme: "Travail & emploi",
+        theme: "Pouvoir d'achat et économie",
         titre: "Réduire à 12 mois la durée d'indemnisation chômage pour les moins de 50 ans",
         resumeOfficiel: "Présenté par le candidat comme un alignement sur le modèle allemand, dans un programme économique axé sur la maîtrise de la dépense publique.",
         sourceOfficielle: "https://www.lejdd.fr/economie/presidentielle-edouard-philippe-compte-reduire-lindemnisation-du-chomage-et-mettre-fin-a-lopen-bar-des-arrets-de-travail-181923",
@@ -193,7 +212,7 @@ export const CANDIDATS: Candidat[] = [
       },
       {
         id: "ep-regle-or",
-        theme: "Fiscalité",
+        theme: "Pouvoir d'achat et économie",
         titre: "Constitutionnaliser une règle d'or budgétaire limitant les déficits publics",
         resumeOfficiel: "Inscrire dans la Constitution une limite aux déficits publics, avec un objectif de retour sous les 3 % de déficit d'ici 2030, sans détail chiffré public sur la trajectoire.",
         sourceOfficielle: "https://www.franceinfo.fr/elections/presidentielle/dette-publique-retraites-reindustrialisation-ce-qu-il-faut-retenir-du-premier-debat-des-principaux-candidats-a-la-presidentielle_8165342.html",
@@ -215,7 +234,7 @@ export const CANDIDATS: Candidat[] = [
     mesures: [
       {
         id: "br-rsa",
-        theme: "Travail & emploi",
+        theme: "Pouvoir d'achat et économie",
         titre: "Conditionner plus strictement le RSA à l'acceptation d'offres d'emploi",
         resumeOfficiel: "Dans la continuité de la loi pour le plein emploi, durcir les conditions de maintien du RSA en cas de refus répété d'offres d'emploi jugées raisonnables.",
         sourceOfficielle: "https://www.elyseescope.com/questions/programme-retailleau-lr-2027-securite-immigration",
@@ -237,7 +256,7 @@ export const CANDIDATS: Candidat[] = [
     mesures: [
       {
         id: "mlp-tva",
-        theme: "Pouvoir d'achat",
+        theme: "Pouvoir d'achat et économie",
         titre: "Suppression ou forte baisse de la TVA sur les produits de première nécessité",
         resumeOfficiel: "Réduire ou supprimer la TVA sur l'énergie, l'alimentation et le carburant pour soutenir le pouvoir d'achat, sans calendrier ni chiffrage détaillé rendus publics pour 2027.",
         sourceOfficielle: "https://www.elyseescope.com/le-radar/programme-economique-marine-le-pen-rn-2027",
@@ -252,7 +271,7 @@ export const CANDIDATS: Candidat[] = [
       },
       {
         id: "mlp-ifi",
-        theme: "Fiscalité",
+        theme: "Pouvoir d'achat et économie",
         titre: "Suppression de l'IFI et création d'un impôt sur la fortune financière (IFF)",
         resumeOfficiel: "Remplacer l'impôt sur la fortune immobilière par un impôt ciblant les actifs financiers, présenté par le parti comme visant la « spéculation » plutôt que la détention d'un bien immobilier.",
         sourceOfficielle: "https://votons-2027.fr/candidats/le-pen/programme",
