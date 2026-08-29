@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
             ))}
             <a
-              href="https://github.com/"
+              href="https://github.com/NEWTON313/agora-sociale-app"
               target="_blank"
               rel="noopener noreferrer"
               className="border-b-2 border-transparent hover:border-line-strong text-ink-soft hover:text-ink pb-1 transition-colors"
