@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SMIC jeunes et RSA sous 25 ans : le cadre légal",
+  description:
+    "Abattement Smic jeunes, condition d'âge du RSA : cadre légal actuel, le \"trou\" 18-25 ans, et arguments pour et contre les propositions des candidats.",
+  alternates: { canonical: "/methodologie/jeunesse" },
+};
+
 export default function JeunessePage() {
   return (
     <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">

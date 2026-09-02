@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Fiscalité du patrimoine 2027 : IFI et succession",
+  description:
+    "IFI, droits de succession : cadre légal actuel, angle mort structurel, et argumentaire pour/contre des propositions des candidats à la présidentielle 2027, sans verdict.",
+  alternates: { canonical: "/methodologie/fiscalite-patrimoine" },
+};
+
 export default function FiscalitePatrimoinePage() {
   return (
     <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">

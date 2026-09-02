@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Réforme des retraites 2027 : cadre légal et enjeux",
+  description:
+    "Suspension de la réforme Borne, calendrier gelé jusqu'en 2028 : cadre légal actuel, angle mort sur l'espérance de vie par catégorie, arguments pour et contre.",
+  alternates: { canonical: "/methodologie/retraites" },
+};
+
 export default function RetraitesPage() {
   return (
     <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">

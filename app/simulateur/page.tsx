@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import SimulateurForm from "@/components/SimulateurForm";
 
 export const metadata: Metadata = {
-  title: "Simulateur — À quelle catégorie sociale appartenez-vous ? | Mon Choix 2027",
+  title: "Simulateur : à quelle catégorie sociale appartenez-vous ?",
+  description:
+    "Calculez votre niveau de vie selon la méthode INSEE (revenu du foyer ÷ unités de consommation) et situez-vous automatiquement dans le comparateur des programmes 2027. Aucune donnée conservée.",
+  alternates: { canonical: "/simulateur" },
 };
 
 export default function SimulateurPage() {

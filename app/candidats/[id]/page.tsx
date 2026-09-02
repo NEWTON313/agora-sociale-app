@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CANDIDATS, CLASSES_SOCIALES, getCandidat } from "@/lib/data";
 
@@ -11,6 +12,24 @@ const COULEURS: Record<string, { fg: string; bg: string }> = {
 // Pré-génère une page statique par candidat au build (SSG).
 export function generateStaticParams() {
   return CANDIDATS.map((c) => ({ id: c.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const candidat = getCandidat(id);
+  if (!candidat) return {};
+
+  const themes = candidat.mesures.map((m) => m.theme).join(", ");
+  const title = `${candidat.nom} (${candidat.parti}) — programme et mesures à la présidentielle 2027`;
+  const description = `Impact des mesures de ${candidat.nom} (${candidat.parti}) sur chaque catégorie sociale : ${themes}. Sources, niveau de confiance et angle mort pour chaque mesure.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/candidats/${candidat.id}` },
+    openGraph: { title, description, url: `/candidats/${candidat.id}` },
+    twitter: { title, description },
+  };
 }
 
 export default async function FicheCandidatPage({ params }: { params: Promise<{ id: string }> }) {

@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Méthodologie",
+  description:
+    "Comment sont collectées, sourcées et notées les mesures des candidats : garde-fous de neutralité, score d'impact par classe sociale, limites assumées.",
+  alternates: { canonical: "/methodologie" },
+};
+
 export default function MethodologiePage() {
   return (
     <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">
