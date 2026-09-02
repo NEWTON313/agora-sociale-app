@@ -31,25 +31,35 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
         en plus (et sans changer) de l&apos;affichage neutre par défaut.
       </p>
 
-      <ul className="flex flex-col gap-3">
-        {THEMES.map((theme) => (
-          <li key={theme} className="flex justify-between items-center flex-wrap gap-2.5 max-[480px]:flex-col max-[480px]:items-start">
-            <span className="text-[0.9rem]">{theme}</span>
+      <ul className="flex flex-col">
+        {THEMES.map((theme, i) => (
+          <li
+            key={theme}
+            className={`grid grid-cols-[minmax(150px,230px)_1fr] max-[480px]:grid-cols-1 items-center gap-4 max-[480px]:gap-2 py-3.5 ${
+              i < THEMES.length - 1 ? "border-b border-dashed border-line" : "pb-1"
+            }`}
+          >
+            <span className="text-[0.9rem] font-medium">{theme}</span>
+            {/* Contrôle segmenté : les 4 niveaux forment un seul bloc à bordure partagée,
+                plutôt que 4 boutons séparés — toujours le même gabarit quel que soit le
+                nom du thème. Sur mobile, on repasse à des boutons individuels en grille 2x2. */}
             <div
-              className="flex flex-wrap gap-1.5 max-[480px]:grid max-[480px]:grid-cols-2 max-[480px]:w-full"
+              className="flex max-[480px]:grid max-[480px]:grid-cols-2 max-[480px]:gap-1.5 rounded border border-line-strong max-[480px]:border-0 overflow-hidden max-[480px]:overflow-visible bg-paper max-[480px]:bg-transparent"
               role="group"
               aria-label={`Priorité pour ${theme}`}
             >
-              {NIVEAUX_PRIORITE.map((niveau) => (
+              {NIVEAUX_PRIORITE.map((niveau, ni) => (
                 <button
                   key={niveau}
                   type="button"
                   aria-pressed={poids[theme] === niveau}
                   onClick={() => setNiveau(theme, niveau)}
-                  className={`font-mono text-[0.68rem] uppercase tracking-wide px-2.5 py-1.5 border rounded transition-colors text-center ${
+                  className={`flex-1 font-mono text-[0.66rem] uppercase tracking-wide px-1.5 py-2.5 text-center transition-colors max-[480px]:rounded max-[480px]:border max-[480px]:border-line-strong ${
+                    ni < NIVEAUX_PRIORITE.length - 1 ? "border-r border-line-strong max-[480px]:border-r-line-strong" : ""
+                  } ${
                     poids[theme] === niveau
-                      ? "bg-accent-bleu text-paper-raised border-accent-bleu"
-                      : "bg-paper text-ink-soft border-line-strong hover:border-accent-bleu"
+                      ? "bg-accent-bleu text-paper-raised font-semibold max-[480px]:border-accent-bleu"
+                      : "bg-transparent text-ink-soft hover:bg-accent-bleu-soft hover:text-paper-raised max-[480px]:bg-paper"
                   }`}
                   title={LABELS_PRIORITE[niveau]}
                 >

@@ -21,7 +21,8 @@ export default function SimulateurPage() {
           </h1>
           <p className="text-[1.15rem] max-w-[62ch] text-ink-soft mt-4.5">
             Ce simulateur calcule votre <strong>niveau de vie</strong> selon la méthode officielle de l&apos;INSEE
-            pour vous situer automatiquement dans le comparateur.
+            pour déterminer votre catégorie sociale, puis vous indique quel candidat penche le plus en votre
+            faveur en fonction de votre classe sociale et de vos priorités.
           </p>
           <div className="mt-6 border-l-[3px] border-line-strong pl-4 py-2.5 text-[0.88rem] text-ink-soft bg-paper max-w-[60ch]">
             Le calcul se fait entièrement dans votre navigateur (aucun appel serveur, aucune donnée conservée).

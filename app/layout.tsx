@@ -40,7 +40,6 @@ export const metadata: Metadata = {
 };
 
 const NAV = [
-  { href: "/", label: "Comparateur" },
   { href: "/simulateur", label: "Simulateur" },
   { href: "/candidats/melenchon", label: "Fiches candidats" },
   { href: "/methodologie", label: "Méthodologie" },
@@ -80,10 +79,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <header className="sticky top-0 z-[100] border-b border-line bg-white/85 backdrop-blur-md shadow-[0_1px_0_#1e3a5f]">
           <div className="max-w-[1180px] mx-auto px-6 flex items-baseline justify-between flex-wrap gap-2 pt-5 pb-3.5">
-            <div className="font-display text-2xl font-bold tracking-tight">
+            <Link href="/" className="font-display text-2xl font-bold tracking-tight no-underline">
               <span className="text-accent-bleu">Mon</span>{" "}
               <span className="font-normal text-ink-faint">Choix 2027</span>
-            </div>
+            </Link>
             <div className="font-mono text-[0.76rem] uppercase tracking-wide text-ink-faint max-[560px]:hidden">
               Projet citoyen · Open source · Présidentielle 2027
             </div>
