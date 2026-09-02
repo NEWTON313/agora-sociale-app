@@ -1,5 +1,5 @@
 /**
- * L'AGORA SOCIALE — Simulateur de classement (logique pure, testable)
+ * MON CHOIX 2027 — Simulateur de classement (logique pure, testable)
  * Source des seuils : Insee, "Distribution des niveaux de vie", données 2024,
  * publication du 09/07/2026. https://www.insee.fr/fr/statistiques/2416808
  * ⚠️ À mettre à jour chaque année (généralement en juillet).

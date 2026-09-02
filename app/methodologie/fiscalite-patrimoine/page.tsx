@@ -84,7 +84,7 @@ export default function FiscalitePatrimoinePage() {
         <p>
           L&apos;évaluation de la réforme ISF → IFI (2018) n&apos;a pas permis de conclure de façon définitive sur ses
           effets sur l&apos;investissement ou les départs/retours de contribuables fortunés. Des économistes défendent
-          des lectures opposées de ces mêmes données. L&apos;Agora Sociale ne tranche pas ce débat empirique.
+          des lectures opposées de ces mêmes données. Mon Choix 2027 ne tranche pas ce débat empirique.
         </p>
       </section>
 

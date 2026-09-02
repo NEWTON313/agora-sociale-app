@@ -16,7 +16,7 @@ export default function HomePage() {
               Comparez les programmes selon leur impact réel sur votre classe sociale.
             </h1>
             <p className="text-[1.18rem] max-w-[62ch] text-ink-soft mt-5 animate-rise" style={{ animationDelay: "0.08s" }}>
-              L&apos;Agora Sociale croise les mesures phares des candidats avec quatre grandes catégories
+              Mon Choix 2027 croise les mesures phares des candidats avec quatre grandes catégories
               socio-économiques pour rendre visibles les avantages, les risques et les angles morts de chaque
               proposition — sans étiquette partisane.
             </p>

@@ -3,7 +3,7 @@ export default function MethodologiePage() {
     <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">
       <h1 className="text-[2rem] mb-2">Comment nous construisons chaque analyse</h1>
       <p className="text-ink-soft">
-        La crédibilité de L&apos;Agora Sociale repose entièrement sur la traçabilité de ses sources et sur la
+        La crédibilité de Mon Choix 2027 repose entièrement sur la traçabilité de ses sources et sur la
         séparation stricte entre le fait et l&apos;interprétation.
       </p>
 

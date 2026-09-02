@@ -1,5 +1,5 @@
 /**
- * L'AGORA SOCIALE — Modèle de données
+ * MON CHOIX 2027 — Modèle de données
  * ⚠️ AVERTISSEMENT MÉTHODOLOGIQUE — voir AVIS_DONNEES_REELLES ci-dessous.
  * Aucune liste de candidats officielle n'existe à ce jour (28/08/2026) ;
  * les parrainages ne seront validés qu'au plus tard le 12/03/2027. Seuls

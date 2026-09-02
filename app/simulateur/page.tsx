@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SimulateurForm from "@/components/SimulateurForm";
 
 export const metadata: Metadata = {
-  title: "Simulateur — À quelle catégorie sociale appartenez-vous ? | L'Agora Sociale",
+  title: "Simulateur — À quelle catégorie sociale appartenez-vous ? | Mon Choix 2027",
 };
 
 export default function SimulateurPage() {

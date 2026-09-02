@@ -1,4 +1,4 @@
-# L'Agora Sociale — version Next.js
+# Mon Choix 2027 — version Next.js
 
 Portage du prototype statique (`agora-sociale/`) vers Next.js 14 (App Router)
 + TypeScript + Tailwind CSS. À utiliser dès que le site a besoin de pages
@@ -73,7 +73,7 @@ npm run build   # build de production (SSG des fiches candidats)
 cd agora-sociale-next
 git init
 git add .
-git commit -m "Premier commit : L'Agora Sociale (Next.js)"
+git commit -m "Premier commit : Mon Choix 2027 (Next.js)"
 git branch -M main
 
 # Crée d'abord un dépôt vide sur https://github.com/new (nom suggéré : agora-sociale-app)
