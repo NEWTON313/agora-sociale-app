@@ -189,7 +189,7 @@ export default function SimulateurForm() {
               step={10}
               required
               placeholder="Ex : 2400"
-              className="flex-1 px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink"
+              className="flex-1 px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu"
             />
             <span className="font-mono text-[0.85rem] text-ink-soft">€ / mois</span>
           </div>
@@ -201,21 +201,21 @@ export default function SimulateurForm() {
         <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="nbAdultes" className="font-display text-[0.92rem]">Adultes du foyer</label>
-            <input id="nbAdultes" name="nbAdultes" type="number" min={1} max={6} defaultValue={1} required className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink" />
+            <input id="nbAdultes" name="nbAdultes" type="number" min={1} max={6} defaultValue={1} required className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="nbEnfants14Plus" className="font-display text-[0.92rem]">Enfants ≥ 14 ans</label>
-            <input id="nbEnfants14Plus" name="nbEnfants14Plus" type="number" min={0} max={8} defaultValue={0} className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink" />
+            <input id="nbEnfants14Plus" name="nbEnfants14Plus" type="number" min={0} max={8} defaultValue={0} className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="nbEnfantsMoins14" className="font-display text-[0.92rem]">Enfants &lt; 14 ans</label>
-            <input id="nbEnfantsMoins14" name="nbEnfantsMoins14" type="number" min={0} max={8} defaultValue={0} className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink" />
+            <input id="nbEnfantsMoins14" name="nbEnfantsMoins14" type="number" min={0} max={8} defaultValue={0} className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
         </div>
 
         <div className="flex flex-col gap-1.5">
           <label htmlFor="statutActivite" className="font-display text-[0.92rem]">Votre situation principale</label>
-          <select id="statutActivite" name="statutActivite" required className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink">
+          <select id="statutActivite" name="statutActivite" required className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu">
             <option value="emploi_salarie">Salarié·e en emploi</option>
             <option value="independant">Indépendant·e / profession libérale</option>
             <option value="retraite">Retraité·e</option>
@@ -236,7 +236,7 @@ export default function SimulateurForm() {
             placeholder="Ex : 1978"
             value={anneeNaissance}
             onChange={(e) => setAnneeNaissance(e.target.value)}
-            className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink"
+            className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu"
           />
           <p className="text-[0.8rem] text-ink-soft">
             Sert uniquement à indiquer votre âge légal de départ à la retraite applicable aujourd&apos;hui — un
@@ -249,7 +249,7 @@ export default function SimulateurForm() {
             <label htmlFor="trimestreNaissance" className="font-display text-[0.92rem]">
               Vous êtes né·e en 1965 — précisez :
             </label>
-            <select id="trimestreNaissance" name="trimestreNaissance" className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink">
+            <select id="trimestreNaissance" name="trimestreNaissance" className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu">
               <option value="q1">Entre janvier et mars 1965</option>
               <option value="q2_4">Entre avril et décembre 1965</option>
             </select>
@@ -260,13 +260,13 @@ export default function SimulateurForm() {
         <div className="flex flex-col gap-1.5">
           <label htmlFor="patrimoineNet" className="font-display text-[0.92rem]">Patrimoine net estimé (optionnel)</label>
           <div className="flex items-center gap-2">
-            <input id="patrimoineNet" name="patrimoineNet" type="number" min={0} step={1000} placeholder="Ex : 150000" className="flex-1 px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-ink" />
+            <input id="patrimoineNet" name="patrimoineNet" type="number" min={0} step={1000} placeholder="Ex : 150000" className="flex-1 px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
             <span className="font-mono text-[0.85rem] text-ink-soft">€</span>
           </div>
           <p className="text-[0.8rem] text-ink-soft">Immobilier, épargne, placements, moins les dettes. Laissez vide si vous préférez ne pas répondre.</p>
         </div>
 
-        <button type="submit" className="self-start font-mono uppercase tracking-wide text-[0.85rem] px-5.5 py-3 bg-ink text-paper-raised rounded shadow-xs transition-all hover:bg-ink-soft hover:shadow-card active:translate-y-px">
+        <button type="submit" className="self-start font-mono uppercase tracking-wide text-[0.85rem] px-5.5 py-3 bg-accent-bleu text-paper-raised rounded shadow-xs transition-all hover:bg-accent-bleu-soft hover:shadow-card active:translate-y-px">
           Calculer mon classement
         </button>
       </form>

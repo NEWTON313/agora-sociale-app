@@ -9,7 +9,7 @@ export default function HomePage() {
         <div className="max-w-[1180px] mx-auto px-6 grid grid-cols-[1fr_360px] gap-13 items-center max-[900px]:grid-cols-1">
           <div>
             <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-faint mb-3.5 flex items-center gap-2.5">
-              <span className="inline-block w-5 h-px bg-line-strong" />
+              <span className="inline-block w-5 h-[2px] bg-accent-rouge opacity-60" />
               Qui gagne, qui perd, mesure par mesure
             </div>
             <h1 className="font-display text-[clamp(2.1rem,4.4vw,3.4rem)] leading-[1.04] max-w-[15ch] tracking-tight animate-rise">

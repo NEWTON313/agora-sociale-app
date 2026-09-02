@@ -56,7 +56,7 @@ export default function ComparateurClasse() {
               <select
                 value={theme}
                 onChange={(e) => setTheme(e.target.value as Theme)}
-                className="font-mono text-[0.85rem] px-2.5 py-2 border border-line-strong bg-paper-raised rounded"
+                className="font-mono text-[0.85rem] px-2.5 py-2 border border-line-strong bg-paper-raised rounded focus-visible:border-accent-bleu hover:border-accent-bleu-soft transition-colors"
               >
                 {THEMES.map((t) => (
                   <option key={t} value={t}>
@@ -71,8 +71,8 @@ export default function ComparateurClasse() {
               aria-pressed={modePriorites}
               className={`font-mono text-[0.78rem] uppercase tracking-wide px-3 py-2 border rounded transition-colors ${
                 modePriorites
-                  ? "bg-ink text-paper-raised border-ink"
-                  : "bg-paper-raised text-ink-soft border-line-strong hover:border-ink"
+                  ? "bg-accent-bleu text-paper-raised border-accent-bleu"
+                  : "bg-paper-raised text-ink-soft border-line-strong hover:border-accent-bleu-soft hover:text-accent-bleu"
               }`}
             >
               Mes priorités

@@ -17,6 +17,8 @@ module.exports = {
         retraites: { DEFAULT: "#9c7539", bg: "#f1e8d7" },
         positif: "#326049",
         negatif: "#8f382f",
+        "accent-bleu": { DEFAULT: "#1e3a5f", soft: "#395670" },
+        "accent-rouge": "#8a2f35",
       },
       boxShadow: {
         xs: "0 1px 2px rgba(16,19,26,0.05)",

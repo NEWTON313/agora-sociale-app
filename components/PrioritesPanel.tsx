@@ -20,7 +20,7 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
         <button
           type="button"
           onClick={() => onChange(poidsThemesParDefaut())}
-          className="font-mono text-[0.72rem] uppercase tracking-wide underline text-ink-soft hover:text-ink"
+          className="font-mono text-[0.72rem] uppercase tracking-wide underline text-ink-soft hover:text-accent-rouge"
         >
           Réinitialiser mes priorités
         </button>
@@ -33,19 +33,23 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
 
       <ul className="flex flex-col gap-3">
         {THEMES.map((theme) => (
-          <li key={theme} className="flex justify-between items-center flex-wrap gap-2.5">
+          <li key={theme} className="flex justify-between items-center flex-wrap gap-2.5 max-[480px]:flex-col max-[480px]:items-start">
             <span className="text-[0.9rem]">{theme}</span>
-            <div className="flex gap-1.5" role="group" aria-label={`Priorité pour ${theme}`}>
+            <div
+              className="flex flex-wrap gap-1.5 max-[480px]:grid max-[480px]:grid-cols-2 max-[480px]:w-full"
+              role="group"
+              aria-label={`Priorité pour ${theme}`}
+            >
               {NIVEAUX_PRIORITE.map((niveau) => (
                 <button
                   key={niveau}
                   type="button"
                   aria-pressed={poids[theme] === niveau}
                   onClick={() => setNiveau(theme, niveau)}
-                  className={`font-mono text-[0.68rem] uppercase tracking-wide px-2.5 py-1.5 border rounded transition-colors ${
+                  className={`font-mono text-[0.68rem] uppercase tracking-wide px-2.5 py-1.5 border rounded transition-colors text-center ${
                     poids[theme] === niveau
-                      ? "bg-ink text-paper-raised border-ink"
-                      : "bg-paper text-ink-soft border-line-strong hover:border-ink"
+                      ? "bg-accent-bleu text-paper-raised border-accent-bleu"
+                      : "bg-paper text-ink-soft border-line-strong hover:border-accent-bleu"
                   }`}
                   title={LABELS_PRIORITE[niveau]}
                 >

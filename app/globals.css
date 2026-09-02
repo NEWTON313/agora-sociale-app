@@ -30,7 +30,7 @@ body::before {
 .mono-nums { font-feature-settings: "tnum" 1, "zero" 1; }
 
 :focus-visible {
-  outline: 2px solid var(--ink, #10131a);
+  outline: 2px solid #1e3a5f;
   outline-offset: 2px;
   border-radius: 2px;
 }

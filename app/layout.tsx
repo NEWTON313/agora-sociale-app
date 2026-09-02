@@ -78,21 +78,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "linear-gradient(to right, #3d5a78 0%, #3d5a78 25%, #566f4d 25%, #566f4d 50%, #7a4258 50%, #7a4258 75%, #9c7539 75%, #9c7539 100%)",
           }}
         />
-        <header className="sticky top-0 z-[100] border-b border-line bg-white/85 backdrop-blur-md shadow-[0_1px_0_#10131a]">
+        <header className="sticky top-0 z-[100] border-b border-line bg-white/85 backdrop-blur-md shadow-[0_1px_0_#1e3a5f]">
           <div className="max-w-[1180px] mx-auto px-6 flex items-baseline justify-between flex-wrap gap-2 pt-5 pb-3.5">
             <div className="font-display text-2xl font-bold tracking-tight">
-              Mon <span className="font-normal text-ink-faint">Choix 2027</span>
+              <span className="text-accent-bleu">Mon</span>{" "}
+              <span className="font-normal text-ink-faint">Choix 2027</span>
             </div>
-            <div className="font-mono text-[0.76rem] uppercase tracking-wide text-ink-faint">
+            <div className="font-mono text-[0.76rem] uppercase tracking-wide text-ink-faint max-[560px]:hidden">
               Projet citoyen · Open source · Présidentielle 2027
             </div>
           </div>
-          <nav className="max-w-[1180px] mx-auto px-6 flex gap-6 font-mono text-[0.8rem] uppercase tracking-wide pb-3.5">
+          <nav className="max-w-[1180px] mx-auto px-6 flex flex-nowrap gap-6 font-mono text-[0.8rem] uppercase tracking-wide pb-3.5 overflow-x-auto">
             {NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="border-b-2 border-transparent hover:border-line-strong text-ink-soft hover:text-ink pb-1 transition-colors"
+                className="whitespace-nowrap border-b-2 border-transparent hover:border-accent-bleu-soft text-ink-soft hover:text-accent-bleu pb-1 transition-colors"
               >
                 {item.label}
               </Link>
@@ -101,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               href="https://github.com/NEWTON313/agora-sociale-app"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-b-2 border-transparent hover:border-line-strong text-ink-soft hover:text-ink pb-1 transition-colors"
+              className="whitespace-nowrap border-b-2 border-transparent hover:border-accent-bleu-soft text-ink-soft hover:text-accent-bleu pb-1 transition-colors"
             >
               Code source
             </a>
