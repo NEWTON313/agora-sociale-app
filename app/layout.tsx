@@ -98,14 +98,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {item.label}
               </Link>
             ))}
-            <a
-              href="https://github.com/NEWTON313/agora-sociale-app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whitespace-nowrap border-b-2 border-transparent hover:border-accent-bleu-soft text-ink-soft hover:text-accent-bleu pb-1 transition-colors"
-            >
-              Code source
-            </a>
           </nav>
         </header>
 

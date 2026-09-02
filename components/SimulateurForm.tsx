@@ -23,6 +23,12 @@ import ScorePersonnalise from "./ScorePersonnalise";
 
 const euros = (n: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(n) + " €";
 
+function decrirePosition(percentile: number): string {
+  if (percentile === 50) return "à la médiane exacte du niveau de vie";
+  if (percentile > 50) return `parmi les ${100 - percentile} % les plus aisés`;
+  return `parmi les ${percentile} % les plus modestes`;
+}
+
 const COULEURS: Record<string, string> = {
   populaires: "#3d5a78",
   moyennes: "#566f4d",
@@ -126,7 +132,7 @@ function Resultat({ r }: { r: ResultatClassement }) {
         </div>
         <div>
           <dt className="font-mono text-[0.7rem] uppercase text-ink-soft">Position dans la population</dt>
-          <dd className="font-display text-[1.1rem] mt-1">environ le {r.percentile}ᵉ percentile</dd>
+          <dd className="font-display text-[1.1rem] mt-1">{decrirePosition(r.percentile)}</dd>
         </div>
         <div>
           <dt className="font-mono text-[0.7rem] uppercase text-ink-soft">Unités de consommation</dt>
