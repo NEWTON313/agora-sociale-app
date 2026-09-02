@@ -51,7 +51,7 @@ export default function MethodologiePage() {
         </ul>
       </section>
 
-      <section className="py-8 border-b border-line">
+      <section id="score-personnalise" className="py-8 border-b border-line">
         <h2 className="text-[1.2rem] mb-5">4. Le score personnalisé « mes priorités »</h2>
         <p>
           Sur la page d&apos;accueil, vous pouvez indiquer l&apos;importance que vous accordez à chaque thème : le
@@ -68,6 +68,12 @@ export default function MethodologiePage() {
           <strong>Ce score n&apos;est jamais utilisé pour réordonner l&apos;affichage par défaut des candidats</strong>{" "}
           (voir garde-fous de neutralité ci-dessus). Un tri optionnel, explicitement activé par vous, reste disponible
           mais porte la mention « expérimental » et un rappel que ce n&apos;est ni un classement ni une recommandation.
+        </p>
+        <p className="mt-3">
+          Le bouton <strong>« Mon candidat »</strong> du simulateur applique le même calcul, à partir de la catégorie
+          sociale que vous venez de déterminer : il met en avant le candidat dont les mesures recensées obtiennent le
+          score le plus favorable pour les priorités indiquées, mais affiche systématiquement le classement complet
+          des candidats en dessous, jamais un seul nom isolé de son contexte.
         </p>
       </section>
 

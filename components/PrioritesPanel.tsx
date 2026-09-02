@@ -27,8 +27,8 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
       </div>
 
       <p className="text-[0.85rem] text-ink-soft mb-4">
-        Indiquez l&apos;importance que vous accordez à chaque thème : les cartes ci-dessous affichent alors un score
-        personnalisé, en plus (et sans changer) de l&apos;affichage neutre par défaut.
+        Indiquez l&apos;importance que vous accordez à chaque thème pour obtenir un score personnalisé par candidat,
+        en plus (et sans changer) de l&apos;affichage neutre par défaut.
       </p>
 
       <ul className="flex flex-col gap-3">
