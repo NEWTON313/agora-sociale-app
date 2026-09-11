@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import ComparateurClasse from "@/components/ComparateurClasse";
 import { AVIS_DONNEES_REELLES } from "@/lib/data";
 
@@ -10,33 +11,50 @@ export default function HomePage() {
           <div>
             <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-faint mb-3.5 flex items-center gap-2.5">
               <span className="inline-block w-5 h-[2px] bg-accent-rouge opacity-60" />
-              Qui gagne, qui perd, mesure par mesure
+              6 candidats · 9 thèmes · zéro étiquette partisane
             </div>
-            <h1 className="font-display text-[clamp(2.1rem,4.4vw,3.4rem)] leading-[1.04] max-w-[15ch] tracking-tight animate-rise">
-              Comparez les programmes selon leur impact réel sur votre classe sociale.
+
+            <h1 className="font-display text-[clamp(2.1rem,4.4vw,3.4rem)] leading-[1.04] max-w-[16ch] tracking-tight animate-rise">
+              Quel candidat colle vraiment à votre situation&nbsp;?
             </h1>
-            <p className="text-[1.18rem] max-w-[62ch] text-ink-soft mt-5 animate-rise" style={{ animationDelay: "0.08s" }}>
-              Mon Choix 2027 croise les mesures phares des candidats avec quatre grandes catégories
-              socio-économiques pour rendre visibles les avantages, les risques et les angles morts de chaque
-              proposition — sans étiquette partisane.
+
+            <p className="text-[1.18rem] max-w-[58ch] text-ink-soft mt-5 animate-rise" style={{ animationDelay: "0.08s" }}>
+              2 minutes de questions, une méthode INSEE, un score calculé à partir de{" "}
+              <strong>vos</strong> priorités — jamais l&apos;inverse. Classement complet
+              systématique, jamais un seul nom mis en avant.
             </p>
-            <div className="mt-6 border-l-[3px] border-line-strong pl-4.5 py-3 text-[0.88rem] text-ink-soft bg-white shadow-xs rounded-r max-w-[60ch]">
-              <strong>Neutralité :</strong> ce site ne soutient aucun candidat. Voir la méthodologie pour les règles de
-              collecte des données.
+
+            <div className="mt-7 flex items-center gap-4 flex-wrap animate-rise" style={{ animationDelay: "0.12s" }}>
+              <Link
+                href="/simulateur"
+                className="inline-flex items-center gap-2 bg-accent-bleu text-paper-raised font-mono text-[0.85rem] uppercase tracking-wide px-6 py-3.5 rounded shadow-premium hover:bg-accent-bleu-soft transition-colors"
+              >
+                Faire le test (2 min) →
+              </Link>
+              <a
+                href="#comparateur"
+                className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-soft underline underline-offset-4 hover:text-accent-bleu transition-colors"
+              >
+                Explorer sans faire le test
+              </a>
             </div>
-            <div className="mt-3 border-l-[3px] pl-4.5 py-3 text-[0.88rem] text-ink-soft bg-white shadow-xs rounded-r max-w-[60ch]" style={{ borderLeftColor: "#9c7539" }}>
-              <strong>⚠️ Données en cours de constitution (màj {AVIS_DONNEES_REELLES.dateMaj}) :</strong>{" "}
-              {AVIS_DONNEES_REELLES.texte}
-            </div>
+
+            <p className="mt-6 text-[0.8rem] text-ink-faint max-w-[60ch]">
+              Ce site ne soutient aucun candidat.{" "}
+              <Link href="/methodologie" className="underline hover:text-accent-bleu">
+                Voir la méthodologie
+              </Link>{" "}
+              et les règles de collecte des données.
+            </p>
           </div>
 
           <div
             aria-hidden="true"
             className="border border-line rounded-lg bg-white shadow-premium p-5.5 animate-rise max-[900px]:rotate-0 max-[900px]:max-w-[380px]"
-            style={{ transform: "rotate(-1.2deg)", animationDelay: "0.15s" }}
+            style={{ transform: "rotate(-1.2deg)", animationDelay: "0.18s" }}
           >
             <div className="font-mono text-[0.64rem] uppercase tracking-wide text-ink-faint mb-3.5 pb-3 border-b border-dashed border-line">
-              Le registre — illustration
+              Votre résultat pourrait ressembler à ça
             </div>
             {[
               { label: "Classes populaires", width: 38, sens: "pos" as const },
@@ -62,7 +80,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="max-w-[1180px] mx-auto px-6 py-10 pb-20">
+      <div className="border-b border-line bg-paper-raised">
+        <div className="max-w-[1180px] mx-auto px-6 py-5 flex flex-col sm:flex-row gap-3 sm:gap-8 text-[0.82rem] text-ink-soft">
+          <div className="flex-1">
+            <strong className="text-ink">⚠️ Données en cours de constitution</strong>{" "}
+            <span className="text-ink-faint">(màj {AVIS_DONNEES_REELLES.dateMaj})</span> — {AVIS_DONNEES_REELLES.texte}
+          </div>
+        </div>
+      </div>
+
+      <div id="comparateur" className="max-w-[1180px] mx-auto px-6 py-10 pb-20 scroll-mt-20">
         {/* useSearchParams nécessite un Suspense boundary en App Router */}
         <Suspense fallback={null}>
           <ComparateurClasse />
