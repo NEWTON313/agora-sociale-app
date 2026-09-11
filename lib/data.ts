@@ -138,9 +138,9 @@ export const CANDIDATS: Candidat[] = [
         titre: "Nouvelles tranches d'impôt sur le revenu et alignement de la fiscalité du capital sur celle du travail",
         resumeOfficiel:
           "Création de tranches supplémentaires d'impôt sur le revenu pour les hauts revenus et taxation des revenus du capital au même barème que les revenus du travail, pour financer les services publics et réduire les inégalités.",
-        sourceOfficielle: "https://www.elyseescope.com/le-radar/programme-economique-melenchon-2027",
+        sourceOfficielle: "https://www.franceinfo.fr/elections/presidentielle/salarie-chomeur-chef-d-entreprise-si-jean-luc-melenchon-devient-president-voici-ce-qui-changera-pour-vous_2044075.html",
         niveauConfiance: "annonce",
-        noteConfiance: "Cohérent avec le programme « L'Avenir en commun » des campagnes précédentes, mais chiffrage 2027 non retrouvé dans une source de premier rang.",
+        noteConfiance: "Détaillé par franceinfo lors de la campagne 2022 (barème à 14 tranches contre 5 actuellement, taux marginal élevé au-delà d'un seuil élevé de revenu, capital taxé comme le travail), cohérent avec « L'Avenir en commun » ; chiffrage spécifique à 2027 non retrouvé dans une source de premier rang à ce jour.",
         impactParClasse: {
           populaires: { score: 0, avantages: ["Non concernées par les tranches ou la taxation du capital"], risques: [], angleMort: "Le programme ne précise pas d'affectation ciblée d'une partie des recettes vers cette catégorie." },
           moyennes: { score: 0, avantages: ["Non concernées par le haut de barème visé"], risques: ["Une partie supérieure de cette catégorie détenant une épargne financière pourrait être affectée, sans seuil exact public"], angleMort: "Absence de seuil précis pour distinguer petite épargne et gros patrimoine financier." },
@@ -460,9 +460,9 @@ export const CANDIDATS: Candidat[] = [
         theme: "Pouvoir d'achat et économie",
         titre: "Conditionner plus strictement le RSA à l'acceptation d'offres d'emploi",
         resumeOfficiel: "Dans la continuité de la loi pour le plein emploi, durcir les conditions de maintien du RSA en cas de refus répété d'offres d'emploi jugées raisonnables.",
-        sourceOfficielle: "https://www.elyseescope.com/questions/programme-retailleau-lr-2027-securite-immigration",
+        sourceOfficielle: "https://www.lejdd.fr/politique/presidentielle-le-peuple-de-droite-a-deja-son-programme-182934",
         niveauConfiance: "annonce",
-        noteConfiance: "Orientation cohérente avec les positions connues de Bruno Retailleau et de LR, mais modalités précises non retrouvées dans une source de premier rang.",
+        noteConfiance: "Le JDD documente un consensus plus large de la droite (LR dont Bruno Retailleau) autour de la conditionnalité du RSA à une contrepartie d'activité, par opposition au RN qui refuse cette conditionnalité ; le mécanisme précis de sanction en cas de refus répété d'offres d'emploi n'est pas chiffré dans cette source.",
         impactParClasse: {
           populaires: { score: -1, avantages: ["Objectif affiché d'insertion professionnelle plus rapide"], risques: ["Risque de sanctions pour des allocataires confrontés à des freins réels à l'emploi (garde d'enfants, mobilité, santé)", "Associations de lutte contre la pauvreté généralement critiques de ce type de conditionnalité"], angleMort: "Le programme ne détaille pas les moyens d'accompagnement prévus en parallèle de la sanction." },
           moyennes: { score: 0, avantages: [], risques: [], angleMort: "Mesure sans effet direct pour cette catégorie, non bénéficiaire du RSA dans son ensemble." },
@@ -577,10 +577,10 @@ export const CANDIDATS: Candidat[] = [
         id: "mlp-tva",
         theme: "Pouvoir d'achat et économie",
         titre: "Suppression ou forte baisse de la TVA sur les produits de première nécessité",
-        resumeOfficiel: "Réduire ou supprimer la TVA sur l'énergie, l'alimentation et le carburant pour soutenir le pouvoir d'achat, sans calendrier ni chiffrage détaillé rendus publics pour 2027.",
-        sourceOfficielle: "https://www.elyseescope.com/le-radar/programme-economique-marine-le-pen-rn-2027",
+        resumeOfficiel: "Baisser la TVA de 20 % à 5,5 % sur les produits énergétiques (carburant, fioul, gaz, électricité) et de 5,5 % à 0 % sur une liste d'une centaine de produits de première nécessité, sans calendrier ni chiffrage global rendus publics pour 2027.",
+        sourceOfficielle: "https://www.lejdd.fr/Politique/credibilite-efficacite-legalite-un-economiste-evalue-les-deux-baisses-de-tva-de-marine-le-pen-4105789",
         niveauConfiance: "confirme",
-        noteConfiance: "Position historique du RN documentée sur plusieurs campagnes successives (2017, 2022) ; modalités précises 2027 à préciser.",
+        noteConfiance: "Position portée par Marine Le Pen et le RN sur plusieurs campagnes : les deux baisses de TVA (énergie et produits de première nécessité) ont été chiffrées et analysées par des économistes dans Le JDD lors de la présidentielle 2022, et réaffirmées depuis (le RN maintenait encore une TVA à taux zéro sur une centaine de produits en 2024). Aucune confirmation officielle chiffrée spécifique à 2027 à ce jour.",
         impactParClasse: {
           populaires: { score: 2, avantages: ["Effet direct et proportionnellement plus favorable pour les ménages consacrant une part importante de leur revenu à ces produits"], risques: ["Financement du manque à gagner de TVA non détaillé publiquement"], angleMort: "Aucun chiffrage indépendant public du coût budgétaire de la mesure." },
           moyennes: { score: 1, avantages: ["Gain de pouvoir d'achat, dans une proportion moindre du revenu que pour les classes populaires"], risques: [], angleMort: "Effet exact selon la composition du panier de consommation, non détaillé." },
