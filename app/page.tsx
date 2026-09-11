@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <>
       <section className="border-b border-line py-16 overflow-hidden">
-        <div className="max-w-[1180px] mx-auto px-6 grid grid-cols-[1fr_360px] gap-13 items-center max-[900px]:grid-cols-1">
+        <div className="max-w-[1180px] mx-auto px-6 grid grid-cols-[1fr_400px] gap-13 items-center max-[900px]:grid-cols-1">
           <div>
             <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-faint mb-3.5 flex items-center gap-2.5">
               <span className="inline-block w-5 h-[2px] bg-accent-rouge opacity-60" />
@@ -50,30 +50,32 @@ export default function HomePage() {
 
           <div
             aria-hidden="true"
-            className="border border-line rounded-lg bg-white shadow-premium p-5.5 animate-rise max-[900px]:rotate-0 max-[900px]:max-w-[380px]"
+            className="border border-line rounded-lg bg-white shadow-premium p-7 animate-rise max-[900px]:rotate-0 max-[900px]:max-w-[380px]"
             style={{ transform: "rotate(-1.2deg)", animationDelay: "0.18s" }}
           >
-            <div className="font-mono text-[0.64rem] uppercase tracking-wide text-ink-faint mb-3.5 pb-3 border-b border-dashed border-line">
+            <div className="font-mono text-[0.64rem] uppercase tracking-wide text-ink-faint mb-4 pb-3.5 border-b border-dashed border-line">
               Votre résultat pourrait ressembler à ça
             </div>
-            {[
-              { label: "Classes populaires", width: 38, sens: "pos" as const },
-              { label: "Classes moyennes", width: 15, sens: "pos" as const },
-              { label: "Classes aisées", width: 42, sens: "neg" as const },
-              { label: "Retraités & inactifs", width: 8, sens: "pos" as const },
-            ].map((row) => (
-              <div key={row.label} className="grid grid-cols-[96px_1fr] items-center gap-3 mb-3 last:mb-0">
-                <div className="text-[0.76rem] text-ink-soft leading-tight">{row.label}</div>
-                <div className="relative h-2.5 bg-paper border border-line rounded-sm overflow-hidden">
-                  <div className="absolute left-1/2 top-[-1px] bottom-[-1px] w-px bg-ink" />
-                  <div
-                    className={`absolute top-0 bottom-0 ${row.sens === "pos" ? "left-1/2 bg-positif" : "right-1/2 bg-negatif"}`}
-                    style={{ width: `${row.width}%` }}
-                  />
+            <div className="flex flex-col gap-4">
+              {[
+                { label: "Classes populaires", width: 38, sens: "pos" as const },
+                { label: "Classes moyennes", width: 15, sens: "pos" as const },
+                { label: "Classes aisées", width: 42, sens: "neg" as const },
+                { label: "Retraités & inactifs", width: 8, sens: "pos" as const },
+              ].map((row) => (
+                <div key={row.label} className="grid grid-cols-[132px_1fr] items-center gap-4">
+                  <div className="text-[0.76rem] text-ink-soft leading-tight">{row.label}</div>
+                  <div className="relative h-2.5 bg-paper rounded-sm overflow-hidden">
+                    <div className="absolute left-1/2 top-0 bottom-0 w-px bg-line-strong" />
+                    <div
+                      className={`absolute top-0 bottom-0 ${row.sens === "pos" ? "left-1/2 bg-positif" : "right-1/2 bg-negatif"}`}
+                      style={{ width: `${row.width}%` }}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-            <div className="mt-4 pt-3 border-t border-dashed border-line text-[0.72rem] text-ink-faint italic">
+              ))}
+            </div>
+            <div className="mt-5 pt-3.5 border-t border-dashed border-line text-[0.72rem] text-ink-faint italic">
               Exemple illustratif — pas une mesure réelle
             </div>
           </div>
