@@ -25,30 +25,25 @@ export default function CarteCandidat({ candidat, theme, classeActive, scorePers
   const nbMasquees = mesures.length - mesuresVisibles.length;
 
   return (
-    <article className="border border-line rounded-lg bg-paper-raised p-5.5 flex flex-col gap-3.5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated hover:border-line-strong">
-      <header className="flex justify-between items-start gap-2">
-        <div className="font-display text-[1.18rem] tracking-tight">{candidat.nom}</div>
-        <span className="font-mono text-[0.68rem] uppercase tracking-wide border border-current px-1.5 py-0.5 rounded">
-          {candidat.parti}
-        </span>
+    <article className="border border-line rounded-lg bg-paper-raised p-7 flex flex-col gap-4.5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated hover:border-line-strong">
+      <header className="flex items-baseline justify-between gap-3 flex-wrap">
+        <div className="font-display text-[1.24rem] tracking-tight">{candidat.nom}</div>
+        <div className="font-mono text-[0.72rem] uppercase tracking-wide text-ink-faint">{candidat.parti}</div>
       </header>
 
       {mesures.length === 0 && (
-        <p className="text-[0.94rem] text-ink-soft border-t border-dashed border-line pt-3">
+        <p className="text-[0.96rem] text-ink-soft border-t border-dashed border-line pt-4">
           Aucune mesure recensée sur ce thème pour ce candidat.
         </p>
       )}
 
       {mesuresVisibles.map((mesure) => (
-        <div key={mesure.id} className="border-t border-dashed border-line pt-3 flex flex-col gap-3">
-          <p className="text-[0.94rem] text-ink-soft">{mesure.titre}</p>
+        <div key={mesure.id} className="border-t border-dashed border-line pt-4 flex flex-col gap-3.5">
+          <p className="text-[0.96rem] text-ink-soft leading-snug">{mesure.titre}</p>
 
           <span
-            className="self-start font-mono text-[0.65rem] uppercase tracking-wide px-1.5 py-0.5 border"
-            style={{
-              color: mesure.niveauConfiance === "confirme" ? "#326049" : "#7a8090",
-              borderColor: mesure.niveauConfiance === "confirme" ? "#326049" : "#7a8090",
-            }}
+            className="self-start font-mono text-[0.68rem] uppercase tracking-wide"
+            style={{ color: mesure.niveauConfiance === "confirme" ? "#326049" : "#7a8090" }}
           >
             {mesure.niveauConfiance === "confirme" ? "Confirmé par plusieurs médias" : "Annoncé, détails à préciser"}
           </span>

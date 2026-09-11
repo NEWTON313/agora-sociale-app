@@ -90,7 +90,7 @@ export default function ComparateurClasse() {
           </>
         )}
 
-        <div className="grid gap-4.5" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }} aria-live="polite">
+        <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))" }} aria-live="polite">
           {candidatsAffiches.map((candidat) => (
             <CarteCandidat
               key={candidat.id}
