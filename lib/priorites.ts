@@ -62,6 +62,22 @@ export function calculerScorePersonnalise(
   };
 }
 
+export interface ClassementPersonnalise {
+  classement: Candidat[];
+  resultats: Map<string, ScorePersonnalise>;
+}
+
+/** Calcule le score de chaque candidat puis les trie (voir `trierParScorePersonnalise`). */
+export function classerCandidats(
+  candidats: Candidat[],
+  classeActive: ClasseId,
+  poids: PoidsThemes
+): ClassementPersonnalise {
+  const resultats = new Map<string, ScorePersonnalise>();
+  candidats.forEach((c) => resultats.set(c.id, calculerScorePersonnalise(c, classeActive, poids)));
+  return { classement: trierParScorePersonnalise(candidats, resultats), resultats };
+}
+
 /**
  * Tri stable et explicite (jamais l'ordre par défaut) : les candidats sans score
  * calculable restent toujours en fin de liste, jamais traités comme un score de 0.

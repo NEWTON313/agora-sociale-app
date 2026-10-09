@@ -11,15 +11,10 @@ import {
   type StatutBareme,
   type TrimestreNaissance,
 } from "@/lib/simulateur";
-import {
-  calculerScorePersonnalise,
-  poidsThemesParDefaut,
-  trierParScorePersonnalise,
-  type PoidsThemes,
-  type ScorePersonnalise as ScorePersonnaliseResultat,
-} from "@/lib/priorites";
+import { classerCandidats, poidsThemesParDefaut, type PoidsThemes } from "@/lib/priorites";
+import ClassementPersonnalise from "./ClassementPersonnalise";
+import PartagerResultat from "./PartagerResultat";
 import PrioritesPanel from "./PrioritesPanel";
-import ScorePersonnalise from "./ScorePersonnalise";
 
 const euros = (n: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(n) + " €";
 
@@ -179,9 +174,7 @@ function MonCandidat({ classeActive, poids }: { classeActive: ResultatClassement
     );
   }
 
-  const resultats = new Map<string, ScorePersonnaliseResultat>();
-  CANDIDATS.forEach((c) => resultats.set(c.id, calculerScorePersonnalise(c, classeActive, poids)));
-  const classement = trierParScorePersonnalise(CANDIDATS, resultats);
+  const { classement, resultats } = classerCandidats(CANDIDATS, classeActive, poids);
   const premier = resultats.get(classement[0].id);
   const aUneCorrespondance = premier && premier.scoreGlobal !== null;
 
@@ -203,19 +196,8 @@ function MonCandidat({ classeActive, poids }: { classeActive: ResultatClassement
         . Le classement complet ci-dessous reste toujours visible, dans l&apos;ordre de correspondance.
       </p>
 
-      <ol className="flex flex-col gap-4">
-        {classement.map((candidat, i) => (
-          <li key={candidat.id} className={i === 0 && aUneCorrespondance ? "" : "opacity-80"}>
-            <div className="flex items-baseline justify-between gap-2 mb-1.5">
-              <span className="font-display">
-                {i + 1}. {candidat.nom}{" "}
-                <span className="font-mono text-[0.7rem] uppercase text-ink-faint">{candidat.parti}</span>
-              </span>
-            </div>
-            <ScorePersonnalise resultat={resultats.get(candidat.id)!} />
-          </li>
-        ))}
-      </ol>
+      <ClassementPersonnalise classement={classement} resultats={resultats} />
+      <PartagerResultat classe={classeActive} poids={poids} />
     </div>
   );
 }

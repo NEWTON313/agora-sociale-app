@@ -25,7 +25,8 @@ export default function SimulateurPage() {
             faveur en fonction de votre classe sociale et de vos priorités.
           </p>
           <div className="mt-6 border-l-[3px] border-line-strong pl-4 py-2.5 text-[0.88rem] text-ink-soft bg-paper max-w-[60ch]">
-            Le calcul se fait entièrement dans votre navigateur (aucun appel serveur, aucune donnée conservée).
+            Le calcul se fait entièrement dans votre navigateur : aucune donnée n&apos;est envoyée ni conservée. Seul le
+            partage, facultatif, utilise votre catégorie sociale et vos priorités (jamais vos revenus) pour créer une carte.
           </div>
         </div>
       </section>
