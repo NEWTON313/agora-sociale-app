@@ -15,6 +15,22 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Titres éditoriaux : serif semi-gras, resserré. Les composants qui posent explicitement
+   `font-display` ou une taille propre gardent la main. */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+  }
+  strong {
+    font-weight: 600;
+  }
+}
+
 /* Grain de papier — texture subtile, cohérente avec la version statique du site. */
 body::before {
   content: "";

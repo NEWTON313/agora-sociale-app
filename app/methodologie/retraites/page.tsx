@@ -9,23 +9,23 @@ export const metadata: Metadata = {
 
 export default function RetraitesPage() {
   return (
-    <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">
-      <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-soft mb-2">
+    <div className="max-w-[820px] mx-auto px-6 pt-16 pb-24">
+      <div className="font-display text-[0.95rem] font-medium text-accent-bleu mb-4">
         Fiche méthodologique dédiée
       </div>
-      <h1 className="text-[2rem] mb-2">La réforme des retraites</h1>
-      <p className="text-ink-soft">
+      <h1 className="text-[clamp(2.2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em] mb-5">La réforme des retraites</h1>
+      <p className="text-[1.2rem] leading-relaxed text-ink-soft">
         La réforme de 2023 a été suspendue fin 2025 ; l&apos;issue de cette suspension sera directement tranchée par
         l&apos;élection de 2027. Cette fiche pose le cadre légal actuel puis restitue les arguments des deux côtés du
         débat sans les départager.
       </p>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">1. Le cadre légal actuel</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">1. Le cadre légal actuel</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-[0.85rem] border-collapse min-w-[560px]">
             <thead>
-              <tr className="font-mono text-[0.68rem] uppercase text-ink-soft text-left">
+              <tr className="font-display text-[0.84rem] font-medium text-ink-soft text-left">
                 <th className="py-2 border-b border-line pr-3">Paramètre</th>
                 <th className="py-2 border-b border-line pr-3">Avant 2023 (Touraine)</th>
                 <th className="py-2 border-b border-line pr-3">Réforme 2023 (Borne)</th>
@@ -63,7 +63,7 @@ export default function RetraitesPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-[0.85rem] border-collapse min-w-[480px]">
             <thead>
-              <tr className="font-mono text-[0.68rem] uppercase text-ink-soft text-left">
+              <tr className="font-display text-[0.84rem] font-medium text-ink-soft text-left">
                 <th className="py-2 border-b border-line pr-3">Naissance</th>
                 <th className="py-2 border-b border-line pr-3">Âge légal</th>
                 <th className="py-2 border-b border-line pr-3">Trimestres</th>
@@ -102,8 +102,8 @@ export default function RetraitesPage() {
         </p>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">2. L&apos;angle mort structurel</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">2. L&apos;angle mort structurel</h2>
         <p>
           Un même âge légal ne recouvre pas la même réalité selon la catégorie socioprofessionnelle :
         </p>
@@ -129,11 +129,11 @@ export default function RetraitesPage() {
         </p>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">3. Argumentaire — report de l&apos;âge légal</h2>
-        <div className="grid gap-px bg-line" style={{ gridTemplateColumns: "1fr 1fr" }}>
-          <div className="bg-paper-raised p-4.5">
-            <div className="font-mono text-[0.72rem] uppercase mb-2" style={{ color: "#326049" }}>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">3. Argumentaire — report de l&apos;âge légal</h2>
+        <div className="grid gap-5 max-sm:!grid-cols-1" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          <div className="bg-paper-raised p-7 rounded-2xl border border-line">
+            <div className="font-display text-[0.84rem] font-medium mb-2" style={{ color: "#326049" }}>
               Arguments pour le report
             </div>
             <ul className="list-disc pl-4.5 text-[0.9rem]">
@@ -143,8 +143,8 @@ export default function RetraitesPage() {
               <li>Maintien en emploi des seniors, jugé favorable à l&apos;activité</li>
             </ul>
           </div>
-          <div className="bg-paper-raised p-4.5">
-            <div className="font-mono text-[0.72rem] uppercase mb-2" style={{ color: "#8f382f" }}>
+          <div className="bg-paper-raised p-7 rounded-2xl border border-line">
+            <div className="font-display text-[0.84rem] font-medium mb-2" style={{ color: "#8f382f" }}>
               Arguments contre le report
             </div>
             <ul className="list-disc pl-4.5 text-[0.9rem]">
@@ -156,11 +156,11 @@ export default function RetraitesPage() {
         </div>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">4. Argumentaire — la suspension (LFSS 2026)</h2>
-        <div className="grid gap-px bg-line" style={{ gridTemplateColumns: "1fr 1fr" }}>
-          <div className="bg-paper-raised p-4.5">
-            <div className="font-mono text-[0.72rem] uppercase mb-2" style={{ color: "#326049" }}>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">4. Argumentaire — la suspension (LFSS 2026)</h2>
+        <div className="grid gap-5 max-sm:!grid-cols-1" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          <div className="bg-paper-raised p-7 rounded-2xl border border-line">
+            <div className="font-display text-[0.84rem] font-medium mb-2" style={{ color: "#326049" }}>
               Arguments pour la suspension
             </div>
             <ul className="list-disc pl-4.5 text-[0.9rem]">
@@ -169,8 +169,8 @@ export default function RetraitesPage() {
               <li>Bénéficie en priorité aux générations les plus proches du départ</li>
             </ul>
           </div>
-          <div className="bg-paper-raised p-4.5">
-            <div className="font-mono text-[0.72rem] uppercase mb-2" style={{ color: "#8f382f" }}>
+          <div className="bg-paper-raised p-7 rounded-2xl border border-line">
+            <div className="font-display text-[0.84rem] font-medium mb-2" style={{ color: "#8f382f" }}>
               Arguments contre la suspension
             </div>
             <ul className="list-disc pl-4.5 text-[0.9rem]">
@@ -182,8 +182,8 @@ export default function RetraitesPage() {
         </div>
       </section>
 
-      <section className="py-8">
-        <h2 className="text-[1.2rem] mb-5">5. Sources</h2>
+      <section className="py-12">
+        <h2 className="text-[1.7rem] mb-6">5. Sources</h2>
         <ul className="list-disc pl-4.5 text-[0.9rem]">
           <li>Loi n° 2023-270 du 14 avril 2023 (réforme dite « Borne »)</li>
           <li>Loi de financement de la Sécurité sociale pour 2026, promulguée le 30 décembre 2025</li>

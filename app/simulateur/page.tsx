@@ -11,31 +11,36 @@ export const metadata: Metadata = {
 export default function SimulateurPage() {
   return (
     <>
-      <section className="border-b border-line py-14">
-        <div className="max-w-[1180px] mx-auto px-6">
-          <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-soft mb-2.5">
-            2 minutes, aucune donnée conservée
+      <section className="relative overflow-hidden border-b border-line">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-48 -right-40 h-[480px] w-[480px] rounded-full opacity-[0.14] blur-3xl"
+          style={{ background: "radial-gradient(circle, #395670 0%, transparent 68%)" }}
+        />
+        <div className="relative max-w-[1180px] mx-auto px-6 py-20 max-[900px]:py-14">
+          <div className="flex items-center gap-2.5 font-display text-[0.95rem] text-ink-faint mb-6">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-bleu" />2 minutes, aucune donnée conservée
           </div>
-          <h1 className="font-display text-[clamp(2rem,4.2vw,3.2rem)] leading-[1.05] max-w-[16ch]">
-            À quelle catégorie appartenez-vous ?
+          <h1 className="text-[clamp(2.3rem,4.6vw,3.8rem)] leading-[1.04] tracking-[-0.022em] max-w-[18ch]">
+            À quelle catégorie appartenez-vous&nbsp;?
           </h1>
-          <p className="text-[1.15rem] max-w-[62ch] text-ink-soft mt-4.5">
-            Ce simulateur calcule votre <strong>niveau de vie</strong> selon la méthode officielle de l&apos;INSEE
-            pour déterminer votre catégorie sociale, puis vous indique quel candidat penche le plus en votre
+          <p className="text-[1.25rem] leading-relaxed max-w-[56ch] text-ink-soft mt-7">
+            Ce simulateur calcule votre <strong className="text-ink">niveau de vie</strong> selon la méthode officielle de
+            l&apos;INSEE pour déterminer votre catégorie sociale, puis vous indique quel candidat penche le plus en votre
             faveur en fonction de votre classe sociale et de vos priorités.
           </p>
-          <div className="mt-6 border-l-[3px] border-line-strong pl-4 py-2.5 text-[0.88rem] text-ink-soft bg-paper max-w-[60ch]">
+          <div className="mt-8 rounded-xl bg-paper-deep/70 px-5 py-4 text-[0.92rem] leading-relaxed text-ink-soft max-w-[62ch]">
             Le calcul se fait entièrement dans votre navigateur : aucune donnée n&apos;est envoyée ni conservée. Seul le
             partage, facultatif, utilise votre catégorie sociale et vos priorités (jamais vos revenus) pour créer une carte.
           </div>
         </div>
       </section>
 
-      <div className="max-w-[720px] mx-auto px-6 py-10 pb-20">
+      <div className="max-w-[760px] mx-auto px-6 py-14 pb-24">
         <SimulateurForm />
-        <p className="mt-8 text-[0.82rem] text-ink-soft">
+        <p className="mt-10 text-[0.9rem] text-ink-faint leading-relaxed">
           Méthode et sources des seuils : voir la{" "}
-          <a href="/methodologie#simulateur" className="underline">
+          <a href="/methodologie#simulateur" className="underline underline-offset-4 hover:text-accent-bleu">
             méthodologie du simulateur
           </a>
           . Ce résultat est une estimation statistique, pas un jugement sur votre situation personnelle.

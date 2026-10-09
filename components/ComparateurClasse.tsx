@@ -46,17 +46,17 @@ export default function ComparateurClasse() {
       <ClasseRail classeActive={classeActive} onChange={setClasseActive} />
 
       <main>
-        <div className="flex justify-between items-baseline flex-wrap gap-3 mb-5">
-          <h2 className="text-2xl">
-            Impact sur : <span className="font-mono text-[1.1rem]">{classeInfo.nom}</span>
+        <div className="flex justify-between items-end flex-wrap gap-5 mb-8">
+          <h2 className="font-body font-semibold text-[clamp(1.7rem,3vw,2.2rem)] leading-tight tracking-[-0.015em]">
+            Impact sur <span className="text-accent-bleu">{classeInfo.nom.toLowerCase()}</span>
           </h2>
-          <div className="flex items-center gap-4 flex-wrap">
-            <label className="font-mono text-[0.8rem]">
-              Thème :{" "}
+          <div className="flex items-center gap-3 flex-wrap">
+            <label className="flex items-center gap-2.5 font-display text-[0.9rem] text-ink-soft">
+              Thème
               <select
                 value={theme}
                 onChange={(e) => setTheme(e.target.value as Theme)}
-                className="font-mono text-[0.85rem] px-2.5 py-2 border border-line-strong bg-paper-raised rounded focus-visible:border-accent-bleu hover:border-accent-bleu-soft transition-colors"
+                className="font-display text-[0.92rem] text-ink pl-4 pr-3 py-2.5 border border-line-strong bg-paper-raised rounded-full focus-visible:border-accent-bleu hover:border-accent-bleu-soft transition-colors"
               >
                 {THEMES.map((t) => (
                   <option key={t} value={t}>
@@ -69,10 +69,10 @@ export default function ComparateurClasse() {
               type="button"
               onClick={() => setModePriorites((v) => !v)}
               aria-pressed={modePriorites}
-              className={`font-mono text-[0.78rem] uppercase tracking-wide px-3 py-2 border rounded transition-colors ${
+              className={`font-display text-[0.92rem] px-5 py-2.5 border rounded-full transition-colors ${
                 modePriorites
-                  ? "bg-accent-bleu text-paper-raised border-accent-bleu"
-                  : "bg-paper-raised text-ink-soft border-line-strong hover:border-accent-bleu-soft hover:text-accent-bleu"
+                  ? "bg-accent-bleu text-white border-accent-bleu"
+                  : "bg-paper-raised text-ink border-line-strong hover:border-accent-bleu-soft hover:text-accent-bleu"
               }`}
             >
               Mes priorités
@@ -83,7 +83,7 @@ export default function ComparateurClasse() {
         {modePriorites && (
           <>
             <PrioritesPanel poids={poids} onChange={setPoids} />
-            <label className="flex items-center gap-2 font-mono text-[0.78rem] text-ink-soft mb-4">
+            <label className="flex items-center gap-2 font-display text-[0.9rem] text-ink-soft mb-4">
               <input type="checkbox" checked={trierParScore} onChange={(e) => setTrierParScore(e.target.checked)} />
               Trier par mon score personnalisé (expérimental — ce n&apos;est ni un classement ni une recommandation)
             </label>
