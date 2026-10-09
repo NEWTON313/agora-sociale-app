@@ -35,7 +35,7 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
         {THEMES.map((theme, i) => (
           <li
             key={theme}
-            className={`grid grid-cols-[minmax(150px,220px)_1fr] max-[480px]:grid-cols-1 items-center gap-4 max-[480px]:gap-2 py-4 ${
+            className={`flex flex-col gap-3 py-5 ${
               i < THEMES.length - 1 ? "border-b border-line" : "pb-1"
             }`}
           >
@@ -53,7 +53,7 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
                   type="button"
                   aria-pressed={poids[theme] === niveau}
                   onClick={() => setNiveau(theme, niveau)}
-                  className={`flex-1 rounded-full px-2 py-2 text-center font-display text-[0.8rem] font-medium transition-colors max-[480px]:rounded-lg max-[480px]:border max-[480px]:border-line-strong ${
+                  className={`flex-1 whitespace-nowrap rounded-full px-2 py-2.5 text-center font-display text-[0.85rem] font-medium transition-colors max-[480px]:rounded-lg max-[480px]:border max-[480px]:border-line-strong ${
                     poids[theme] === niveau
                       ? "bg-accent-bleu text-white shadow-sm max-[480px]:border-accent-bleu"
                       : "text-ink-soft hover:bg-paper-deep hover:text-accent-bleu max-[480px]:bg-paper-raised"
