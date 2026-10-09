@@ -8,9 +8,9 @@ import { encoderPartage } from "@/lib/partage";
 const TEXTE_PARTAGE = "Voici ce que donne le comparateur Mon Choix 2027 pour ma situation et mes priorités. À toi d'essayer :";
 
 const boutonBase =
-  "font-mono text-[0.78rem] uppercase tracking-wide px-4 py-2.5 rounded border transition-colors";
-const boutonPrimaire = `${boutonBase} bg-accent-bleu text-paper-raised border-accent-bleu hover:bg-accent-bleu-soft`;
-const boutonSecondaire = `${boutonBase} bg-paper-raised text-ink-soft border-line-strong hover:border-accent-bleu-soft hover:text-accent-bleu`;
+  "font-display text-[0.95rem] font-medium px-6 py-3 rounded-md border transition-all duration-300 inline-flex items-center";
+const boutonPrimaire = `${boutonBase} bg-accent-bleu text-white border-accent-bleu hover:bg-accent-bleu-soft hover:-translate-y-0.5`;
+const boutonSecondaire = `${boutonBase} bg-paper-raised text-ink border-line-strong hover:border-accent-bleu-soft hover:text-accent-bleu`;
 
 export default function PartagerResultat({ classe, poids }: { classe: ClasseId; poids: PoidsThemes }) {
   const [ouvert, setOuvert] = useState(false);
@@ -61,7 +61,7 @@ export default function PartagerResultat({ classe, poids }: { classe: ClasseId; 
         <button type="button" onClick={() => setOuvert(true)} className={boutonPrimaire}>
           Partager mon résultat
         </button>
-        <p className="text-[0.8rem] text-ink-soft max-w-[58ch]">
+        <p className="text-[0.9rem] text-ink-faint max-w-[58ch]">
           Facultatif. Seuls votre catégorie sociale et vos priorités sont utilisées pour créer la carte : jamais
           votre revenu, votre âge ni votre patrimoine.
         </p>
@@ -70,17 +70,17 @@ export default function PartagerResultat({ classe, poids }: { classe: ClasseId; 
   }
 
   return (
-    <div className="mt-6 p-6 bg-paper-raised border border-line rounded-lg shadow-elevated animate-rise">
-      <div className="font-mono text-[0.72rem] uppercase tracking-wide text-ink-soft mb-3">Ma carte à partager</div>
+    <div className="mt-8 p-7 bg-paper-raised border border-line rounded-2xl shadow-elevated animate-rise max-sm:p-5">
+      <div className="font-display text-[0.95rem] font-medium text-ink mb-4">Ma carte à partager</div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={urlImage}
         alt="Carte de résultat : ma catégorie sociale, mes priorités et le classement complet des candidats selon ces priorités"
         width={1200}
         height={630}
-        className="w-full h-auto border border-line rounded"
+        className="w-full h-auto border border-line rounded-xl"
       />
-      <p className="text-[0.8rem] text-ink-soft mt-3">
+      <p className="text-[0.9rem] text-ink-faint mt-4">
         La carte montre le classement complet et précise que ce n&apos;est pas une recommandation de vote. Elle
         n&apos;inclut ni votre revenu ni aucune donnée personnelle.
       </p>

@@ -45,12 +45,12 @@ function ReglePercentile({ percentile }: { percentile: number }) {
           <div key={t.percentile} className="absolute top-0 bottom-0 w-px bg-white/60" style={{ left: `${t.percentile}%` }} />
         ))}
         <div className="absolute -top-2.5 w-0.5 h-[34px] bg-ink" style={{ left: `${percentile}%`, transform: "translateX(-50%)" }}>
-          <div className="absolute -top-5 left-1/2 -translate-x-1/2 font-mono text-[0.65rem] uppercase bg-ink text-white px-1.5 py-0.5 whitespace-nowrap">
+          <div className="absolute -top-5 left-1/2 -translate-x-1/2 font-display text-[0.84rem] font-medium bg-ink text-white px-1.5 py-0.5 whitespace-nowrap">
             Vous
           </div>
         </div>
       </div>
-      <div className="flex justify-between font-mono text-[0.68rem] text-ink-soft mt-1.5">
+      <div className="flex justify-between font-display text-[0.84rem] text-ink-soft mt-1.5">
         <span>D1 (10 % les plus modestes)</span>
         <span>Médiane</span>
         <span>D9 (10 % les plus aisés)</span>
@@ -71,14 +71,14 @@ function RepereRetraiteBlock({ r }: { r: ResultatClassement }) {
   const style = STYLES_BAREME[statut];
   return (
     <div className="text-[0.9rem] bg-paper px-3.5 py-3 mt-4" style={{ borderLeft: `3px solid ${style.couleur}` }}>
-      <div className="font-mono text-[0.68rem] uppercase tracking-wide mb-1" style={{ color: style.couleur }}>
+      <div className="font-display text-[0.84rem] font-medium mb-1" style={{ color: style.couleur }}>
         {style.label}
       </div>
       <strong>Repère retraite (indicatif) :</strong> à droit constant aujourd&apos;hui, votre âge légal de départ
       serait <strong>{ageLegal}</strong>, avec <strong>{trimestres} trimestres</strong> requis pour le taux plein.
       {note && <div className="mt-1.5 text-[0.85rem]">{note}</div>}
       <div className="mt-2">
-        <Link href="/methodologie/retraites" className="font-mono text-[0.8rem] underline">
+        <Link href="/methodologie/retraites" className="font-display text-[0.9rem] underline">
           Comprendre le calendrier complet et ses enjeux pour 2027 →
         </Link>
       </div>
@@ -95,7 +95,7 @@ function ReperesJeunesseBlock({ r }: { r: ResultatClassement }) {
           <strong>{repere.titre}</strong>
           <div className="mt-1.5 text-[0.85rem]">{repere.texte}</div>
           <div className="mt-2">
-            <Link href="/methodologie/jeunesse" className="font-mono text-[0.8rem] underline">
+            <Link href="/methodologie/jeunesse" className="font-display text-[0.9rem] underline">
               Comprendre le cadre légal et le débat →
             </Link>
           </div>
@@ -111,8 +111,8 @@ function Resultat({ r }: { r: ResultatClassement }) {
   const couleur = COULEURS[classe.id];
 
   return (
-    <div className="mt-8 p-6 bg-paper-raised border border-line rounded-lg shadow-elevated animate-rise" style={{ borderLeft: `4px solid ${couleur}` }}>
-      <div className="font-mono text-[0.72rem] uppercase tracking-wide text-ink-soft">Vous êtes classé·e dans :</div>
+    <div className="mt-10 p-9 bg-paper-raised border border-line rounded-2xl shadow-elevated max-sm:p-6 animate-rise" style={{ borderLeft: `4px solid ${couleur}` }}>
+      <div className="font-display text-[0.84rem] font-medium text-ink-soft">Vous êtes classé·e dans :</div>
       <h3 className="text-2xl mt-1 mb-2.5" style={{ color: couleur }}>
         {classe.nom}
       </h3>
@@ -122,15 +122,15 @@ function Resultat({ r }: { r: ResultatClassement }) {
 
       <dl className="grid gap-3.5 my-4 py-4 border-y border-dashed border-line" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))" }}>
         <div>
-          <dt className="font-mono text-[0.7rem] uppercase text-ink-soft">Niveau de vie estimé</dt>
+          <dt className="font-display text-[0.84rem] font-medium text-ink-soft">Niveau de vie estimé</dt>
           <dd className="font-display text-[1.1rem] mt-1">{euros(r.niveauDeVie)} / an / UC</dd>
         </div>
         <div>
-          <dt className="font-mono text-[0.7rem] uppercase text-ink-soft">Position dans la population</dt>
+          <dt className="font-display text-[0.84rem] font-medium text-ink-soft">Position dans la population</dt>
           <dd className="font-display text-[1.1rem] mt-1">{decrirePosition(r.percentile)}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[0.7rem] uppercase text-ink-soft">Unités de consommation</dt>
+          <dt className="font-display text-[0.84rem] font-medium text-ink-soft">Unités de consommation</dt>
           <dd className="font-display text-[1.1rem] mt-1">{r.uc}</dd>
         </div>
       </dl>
@@ -155,7 +155,7 @@ function Resultat({ r }: { r: ResultatClassement }) {
 
       <ReperesJeunesseBlock r={r} />
 
-      <Link href={`/?classe=${r.classePrincipale}`} className="inline-block mt-4 font-mono text-[0.82rem] underline">
+      <Link href={`/?classe=${r.classePrincipale}`} className="inline-block mt-4 font-display text-[0.95rem] underline">
         Voir l&apos;impact des programmes sur cette catégorie →
       </Link>
     </div>
@@ -167,7 +167,7 @@ function MonCandidat({ classeActive, poids }: { classeActive: ResultatClassement
 
   if (!themesPonderes) {
     return (
-      <div className="mt-6 p-6 bg-paper border border-dashed border-line-strong rounded-lg text-[0.9rem] text-ink-soft">
+      <div className="mt-8 p-7 bg-paper-deep/60 border border-dashed border-line-strong rounded-2xl text-[0.9rem] text-ink-soft">
         Indiquez au moins une priorité ci-dessus pour voir quel candidat correspond le mieux à ce que vous jugez
         important.
       </div>
@@ -179,8 +179,8 @@ function MonCandidat({ classeActive, poids }: { classeActive: ResultatClassement
   const aUneCorrespondance = premier && premier.scoreGlobal !== null;
 
   return (
-    <div className="mt-6 p-6 bg-paper-raised border border-line rounded-lg shadow-elevated animate-rise">
-      <div className="font-mono text-[0.72rem] uppercase tracking-wide text-ink-soft">
+    <div className="mt-8 p-9 bg-paper-raised border border-line rounded-2xl shadow-elevated max-sm:p-6 animate-rise">
+      <div className="font-display text-[0.84rem] font-medium text-ink-soft">
         Selon vos priorités et votre catégorie sociale
       </div>
       <h3 className="text-2xl mt-1 mb-1">
@@ -226,9 +226,9 @@ export default function SimulateurForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5.5 border border-line rounded-lg bg-paper-raised p-7 shadow-card">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-7 border border-line rounded-2xl bg-paper-raised p-10 shadow-card max-sm:p-6">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="revenuMensuel" className="font-display text-[0.92rem]">
+          <label htmlFor="revenuMensuel" className="font-display text-[0.95rem] font-medium">
             Revenu net mensuel <strong>total du foyer</strong>
           </label>
           <div className="flex items-center gap-2">
@@ -240,9 +240,9 @@ export default function SimulateurForm() {
               step={10}
               required
               placeholder="Ex : 2400"
-              className="flex-1 px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu"
+              className="flex-1 px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu"
             />
-            <span className="font-mono text-[0.85rem] text-ink-soft">€ / mois</span>
+            <span className="font-display text-[0.95rem] text-ink-soft">€ / mois</span>
           </div>
           <p className="text-[0.8rem] text-ink-soft">
             Salaires, pensions, revenus indépendants, allocations chômage, prestations sociales cumulés.
@@ -251,22 +251,22 @@ export default function SimulateurForm() {
 
         <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="nbAdultes" className="font-display text-[0.92rem]">Adultes du foyer</label>
-            <input id="nbAdultes" name="nbAdultes" type="number" min={1} max={6} defaultValue={1} required className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <label htmlFor="nbAdultes" className="font-display text-[0.95rem] font-medium">Adultes du foyer</label>
+            <input id="nbAdultes" name="nbAdultes" type="number" min={1} max={6} defaultValue={1} required className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="nbEnfants14Plus" className="font-display text-[0.92rem]">Enfants ≥ 14 ans</label>
-            <input id="nbEnfants14Plus" name="nbEnfants14Plus" type="number" min={0} max={8} defaultValue={0} className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <label htmlFor="nbEnfants14Plus" className="font-display text-[0.95rem] font-medium">Enfants ≥ 14 ans</label>
+            <input id="nbEnfants14Plus" name="nbEnfants14Plus" type="number" min={0} max={8} defaultValue={0} className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="nbEnfantsMoins14" className="font-display text-[0.92rem]">Enfants &lt; 14 ans</label>
-            <input id="nbEnfantsMoins14" name="nbEnfantsMoins14" type="number" min={0} max={8} defaultValue={0} className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <label htmlFor="nbEnfantsMoins14" className="font-display text-[0.95rem] font-medium">Enfants &lt; 14 ans</label>
+            <input id="nbEnfantsMoins14" name="nbEnfantsMoins14" type="number" min={0} max={8} defaultValue={0} className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="statutActivite" className="font-display text-[0.92rem]">Votre situation principale</label>
-          <select id="statutActivite" name="statutActivite" required className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu">
+          <label htmlFor="statutActivite" className="font-display text-[0.95rem] font-medium">Votre situation principale</label>
+          <select id="statutActivite" name="statutActivite" required className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu">
             <option value="emploi_salarie">Salarié·e en emploi</option>
             <option value="independant">Indépendant·e / profession libérale</option>
             <option value="retraite">Retraité·e</option>
@@ -277,7 +277,7 @@ export default function SimulateurForm() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="anneeNaissance" className="font-display text-[0.92rem]">Votre année de naissance</label>
+          <label htmlFor="anneeNaissance" className="font-display text-[0.95rem] font-medium">Votre année de naissance</label>
           <input
             id="anneeNaissance"
             name="anneeNaissance"
@@ -287,7 +287,7 @@ export default function SimulateurForm() {
             placeholder="Ex : 1978"
             value={anneeNaissance}
             onChange={(e) => setAnneeNaissance(e.target.value)}
-            className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu"
+            className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu"
           />
           <p className="text-[0.8rem] text-ink-soft">
             Sert uniquement à indiquer votre âge légal de départ à la retraite applicable aujourd&apos;hui — un
@@ -297,10 +297,10 @@ export default function SimulateurForm() {
 
         {anneeNaissance === "1965" && (
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="trimestreNaissance" className="font-display text-[0.92rem]">
+            <label htmlFor="trimestreNaissance" className="font-display text-[0.95rem] font-medium">
               Vous êtes né·e en 1965 — précisez :
             </label>
-            <select id="trimestreNaissance" name="trimestreNaissance" className="px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu">
+            <select id="trimestreNaissance" name="trimestreNaissance" className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu">
               <option value="q1">Entre janvier et mars 1965</option>
               <option value="q2_4">Entre avril et décembre 1965</option>
             </select>
@@ -309,10 +309,10 @@ export default function SimulateurForm() {
         )}
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="patrimoineNet" className="font-display text-[0.92rem]">Patrimoine net estimé (optionnel)</label>
+          <label htmlFor="patrimoineNet" className="font-display text-[0.95rem] font-medium">Patrimoine net estimé (optionnel)</label>
           <div className="flex items-center gap-2">
-            <input id="patrimoineNet" name="patrimoineNet" type="number" min={0} step={1000} placeholder="Ex : 150000" className="flex-1 px-3 py-2.5 border border-line-strong bg-white rounded transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
-            <span className="font-mono text-[0.85rem] text-ink-soft">€</span>
+            <input id="patrimoineNet" name="patrimoineNet" type="number" min={0} step={1000} placeholder="Ex : 150000" className="flex-1 px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <span className="font-display text-[0.95rem] text-ink-soft">€</span>
           </div>
           <p className="text-[0.8rem] text-ink-soft">Immobilier, épargne, placements, moins les dettes. Laissez vide si vous préférez ne pas répondre.</p>
         </div>
@@ -321,7 +321,7 @@ export default function SimulateurForm() {
           <PrioritesPanel poids={poids} onChange={setPoids} />
         </div>
 
-        <button type="submit" className="self-start font-mono uppercase tracking-wide text-[0.85rem] px-5.5 py-3 bg-accent-bleu text-paper-raised rounded shadow-xs transition-all hover:bg-accent-bleu-soft hover:shadow-card active:translate-y-px">
+        <button type="submit" className="self-start font-display font-medium text-[1.05rem] px-9 py-4 bg-accent-bleu text-white rounded-md shadow-[0_14px_32px_-10px_rgba(30,58,95,0.55)] transition-all duration-300 hover:bg-accent-bleu-soft hover:-translate-y-0.5 active:translate-y-0">
           Mon candidat
         </button>
       </form>

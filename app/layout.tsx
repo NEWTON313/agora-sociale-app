@@ -79,35 +79,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "linear-gradient(to right, #3d5a78 0%, #3d5a78 25%, #566f4d 25%, #566f4d 50%, #7a4258 50%, #7a4258 75%, #9c7539 75%, #9c7539 100%)",
           }}
         />
-        <header className="sticky top-0 z-[100] border-b border-line bg-white/85 backdrop-blur-md shadow-[0_1px_0_#1e3a5f]">
-          <div className="max-w-[1180px] mx-auto px-6 flex items-baseline justify-between flex-wrap gap-2 pt-5 pb-3.5">
-            <Link href="/" className="font-display text-2xl font-bold tracking-tight no-underline">
-              <span className="text-accent-bleu">Mon</span>{" "}
-              <span className="font-normal text-ink-faint">Choix 2027</span>
+        <header className="sticky top-0 z-[100] border-b border-line bg-paper/85 backdrop-blur-xl">
+          <div className="max-w-[1180px] mx-auto px-6 flex items-center justify-between flex-wrap gap-x-10 gap-y-2 py-4">
+            <Link href="/" className="font-body text-[1.55rem] font-semibold tracking-[-0.02em] no-underline">
+              <span className="text-accent-bleu">Mon</span> <span className="text-ink">Choix 2027</span>
             </Link>
-            <div className="font-mono text-[0.76rem] uppercase tracking-wide text-ink-faint max-[560px]:hidden">
-              Projet citoyen · Open source · Présidentielle 2027
-            </div>
+            <nav className="flex flex-nowrap gap-8 font-display text-[0.95rem] font-medium overflow-x-auto">
+              {NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="whitespace-nowrap border-b-2 border-transparent py-1 text-ink-soft transition-colors hover:border-accent-bleu hover:text-accent-bleu"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
           </div>
-          <nav className="max-w-[1180px] mx-auto px-6 flex flex-nowrap gap-6 font-mono text-[0.8rem] uppercase tracking-wide pb-3.5 overflow-x-auto">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="whitespace-nowrap border-b-2 border-transparent hover:border-accent-bleu-soft text-ink-soft hover:text-accent-bleu pb-1 transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
         </header>
 
         {children}
 
-        <footer className="border-t border-ink py-7 font-mono text-[0.78rem] text-ink-faint">
-          <div className="max-w-[1180px] mx-auto px-6">
-            MON CHOIX 2027 — outil communautaire et open source. Aucun financement de parti, de candidat ou
-            d&apos;annonceur.
+        <footer className="border-t border-line bg-paper-deep">
+          <div className="max-w-[1180px] mx-auto px-6 py-12 flex flex-wrap justify-between gap-x-12 gap-y-6">
+            <div className="max-w-[52ch]">
+              <div className="font-body text-[1.25rem] font-semibold tracking-[-0.015em] text-ink mb-2">Mon Choix 2027</div>
+              <p className="font-display text-[0.92rem] leading-relaxed text-ink-soft">
+                Outil communautaire et open source. Aucun financement de parti, de candidat ou d&apos;annonceur.
+              </p>
+            </div>
+            <div className="font-display text-[0.92rem] text-ink-faint">Projet citoyen · Présidentielle 2027</div>
           </div>
         </footer>
         <Analytics />

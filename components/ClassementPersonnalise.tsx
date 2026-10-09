@@ -18,7 +18,7 @@ export default function ClassementPersonnalise({ classement, resultats, attenuer
           <div className="flex items-baseline justify-between gap-2 mb-1.5">
             <span className="font-display">
               {i + 1}. {candidat.nom}{" "}
-              <span className="font-mono text-[0.7rem] uppercase text-ink-faint">{candidat.parti}</span>
+              <span className="font-display text-[0.84rem] font-medium text-ink-faint">{candidat.parti}</span>
             </span>
           </div>
           <ScorePersonnalise resultat={resultats.get(candidat.id)!} />

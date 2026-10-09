@@ -22,10 +22,10 @@ const COULEURS: Record<ClasseId, { fg: string; bg: string }> = {
 export default function ClasseRail({ classeActive, onChange }: Props) {
   return (
     <aside
-      className="sticky top-[88px] border border-line rounded-lg bg-paper-raised shadow-card overflow-hidden max-md:static max-md:flex max-md:overflow-x-auto max-md:rounded"
+      className="sticky top-[96px] self-start overflow-hidden rounded-2xl border border-line bg-paper-raised shadow-card max-md:static max-md:flex max-md:overflow-x-auto"
       aria-label="Filtrer par catégorie sociale"
     >
-      <div className="font-mono text-[0.72rem] uppercase tracking-wide px-3.5 py-3 border-b border-line text-ink-faint max-md:hidden">
+      <div className="font-display text-[0.88rem] font-medium px-5 py-4 border-b border-line text-ink-faint max-md:hidden">
         Catégorie sociale
       </div>
       {CLASSES_SOCIALES.map((c) => {
@@ -38,16 +38,16 @@ export default function ClasseRail({ classeActive, onChange }: Props) {
             onClick={() => onChange(c.id)}
             aria-pressed={active}
             style={{ background: active ? couleur.bg : "transparent" }}
-            className="relative block w-full text-left p-3.5 border-b border-line last:border-b-0 font-body text-[0.92rem]
+            className="relative block w-full text-left px-5 py-4 border-b border-line last:border-b-0 font-body text-[1rem]
               transition-colors duration-200 hover:bg-paper
-              max-md:flex-none max-md:min-w-[150px] max-md:border-b-0 max-md:border-r"
+              max-md:flex-none max-md:min-w-[180px] max-md:border-b-0 max-md:border-r"
           >
             <span
               className="absolute left-0 top-0 bottom-0 transition-all duration-200"
-              style={{ background: couleur.fg, opacity: active ? 1 : 0.3, width: active ? 5 : 4 }}
+              style={{ background: couleur.fg, opacity: active ? 1 : 0.25, width: active ? 4 : 3 }}
             />
             <span className={active ? "font-semibold" : ""}>{c.nom}</span>
-            <small className="block text-ink-faint text-[0.76rem] mt-0.5 leading-tight">{c.description}</small>
+            <small className="block font-display text-ink-faint text-[0.8rem] mt-1 leading-snug">{c.description}</small>
           </button>
         );
       })}

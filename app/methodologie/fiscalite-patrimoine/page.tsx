@@ -9,19 +9,19 @@ export const metadata: Metadata = {
 
 export default function FiscalitePatrimoinePage() {
   return (
-    <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">
-      <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-soft mb-2">
+    <div className="max-w-[820px] mx-auto px-6 pt-16 pb-24">
+      <div className="font-display text-[0.95rem] font-medium text-accent-bleu mb-4">
         Fiche méthodologique dédiée
       </div>
-      <h1 className="text-[2rem] mb-2">Fiscalité du patrimoine : IFI et droits de succession</h1>
-      <p className="text-ink-soft">
+      <h1 className="text-[clamp(2.2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em] mb-5">Fiscalité du patrimoine : IFI et droits de succession</h1>
+      <p className="text-[1.2rem] leading-relaxed text-ink-soft">
         Ces deux impôts concentrent une grande partie des désaccords de la campagne. Cette fiche pose d&apos;abord
         le cadre légal actuel, puis présente, sans les départager, les arguments de leurs partisans et de leurs
         critiques.
       </p>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">1. Le cadre légal actuel — IFI</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">1. Le cadre légal actuel — IFI</h2>
         <table className="w-full text-[0.9rem] border-collapse">
           <tbody>
             <tr><td className="py-2 border-b border-line font-semibold">Seuil d&apos;entrée</td><td className="py-2 border-b border-line">Patrimoine immobilier net taxable &gt; 1 300 000 €</td></tr>
@@ -33,8 +33,8 @@ export default function FiscalitePatrimoinePage() {
         </table>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">2. Le cadre légal actuel — droits de succession</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">2. Le cadre légal actuel — droits de succession</h2>
         <table className="w-full text-[0.9rem] border-collapse">
           <tbody>
             <tr><td className="py-2 border-b border-line font-semibold">Conjoint / PACS</td><td className="py-2 border-b border-line">Exonération totale</td></tr>
@@ -49,8 +49,8 @@ export default function FiscalitePatrimoinePage() {
         </p>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">3. Un angle mort structurel</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">3. Un angle mort structurel</h2>
         <p>
           Le comparateur classe par <strong>revenu</strong>. L&apos;IFI et les successions portent sur le{" "}
           <strong>patrimoine</strong>. Le seuil « classes aisées » du simulateur (~38 780 €/an/UC) est très inférieur
@@ -60,11 +60,11 @@ export default function FiscalitePatrimoinePage() {
         </p>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">4. Argumentaire — sans trancher</h2>
-        <div className="grid gap-px bg-line" style={{ gridTemplateColumns: "1fr 1fr" }}>
-          <div className="bg-paper-raised p-4.5">
-            <div className="font-mono text-[0.72rem] uppercase mb-2" style={{ color: "#326049" }}>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">4. Argumentaire — sans trancher</h2>
+        <div className="grid gap-5 max-sm:!grid-cols-1" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          <div className="bg-paper-raised p-7 rounded-2xl border border-line">
+            <div className="font-display text-[0.84rem] font-medium mb-2" style={{ color: "#326049" }}>
               Arguments pour une fiscalité renforcée
             </div>
             <ul className="list-disc pl-4.5 text-[0.9rem]">
@@ -74,8 +74,8 @@ export default function FiscalitePatrimoinePage() {
               <li>Le gel du barème depuis 2011 pourrait être corrigé en faveur des classes moyennes plutôt qu&apos;allégé en haut de barème</li>
             </ul>
           </div>
-          <div className="bg-paper-raised p-4.5">
-            <div className="font-mono text-[0.72rem] uppercase mb-2" style={{ color: "#8f382f" }}>
+          <div className="bg-paper-raised p-7 rounded-2xl border border-line">
+            <div className="font-display text-[0.84rem] font-medium mb-2" style={{ color: "#8f382f" }}>
               Arguments pour un allègement
             </div>
             <ul className="list-disc pl-4.5 text-[0.9rem]">
@@ -88,8 +88,8 @@ export default function FiscalitePatrimoinePage() {
         </div>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">5. Un point où les études divergent</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">5. Un point où les études divergent</h2>
         <p>
           L&apos;évaluation de la réforme ISF → IFI (2018) n&apos;a pas permis de conclure de façon définitive sur ses
           effets sur l&apos;investissement ou les départs/retours de contribuables fortunés. Des économistes défendent
@@ -97,8 +97,8 @@ export default function FiscalitePatrimoinePage() {
         </p>
       </section>
 
-      <section className="py-8">
-        <h2 className="text-[1.2rem] mb-5">6. Sources</h2>
+      <section className="py-12">
+        <h2 className="text-[1.7rem] mb-6">6. Sources</h2>
         <ul className="list-disc pl-4.5 text-[0.9rem]">
           <li>Code général des impôts — art. 964–983 (IFI) et 777–779 (successions)</li>
           <li>Direction générale des Finances publiques — barèmes en vigueur</li>

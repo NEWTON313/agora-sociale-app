@@ -83,7 +83,7 @@ export default function ComparateurClasse() {
         {modePriorites && (
           <>
             <PrioritesPanel poids={poids} onChange={setPoids} />
-            <label className="flex items-center gap-2 font-mono text-[0.78rem] text-ink-soft mb-4">
+            <label className="flex items-center gap-2 font-display text-[0.9rem] text-ink-soft mb-4">
               <input type="checkbox" checked={trierParScore} onChange={(e) => setTrierParScore(e.target.checked)} />
               Trier par mon score personnalisé (expérimental — ce n&apos;est ni un classement ni une recommandation)
             </label>

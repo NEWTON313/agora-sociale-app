@@ -47,31 +47,38 @@ export default async function ResultatPage({ searchParams }: { searchParams: Sea
 
   return (
     <>
-      <section className="border-b border-line py-14">
-        <div className="max-w-[1180px] mx-auto px-6">
-          <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-soft mb-2.5">Résultat partagé</div>
-          <h1 className="font-display text-[clamp(1.8rem,3.8vw,2.8rem)] leading-[1.08] max-w-[22ch]">
+      <section className="relative overflow-hidden border-b border-line">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-48 -right-40 h-[480px] w-[480px] rounded-full opacity-[0.14] blur-3xl"
+          style={{ background: "radial-gradient(circle, #395670 0%, transparent 68%)" }}
+        />
+        <div className="relative max-w-[1180px] mx-auto px-6 py-20 max-[900px]:py-14">
+          <div className="flex items-center gap-2.5 font-display text-[0.95rem] text-ink-faint mb-6">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-bleu" />Résultat partagé
+          </div>
+          <h1 className="text-[clamp(2.1rem,4.2vw,3.4rem)] leading-[1.05] tracking-[-0.02em] max-w-[22ch]">
             Ce que donne le comparateur pour : {classe.nom.toLowerCase()}
           </h1>
-          <p className="text-[1.1rem] max-w-[62ch] text-ink-soft mt-4">{classe.description}.</p>
+          <p className="text-[1.2rem] max-w-[56ch] text-ink-soft mt-6">{classe.description}.</p>
         </div>
       </section>
 
-      <div className="max-w-[720px] mx-auto px-6 py-10 pb-20">
-        <div className="p-6 bg-paper-raised border border-line rounded-lg shadow-elevated">
-          <div className="font-mono text-[0.72rem] uppercase tracking-wide text-ink-soft mb-2">Priorités indiquées</div>
-          <ul className="flex flex-col gap-1.5 mb-5">
+      <div className="max-w-[760px] mx-auto px-6 py-14 pb-24">
+        <div className="p-9 bg-paper-raised border border-line rounded-2xl shadow-elevated max-sm:p-6">
+          <div className="font-display text-[0.95rem] font-medium text-ink mb-3">Priorités indiquées</div>
+          <ul className="flex flex-col gap-2 mb-6">
             {priorites.map((t) => (
-              <li key={t} className="flex justify-between gap-3 text-[0.95rem] border-b border-dashed border-line pb-1.5">
+              <li key={t} className="flex justify-between gap-3 text-[1rem] border-b border-line pb-2">
                 <span>{t}</span>
-                <span className="font-mono text-[0.72rem] uppercase text-ink-faint whitespace-nowrap">
+                <span className="font-display text-[0.84rem] font-medium text-ink-faint whitespace-nowrap">
                   {LABELS_PRIORITE[partage.poids[t]]}
                 </span>
               </li>
             ))}
           </ul>
 
-          <p className="text-[0.85rem] text-ink-soft italic mb-4">
+          <p className="text-[0.92rem] text-ink-soft italic mb-6 leading-relaxed">
             Score calculé d&apos;après ces priorités et les mesures recensées pour cette catégorie sociale. Ce n&apos;est
             ni un jugement de valeur ni une recommandation de vote — voir la{" "}
             <Link href="/methodologie#score-personnalise" className="underline">
@@ -83,17 +90,17 @@ export default async function ResultatPage({ searchParams }: { searchParams: Sea
           <ClassementPersonnalise classement={classement} resultats={resultats} attenuerSuivants={false} />
         </div>
 
-        <div className="mt-8 p-6 border border-dashed border-line-strong rounded-lg bg-paper">
-          <h2 className="font-display text-xl mb-2">Et pour vous ?</h2>
-          <p className="text-[0.95rem] text-ink-soft mb-4">
+        <div className="mt-10 p-9 rounded-2xl bg-accent-bleu text-white max-sm:p-6">
+          <h2 className="text-[1.7rem] mb-3">Et pour vous&nbsp;?</h2>
+          <p className="text-[1.02rem] text-white/80 mb-6 max-w-[52ch]">
             Le résultat dépend de la situation et des priorités de chacun. Refaites le calcul avec les vôtres : 2
             minutes, le calcul se fait dans votre navigateur et rien n&apos;est conservé.
           </p>
           <Link
             href="/simulateur"
-            className="inline-flex items-center bg-accent-bleu text-paper-raised font-mono text-[0.85rem] uppercase tracking-wide px-6 py-3.5 rounded shadow-premium hover:bg-accent-bleu-soft transition-colors"
+            className="inline-flex items-center gap-3 bg-white text-accent-bleu font-display text-[1.02rem] font-medium px-7 py-3.5 rounded-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_-10px_rgba(0,0,0,0.5)]"
           >
-            Faire le test (2 min) →
+            Faire le test, 2 minutes →
           </Link>
         </div>
       </div>

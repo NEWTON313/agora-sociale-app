@@ -9,15 +9,15 @@ export const metadata: Metadata = {
 
 export default function MethodologiePage() {
   return (
-    <div className="max-w-[820px] mx-auto px-6 pt-8 pb-20">
-      <h1 className="text-[2rem] mb-2">Comment nous construisons chaque analyse</h1>
-      <p className="text-ink-soft">
+    <div className="max-w-[820px] mx-auto px-6 pt-16 pb-24">
+      <h1 className="text-[clamp(2.2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em] mb-5">Comment nous construisons chaque analyse</h1>
+      <p className="text-[1.2rem] leading-relaxed text-ink-soft">
         La crédibilité de Mon Choix 2027 repose entièrement sur la traçabilité de ses sources et sur la
         séparation stricte entre le fait et l&apos;interprétation.
       </p>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">1. Collecte des données</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">1. Collecte des données</h2>
         <p>
           Chaque mesure est saisie uniquement à partir du texte du programme officiel du candidat, ou d&apos;une
           déclaration publique vérifiable. Chaque fiche contient un lien vers la source d&apos;origine et une double
@@ -25,8 +25,8 @@ export default function MethodologiePage() {
         </p>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">2. Le score d&apos;impact par classe</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">2. Le score d&apos;impact par classe</h2>
         <p>
           Score de -2 à +2, jamais un jugement de valeur : une estimation de l&apos;effet économique direct sur le
           niveau de vie de la catégorie, avec un champ <strong>« angle mort »</strong> systématique pour ce que la
@@ -34,8 +34,8 @@ export default function MethodologiePage() {
         </p>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">3. Garde-fous de neutralité</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">3. Garde-fous de neutralité</h2>
         <ul className="list-disc pl-5 space-y-1.5">
           <li>Aucune couleur du site ne reprend les couleurs officielles d&apos;un parti.</li>
           <li>
@@ -51,8 +51,8 @@ export default function MethodologiePage() {
         </ul>
       </section>
 
-      <section id="score-personnalise" className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">4. Le score personnalisé « mes priorités »</h2>
+      <section id="score-personnalise" className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">4. Le score personnalisé « mes priorités »</h2>
         <p>
           Sur la page d&apos;accueil, vous pouvez indiquer l&apos;importance que vous accordez à chaque thème : le
           site calcule alors une moyenne pondérée des scores d&apos;impact (-2 à +2) des mesures correspondantes pour
@@ -77,15 +77,15 @@ export default function MethodologiePage() {
         </p>
       </section>
 
-      <section id="simulateur" className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">5. Le simulateur de classement</h2>
+      <section id="simulateur" className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">5. Le simulateur de classement</h2>
         <p>
           Reproduit le <strong>niveau de vie</strong> INSEE (revenu du foyer ÷ unités de consommation). Seuils basés
           sur les déciles INSEE 2024 (publiés le 09/07/2026) :
         </p>
         <table className="w-full text-[0.9rem] mt-3 border-collapse">
           <thead>
-            <tr className="font-mono text-[0.72rem] uppercase text-ink-soft">
+            <tr className="font-display text-[0.84rem] font-medium text-ink-soft">
               <th className="text-left py-2 border-b border-line">Catégorie</th>
               <th className="text-left py-2 border-b border-line">Seuil / UC / an</th>
             </tr>
@@ -102,43 +102,43 @@ export default function MethodologiePage() {
         </p>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">6. Fiscalité du patrimoine (IFI, succession)</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">6. Fiscalité du patrimoine (IFI, succession)</h2>
         <p>
           Ces mesures étant particulièrement sensibles et sujettes à débat, elles font l&apos;objet d&apos;une fiche
           méthodologique dédiée, présentant le cadre légal actuel et les arguments des deux côtés du débat.
         </p>
-        <a href="/methodologie/fiscalite-patrimoine" className="underline font-mono text-[0.85rem]">
+        <a href="/methodologie/fiscalite-patrimoine" className="underline font-display text-[0.95rem]">
           Voir la fiche « Fiscalité du patrimoine » →
         </a>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">7. Réforme des retraites</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">7. Réforme des retraites</h2>
         <p>
           Le calendrier de l&apos;âge légal a été suspendu fin 2025 et reste incertain au-delà de 2028 : cette fiche
           pose le cadre légal actuel et l&apos;angle mort le plus souvent oublié — l&apos;écart d&apos;espérance de
           vie et de temps réellement passé à la retraite entre catégories socioprofessionnelles.
         </p>
-        <a href="/methodologie/retraites" className="underline font-mono text-[0.85rem]">
+        <a href="/methodologie/retraites" className="underline font-display text-[0.95rem]">
           Voir la fiche « Réforme des retraites » →
         </a>
       </section>
 
-      <section className="py-8 border-b border-line">
-        <h2 className="text-[1.2rem] mb-5">8. SMIC jeunes et RSA sous 25 ans</h2>
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">8. SMIC jeunes et RSA sous 25 ans</h2>
         <p>
           Ces deux règles liées à l&apos;âge laissent un « trou » spécifique entre 18 et 25 ans dans le filet de
           sécurité sociale. Cette fiche pose le cadre légal actuel et les arguments pour et contre l&apos;abattement
           jeunes du Smic et la condition d&apos;âge du RSA.
         </p>
-        <a href="/methodologie/jeunesse" className="underline font-mono text-[0.85rem]">
+        <a href="/methodologie/jeunesse" className="underline font-display text-[0.95rem]">
           Voir la fiche « Jeunesse, emploi, solidarité » →
         </a>
       </section>
 
-      <section className="py-8">
-        <h2 className="text-[1.2rem] mb-5">9. Limites assumées</h2>
+      <section className="py-12">
+        <h2 className="text-[1.7rem] mb-6">9. Limites assumées</h2>
         <p>
           Ce site ne prédit pas l&apos;avenir. Il ne remplace pas une analyse macro-économique complète, ne modélise
           pas les effets de second tour (comportements, épargne, anticipations) et dépend de la qualité et de la

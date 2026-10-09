@@ -38,68 +38,67 @@ export default async function FicheCandidatPage({ params }: { params: Promise<{ 
   if (!candidat) notFound();
 
   return (
-    <div className="max-w-[1180px] mx-auto px-6 pt-8 pb-20">
-      <div className="pb-6 border-b border-line mb-8">
-        <div className="font-mono text-[0.8rem] uppercase tracking-wide text-ink-soft mb-2">
+    <div className="max-w-[1180px] mx-auto px-6 pt-16 pb-24">
+      <div className="pb-10 border-b border-line mb-12">
+        <div className="font-display text-[0.9rem] font-medium text-ink-soft mb-4">
           {candidat.nom} — {candidat.parti}
         </div>
-        <h1 className="text-[2rem] font-display">Mesures recensées</h1>
+        <h1 className="text-[clamp(2.2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">Mesures recensées</h1>
       </div>
 
       {candidat.mesures.map((mesure) => (
-        <div key={mesure.id} className="mb-14">
-          <div className="flex justify-between items-end flex-wrap gap-4 mb-4">
+        <div key={mesure.id} className="mb-20">
+          <div className="flex justify-between items-end flex-wrap gap-4 mb-5">
             <div>
-              <span className="font-mono text-[0.68rem] uppercase tracking-wide border border-current px-2 py-1">
-                Thème : {mesure.theme}
-              </span>
-              <h2 className="text-[1.3rem] font-display mt-2">{mesure.titre}</h2>
+              <span className="font-display text-[0.9rem] font-medium text-accent-bleu">{mesure.theme}</span>
+              <h2 className="text-[1.6rem] leading-snug mt-2 max-w-[44ch]">{mesure.titre}</h2>
             </div>
             <span
-              className="font-mono text-[0.65rem] uppercase tracking-wide px-1.5 py-0.5 border"
-              style={{
-                color: mesure.niveauConfiance === "confirme" ? "#326049" : "#7a8090",
-                borderColor: mesure.niveauConfiance === "confirme" ? "#326049" : "#7a8090",
-              }}
+              className="inline-flex items-center gap-2 font-display text-[0.88rem]"
+              style={{ color: mesure.niveauConfiance === "confirme" ? "#326049" : "#6b7280" }}
             >
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: mesure.niveauConfiance === "confirme" ? "#326049" : "#a7aeb9" }}
+              />
               {mesure.niveauConfiance === "confirme" ? "Confirmé par plusieurs médias" : "Annoncé, détails à préciser"}
             </span>
           </div>
 
-          <p className="max-w-[70ch] text-ink-soft">
+          <p className="max-w-[70ch] text-[1.05rem] leading-relaxed text-ink-soft">
             {mesure.resumeOfficiel}{" "}
-            <a href={mesure.sourceOfficielle} target="_blank" rel="noopener noreferrer" className="underline">
+            <a href={mesure.sourceOfficielle} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-accent-bleu">
               Voir la source
             </a>
             .
           </p>
           {mesure.noteConfiance && (
-            <p className="max-w-[70ch] text-[0.82rem] text-ink-soft mt-1 italic">{mesure.noteConfiance}</p>
+            <p className="max-w-[70ch] text-[0.92rem] text-ink-faint mt-2 italic leading-relaxed">{mesure.noteConfiance}</p>
           )}
 
-          <div className="grid gap-px bg-line mt-5" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
+          <div className="grid gap-5 mt-8" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
             {CLASSES_SOCIALES.map((classe) => {
               const impact = mesure.impactParClasse[classe.id];
               const couleur = COULEURS[classe.id];
               return (
-                <div key={classe.id} className="p-4.5" style={{ background: couleur.bg }}>
-                  <div className="font-mono text-[0.72rem] uppercase tracking-wide mb-2 flex items-center gap-1.5">
+                <div key={classe.id} className="rounded-2xl p-6" style={{ background: couleur.bg }}>
+                  <div className="font-display text-[0.84rem] font-medium mb-3 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full inline-block" style={{ background: couleur.fg }} />
                     {classe.nom}
                   </div>
-                  <strong className="font-mono text-[0.78rem]">Score : {impact.score > 0 ? "+" : ""}{impact.score} / 2</strong>
+                  <strong className="font-display text-[0.95rem]">Score : {impact.score > 0 ? "+" : ""}{impact.score} / 2</strong>
 
-                  <p className="text-[0.85rem] mt-1.5 font-semibold">Avantages</p>
-                  <ul className="list-disc pl-4.5 text-[0.88rem]">
+                  <p className="font-display text-[0.9rem] mt-4 font-medium">Avantages</p>
+                  <ul className="list-disc pl-4.5 text-[0.95rem] leading-snug space-y-1 mt-1.5">
                     {impact.avantages.length ? impact.avantages.map((a, i) => <li key={i}>{a}</li>) : <li>Aucun bénéfice direct identifié</li>}
                   </ul>
 
-                  <p className="text-[0.85rem] mt-2.5 font-semibold">Risques</p>
-                  <ul className="list-disc pl-4.5 text-[0.88rem]">
+                  <p className="font-display text-[0.9rem] mt-4 font-medium">Risques</p>
+                  <ul className="list-disc pl-4.5 text-[0.95rem] leading-snug space-y-1 mt-1.5">
                     {impact.risques.length ? impact.risques.map((r, i) => <li key={i}>{r}</li>) : <li>Aucun risque direct identifié</li>}
                   </ul>
 
-                  <div className="mt-2.5 text-[0.82rem] text-ink-soft italic border-t border-dashed border-line pt-2">
+                  <div className="mt-5 text-[0.9rem] text-ink-soft italic border-t border-black/10 pt-3 leading-relaxed">
                     Angle mort : {impact.angleMort}
                   </div>
                 </div>
@@ -109,9 +108,9 @@ export default async function FicheCandidatPage({ params }: { params: Promise<{ 
         </div>
       ))}
 
-      <p className="mt-2 text-[0.82rem] text-ink-soft max-w-[70ch]">
+      <p className="mt-2 text-[0.92rem] text-ink-faint max-w-[70ch] leading-relaxed">
         Cette fiche ne recense que les mesures pour lesquelles une source vérifiable a été retrouvée au moment de la
-        rédaction (28 août 2026). Voir la <a href="/methodologie" className="underline">méthodologie</a>.
+        rédaction (28 août 2026). Voir la <a href="/methodologie" className="underline underline-offset-4 hover:text-accent-bleu">méthodologie</a>.
       </p>
     </div>
   );

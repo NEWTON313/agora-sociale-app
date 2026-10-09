@@ -14,19 +14,19 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
   }
 
   return (
-    <div className="border border-line rounded-lg bg-paper-raised p-5.5 mb-6">
-      <div className="flex justify-between items-baseline flex-wrap gap-3 mb-4">
-        <h3 className="font-display text-[1.1rem]">Mes priorités</h3>
+    <div className="rounded-2xl border border-line bg-paper p-8 mb-8 max-sm:p-5">
+      <div className="flex justify-between items-baseline flex-wrap gap-3 mb-3">
+        <h3 className="text-[1.4rem]">Mes priorités</h3>
         <button
           type="button"
           onClick={() => onChange(poidsThemesParDefaut())}
-          className="font-mono text-[0.72rem] uppercase tracking-wide underline text-ink-soft hover:text-accent-rouge"
+          className="font-display text-[0.88rem] text-ink-soft underline underline-offset-4 hover:text-accent-bleu"
         >
           Réinitialiser mes priorités
         </button>
       </div>
 
-      <p className="text-[0.85rem] text-ink-soft mb-4">
+      <p className="text-[0.95rem] text-ink-soft mb-5 max-w-[60ch]">
         Indiquez l&apos;importance que vous accordez à chaque thème pour obtenir un score personnalisé par candidat,
         en plus (et sans changer) de l&apos;affichage neutre par défaut.
       </p>
@@ -35,31 +35,28 @@ export default function PrioritesPanel({ poids, onChange }: Props) {
         {THEMES.map((theme, i) => (
           <li
             key={theme}
-            className={`grid grid-cols-[minmax(150px,230px)_1fr] max-[480px]:grid-cols-1 items-center gap-4 max-[480px]:gap-2 py-3.5 ${
-              i < THEMES.length - 1 ? "border-b border-dashed border-line" : "pb-1"
+            className={`grid grid-cols-[minmax(150px,220px)_1fr] max-[480px]:grid-cols-1 items-center gap-4 max-[480px]:gap-2 py-4 ${
+              i < THEMES.length - 1 ? "border-b border-line" : "pb-1"
             }`}
           >
-            <span className="text-[0.9rem] font-medium">{theme}</span>
-            {/* Contrôle segmenté : les 4 niveaux forment un seul bloc à bordure partagée,
-                plutôt que 4 boutons séparés — toujours le même gabarit quel que soit le
-                nom du thème. Sur mobile, on repasse à des boutons individuels en grille 2x2. */}
+            <span className="font-display text-[0.95rem] font-medium">{theme}</span>
+            {/* Contrôle segmenté : un seul bloc à 4 niveaux, de même gabarit quel que soit le nom du thème.
+                Sur mobile, on repasse à des boutons individuels en grille 2x2. */}
             <div
-              className="flex max-[480px]:grid max-[480px]:grid-cols-2 max-[480px]:gap-1.5 rounded border border-line-strong max-[480px]:border-0 overflow-hidden max-[480px]:overflow-visible bg-paper max-[480px]:bg-transparent"
+              className="flex max-[480px]:grid max-[480px]:grid-cols-2 max-[480px]:gap-1.5 rounded-full border border-line-strong bg-paper-raised p-1 max-[480px]:rounded-xl max-[480px]:border-0 max-[480px]:bg-transparent max-[480px]:p-0"
               role="group"
               aria-label={`Priorité pour ${theme}`}
             >
-              {NIVEAUX_PRIORITE.map((niveau, ni) => (
+              {NIVEAUX_PRIORITE.map((niveau) => (
                 <button
                   key={niveau}
                   type="button"
                   aria-pressed={poids[theme] === niveau}
                   onClick={() => setNiveau(theme, niveau)}
-                  className={`flex-1 font-mono text-[0.66rem] uppercase tracking-wide px-1.5 py-2.5 text-center transition-colors max-[480px]:rounded max-[480px]:border max-[480px]:border-line-strong ${
-                    ni < NIVEAUX_PRIORITE.length - 1 ? "border-r border-line-strong max-[480px]:border-r-line-strong" : ""
-                  } ${
+                  className={`flex-1 rounded-full px-2 py-2 text-center font-display text-[0.8rem] font-medium transition-colors max-[480px]:rounded-lg max-[480px]:border max-[480px]:border-line-strong ${
                     poids[theme] === niveau
-                      ? "bg-accent-bleu text-paper-raised font-semibold max-[480px]:border-accent-bleu"
-                      : "bg-transparent text-ink-soft hover:bg-accent-bleu-soft hover:text-paper-raised max-[480px]:bg-paper"
+                      ? "bg-accent-bleu text-white shadow-sm max-[480px]:border-accent-bleu"
+                      : "text-ink-soft hover:bg-paper-deep hover:text-accent-bleu max-[480px]:bg-paper-raised"
                   }`}
                   title={LABELS_PRIORITE[niveau]}
                 >
