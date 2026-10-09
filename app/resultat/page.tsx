@@ -8,8 +8,6 @@ import { classerCandidats, LABELS_PRIORITE } from "@/lib/priorites";
 
 type SearchParams = Promise<{ classe?: string | string[]; p?: string | string[] }>;
 
-const HOTE_PUBLIC = "https://www.monchoix2027.com";
-
 const premier = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
@@ -23,16 +21,15 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const titre = "Mon résultat — Mon Choix 2027";
   const description =
     "Voici ce que donne le comparateur selon ma catégorie sociale et mes priorités. À toi d'essayer : 2 minutes, aucune donnée conservée.";
-  // Hôte servi directement : monchoix2027.com redirige vers www, et les réseaux sociaux
-  // fiabilisent mieux une vignette récupérée sans saut de redirection.
-  const image = `${HOTE_PUBLIC}/api/carte?${qs}`;
+  // Chemins relatifs : metadataBase (hôte www, voir lib/site.ts) les rend absolus.
+  const image = `/api/carte?${qs}`;
   return {
     ...base,
     description,
     openGraph: {
       title: titre,
       description,
-      url: `${HOTE_PUBLIC}/resultat?${qs}`,
+      url: `/resultat?${qs}`,
       images: [{ url: image, width: 1200, height: 630 }],
     },
     twitter: { card: "summary_large_image", title: titre, description, images: [image] },

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const SITE_URL = "https://monchoix2027.com";
 const SITE_TITLE = "Mon Choix 2027";
 const SITE_DESCRIPTION =
   "Comparateur citoyen, open source et non partisan des programmes des candidats à la présidentielle 2027 : mesure par mesure, avantages, risques et angle mort, selon votre catégorie sociale.";

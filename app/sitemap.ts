@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { CANDIDATS } from "@/lib/data";
-
-const SITE_URL = "https://monchoix2027.com";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
