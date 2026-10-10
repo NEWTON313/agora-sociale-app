@@ -4,7 +4,7 @@ import { AVIS_DONNEES_REELLES, CANDIDATS } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Transparence",
   description:
-    "Qui fait Mon Choix 2027, comment les données sont produites (avec une IA, sans relecture humaine systématique), quelles sources sont utilisées, quelles limites existent et comment signaler une erreur.",
+    "Qui fait Mon Choix 2027, comment les données sont produites (avec une IA, relues par un humain avant publication depuis le 10/10/2026), quelles sources sont utilisées, quelles limites existent et comment signaler une erreur.",
   alternates: { canonical: "/transparence" },
 };
 
@@ -86,9 +86,12 @@ export default function TransparencePage() {
           <a href="/methodologie" className="underline underline-offset-4">méthodologie</a>).
         </p>
         <p className="mt-3">
-          <strong>À ce jour, aucune relecture humaine systématique n&apos;a lieu avant publication.</strong> Des
-          vérifications automatiques contrôlent la structure des données (champs obligatoires, scores de -2 à +2, lien
-          de source présent), mais pas l&apos;exactitude du fond : une erreur d&apos;interprétation, de résumé ou de
+          <strong>Depuis le 10 octobre 2026, l&apos;IA ne publie plus directement :</strong> elle propose ses mises à
+          jour sous forme de demande de modification publique, que le responsable du site relit avant de les fusionner.
+          Cette relecture porte sur les sources et la cohérence ; elle ne garantit pas l&apos;absence d&apos;erreur, et
+          les mesures publiées avant cette date n&apos;ont pas toutes été relues une à une. Des vérifications
+          automatiques contrôlent aussi la structure des données (champs obligatoires, scores de -2 à +2, lien de
+          source présent), mais pas l&apos;exactitude du fond : une erreur d&apos;interprétation, de résumé ou de
           notation reste possible. C&apos;est la raison pour laquelle chaque mesure renvoie à sa source et que vous
           pouvez signaler une erreur (voir plus bas).
         </p>
@@ -155,8 +158,8 @@ export default function TransparencePage() {
             de mesures.
           </li>
           <li>
-            <strong>Une notation faite par une IA,</strong> susceptible de biais et d&apos;erreurs, sans second regard
-            humain systématique.
+            <strong>Une notation faite par une IA,</strong> susceptible de biais et d&apos;erreurs, même si une
+            relecture humaine précède désormais chaque mise à jour.
           </li>
           <li>
             <strong>Des choix éditoriaux</strong> qui ne sont pas neutres par nature : le choix des 9 thèmes, des

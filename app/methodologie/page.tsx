@@ -21,8 +21,8 @@ export default function MethodologiePage() {
         <p>
           Chaque mesure est établie à partir d&apos;un programme officiel du candidat quand il existe, ou d&apos;une
           déclaration publique rapportée par un média de référence. Chaque fiche contient un lien vers la source
-          d&apos;origine. La recherche, le résumé et la notation sont réalisés avec l&apos;aide d&apos;une IA ; à ce
-          jour, aucune relecture humaine systématique n&apos;a lieu avant publication.{" "}
+          d&apos;origine. La recherche, le résumé et la notation sont réalisés avec l&apos;aide d&apos;une IA ; depuis
+          le 10/10/2026, les mises à jour sont relues par un humain avant publication.{" "}
           <a href="/transparence" className="underline underline-offset-4">
             Voir la page Transparence : qui fait quoi, limites connues, signaler une erreur
           </a>
