@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CANDIDATS, CLASSES_SOCIALES, getCandidat } from "@/lib/data";
+
+// Ordre alphabétique des identifiants, jamais par sondage ni popularité (garde-fous de neutralité).
+const candidatsTries = [...CANDIDATS].sort((a, b) => a.id.localeCompare(b.id));
 
 const COULEURS: Record<string, { fg: string; bg: string }> = {
   populaires: { fg: "#3d5a78", bg: "#e2e8ee" },
@@ -38,7 +42,27 @@ export default async function FicheCandidatPage({ params }: { params: Promise<{ 
   if (!candidat) notFound();
 
   return (
-    <div className="max-w-[1180px] mx-auto px-6 pt-16 pb-24">
+    <div className="max-w-[1180px] mx-auto px-6 pt-12 pb-24">
+      <nav aria-label="Autres fiches candidats" className="flex flex-wrap items-center gap-2.5 mb-12">
+        <Link href="/candidats" className="font-display text-[0.9rem] text-ink-soft underline-offset-4 hover:text-accent-bleu hover:underline mr-3">
+          ← Tous les candidats
+        </Link>
+        {candidatsTries.map((c) => (
+          <Link
+            key={c.id}
+            href={`/candidats/${c.id}`}
+            aria-current={c.id === candidat.id ? "page" : undefined}
+            className={`rounded-full border px-4 py-1.5 font-display text-[0.88rem] transition-colors ${
+              c.id === candidat.id
+                ? "border-accent-bleu bg-accent-bleu text-white"
+                : "border-line-strong bg-paper-raised text-ink-soft hover:border-accent-bleu-soft hover:text-accent-bleu"
+            }`}
+          >
+            {c.nom}
+          </Link>
+        ))}
+      </nav>
+
       <div className="pb-10 border-b border-line mb-12">
         <div className="font-display text-[0.9rem] font-medium text-ink-soft mb-4">
           {candidat.nom} — {candidat.parti}

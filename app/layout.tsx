@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
 const NAV = [
   { href: "/simulateur", label: "Simulateur" },
-  { href: "/candidats/melenchon", label: "Fiches candidats" },
+  { href: "/candidats", label: "Fiches candidats" },
   { href: "/methodologie", label: "Méthodologie" },
 ];
 
