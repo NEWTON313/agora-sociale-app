@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/simulateur",
     "/candidats",
     "/methodologie",
+    "/transparence",
     "/methodologie/fiscalite-patrimoine",
     "/methodologie/retraites",
     "/methodologie/jeunesse",

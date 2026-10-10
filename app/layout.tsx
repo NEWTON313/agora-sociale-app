@@ -108,7 +108,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 Outil communautaire et open source. Aucun financement de parti, de candidat ou d&apos;annonceur.
               </p>
             </div>
-            <div className="font-display text-[0.92rem] text-ink-faint">Projet citoyen · Présidentielle 2027</div>
+            <div className="flex flex-col gap-2 font-display text-[0.92rem] text-ink-faint">
+              <div>Projet citoyen · Présidentielle 2027</div>
+              <div className="flex gap-5">
+                <Link href="/methodologie" className="underline underline-offset-4 hover:text-ink">Méthodologie</Link>
+                <Link href="/transparence" className="underline underline-offset-4 hover:text-ink">Transparence</Link>
+              </div>
+            </div>
           </div>
         </footer>
         <Analytics />

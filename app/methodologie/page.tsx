@@ -19,9 +19,14 @@ export default function MethodologiePage() {
       <section className="py-12 border-b border-line">
         <h2 className="text-[1.7rem] mb-6">1. Collecte des données</h2>
         <p>
-          Chaque mesure est saisie uniquement à partir du texte du programme officiel du candidat, ou d&apos;une
-          déclaration publique vérifiable. Chaque fiche contient un lien vers la source d&apos;origine et une double
-          relecture est requise avant publication.
+          Chaque mesure est établie à partir d&apos;un programme officiel du candidat quand il existe, ou d&apos;une
+          déclaration publique rapportée par un média de référence. Chaque fiche contient un lien vers la source
+          d&apos;origine. La recherche, le résumé et la notation sont réalisés avec l&apos;aide d&apos;une IA ; à ce
+          jour, aucune relecture humaine systématique n&apos;a lieu avant publication.{" "}
+          <a href="/transparence" className="underline underline-offset-4">
+            Voir la page Transparence : qui fait quoi, limites connues, signaler une erreur
+          </a>
+          .
         </p>
       </section>
 
@@ -52,7 +57,11 @@ export default function MethodologiePage() {
             connotés positivement ou négativement.
           </li>
           <li>Toute mesure identique proposée par plusieurs candidats est analysée avec exactement la même grille et le même barème.</li>
-          <li>Le code et le jeu de données sont publiés en open source pour permettre l&apos;audit par n&apos;importe qui.</li>
+          <li>
+            Le code et le jeu de données sont publiés en open source, avec l&apos;historique daté de chaque
+            modification, pour permettre l&apos;audit par n&apos;importe qui (voir la page{" "}
+            <a href="/transparence" className="underline underline-offset-4">Transparence</a>).
+          </li>
         </ul>
       </section>
 
