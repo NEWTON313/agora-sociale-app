@@ -149,6 +149,11 @@ function determinerReperesJeunesse(
 }
 
 export interface ResultatClassement {
+  /** Éléments du calcul, affichés à l'utilisateur dans le volet « Comment ce résultat est-il calculé ? ». */
+  revenuAnnuel: number;
+  nbAdultes: number;
+  nbEnfants14Plus: number;
+  nbEnfantsMoins14: number;
   uc: number;
   niveauDeVie: number;
   percentile: number;
@@ -198,6 +203,10 @@ export function classerProfil(profil: ProfilSimulateur): ResultatClassement {
   const classePrincipale: ClasseId = estRetraiteOuInactif ? "retraites" : classeRevenu;
 
   return {
+    revenuAnnuel: Math.round(profil.revenuNetAnnuelMenage || 0),
+    nbAdultes: Math.max(1, profil.nbAdultes || 1),
+    nbEnfants14Plus: profil.nbEnfants14Plus || 0,
+    nbEnfantsMoins14: profil.nbEnfantsMoins14 || 0,
     uc,
     niveauDeVie: Math.round(niveauDeVie),
     percentile,

@@ -13,6 +13,7 @@ import {
 } from "@/lib/simulateur";
 import { classerCandidats, poidsThemesParDefaut, type PoidsThemes } from "@/lib/priorites";
 import ClassementPersonnalise from "./ClassementPersonnalise";
+import DetailCalcul from "./DetailCalcul";
 import PartagerResultat from "./PartagerResultat";
 import PrioritesPanel from "./PrioritesPanel";
 
@@ -134,6 +135,8 @@ function Resultat({ r }: { r: ResultatClassement }) {
           <dd className="font-display text-[1.1rem] mt-1">{r.uc}</dd>
         </div>
       </dl>
+
+      <DetailCalcul r={r} />
 
       {r.estRetraiteOuInactif && (
         <p className="text-[0.9rem] bg-paper border-l-2 border-line-strong px-3.5 py-2.5 mt-4">

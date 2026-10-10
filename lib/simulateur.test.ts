@@ -222,3 +222,14 @@ describe("classerProfil — repères jeunesse", () => {
     expect(r.reperesJeunesse).toEqual([]);
   });
 });
+
+describe("classerProfil — éléments du calcul exposés à l'utilisateur", () => {
+  it("restitue revenu annuel, composition du foyer, UC et niveau de vie", () => {
+    const r = classerProfil(profil({ revenuNetAnnuelMenage: 60000, nbAdultes: 2, nbEnfants14Plus: 0, nbEnfantsMoins14: 0 }));
+    expect(r.revenuAnnuel).toBe(60000);
+    expect(r.nbAdultes).toBe(2);
+    expect(r.uc).toBe(1.5);
+    expect(r.niveauDeVie).toBe(40000);
+    expect(r.classePrincipale).toBe("aisees");
+  });
+});
