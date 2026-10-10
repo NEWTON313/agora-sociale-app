@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BadgeParti from "@/components/BadgeParti";
 import { CANDIDATS_ALPHABETIQUE, THEMES } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -46,7 +47,10 @@ export default function CandidatsPage() {
                 >
                   <div>
                     <div className="font-body text-[1.5rem] font-semibold leading-tight tracking-[-0.01em]">{c.nom}</div>
-                    <div className="font-display text-[0.95rem] text-ink-faint mt-1">{c.parti}</div>
+                    <div className="mt-2 flex items-center gap-2.5 font-display text-[0.95rem] text-ink-faint">
+                      <BadgeParti parti={c.parti} />
+                      {c.parti}
+                    </div>
                   </div>
                   {c.mesures.length === 0 ? (
                     <p className="font-display text-[0.92rem] text-ink-faint">Aucune mesure recensée à ce stade</p>

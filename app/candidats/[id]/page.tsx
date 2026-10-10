@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BadgeParti from "@/components/BadgeParti";
 import { CANDIDATS_ALPHABETIQUE, CLASSES_SOCIALES, getCandidat } from "@/lib/data";
 
 const COULEURS: Record<string, { fg: string; bg: string }> = {
@@ -65,8 +66,11 @@ export default async function FicheCandidatPage({ params }: { params: Promise<{ 
       </nav>
 
       <div className="pb-10 border-b border-line mb-12">
-        <div className="font-display text-[0.95rem] font-medium text-ink-soft mb-4">
-          {candidat.parti} · Mesures recensées : {candidat.mesures.length}
+        <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-display text-[0.95rem] font-medium text-ink-soft">
+          <BadgeParti parti={candidat.parti} className="!text-[0.82rem] !px-2.5 !py-1" />
+          <span>
+            {candidat.parti} · Mesures recensées : {candidat.mesures.length}
+          </span>
         </div>
         <h1 className="text-[clamp(2.2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">{candidat.nom}</h1>
       </div>

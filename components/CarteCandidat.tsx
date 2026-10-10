@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import type { Candidat, ClasseId, Theme } from "@/lib/data";
 import type { ScorePersonnalise as ScorePersonnaliseResultat } from "@/lib/priorites";
+import BadgeParti from "./BadgeParti";
 import Ledger from "./Ledger";
 import ScorePersonnalise from "./ScorePersonnalise";
 
@@ -37,7 +38,10 @@ export default function CarteCandidat({ candidat, theme, classeActive, scorePers
     >
       <header>
         <div className="font-body font-semibold text-[1.4rem] leading-tight tracking-[-0.01em]">{candidat.nom}</div>
-        <div className="font-display text-[0.92rem] text-ink-faint mt-1">{candidat.parti}</div>
+        <div className="mt-2 flex items-center gap-2.5 font-display text-[0.92rem] text-ink-faint">
+          <BadgeParti parti={candidat.parti} />
+          {candidat.parti}
+        </div>
       </header>
 
       {vide && (
