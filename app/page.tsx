@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import ComparateurClasse from "@/components/ComparateurClasse";
-import { AVIS_DONNEES_REELLES } from "@/lib/data";
+import { AVIS_DONNEES_REELLES, CANDIDATS, THEMES } from "@/lib/data";
 
 const EXEMPLE_REGISTRE = [
   { label: "Classes populaires", width: 38, sens: "pos" as const },
@@ -22,7 +22,8 @@ export default function HomePage() {
         <div className="relative max-w-[1180px] mx-auto px-6 py-24 max-[900px]:py-16 grid grid-cols-[1fr_420px] gap-16 items-center max-[900px]:grid-cols-1 max-[900px]:gap-12">
           <div>
             <div className="flex items-center gap-2.5 font-display text-[0.95rem] text-ink-faint mb-7 animate-rise">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-bleu" />6 candidats · 9 thèmes · zéro étiquette partisane
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-bleu" />
+              {CANDIDATS.length} candidats · {THEMES.length} thèmes · zéro étiquette partisane
             </div>
 
             <h1
