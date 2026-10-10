@@ -24,16 +24,27 @@ export default function CarteCandidat({ candidat, theme, classeActive, scorePers
   const mesuresVisibles = depliee || mesures.length <= 1 ? mesures : mesures.slice(0, 1);
   const nbMasquees = mesures.length - mesuresVisibles.length;
 
+  // Carte compacte quand rien n'est à comparer sur ce thème : tous les candidats restent présents
+  // (équité), sans que les cartes vides ne noient celles qui contiennent des mesures.
+  const vide = mesures.length === 0;
+  const aucuneMesure = candidat.mesures.length === 0;
+
   return (
-    <article className="group/carte flex flex-col gap-6 rounded-2xl border border-line bg-paper-raised p-8 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated">
+    <article
+      className={`group/carte flex flex-col rounded-2xl border border-line bg-paper-raised shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated ${
+        vide ? "gap-4 p-6" : "gap-6 p-8"
+      }`}
+    >
       <header>
         <div className="font-body font-semibold text-[1.4rem] leading-tight tracking-[-0.01em]">{candidat.nom}</div>
         <div className="font-display text-[0.92rem] text-ink-faint mt-1">{candidat.parti}</div>
       </header>
 
-      {mesures.length === 0 && (
-        <p className="font-body text-[1rem] text-ink-soft border-t border-line pt-5">
-          Aucune mesure recensée sur ce thème pour ce candidat.
+      {vide && (
+        <p className="font-body text-[0.98rem] text-ink-soft border-t border-line pt-4">
+          {aucuneMesure
+            ? "Aucune mesure recensée à ce stade pour ce candidat."
+            : "Aucune mesure recensée sur ce thème pour ce candidat."}
         </p>
       )}
 
@@ -69,13 +80,13 @@ export default function CarteCandidat({ candidat, theme, classeActive, scorePers
         </button>
       )}
 
-      {mesures.length === 0 && <Ledger impact={undefined} />}
-
       {scorePersonnalise && <ScorePersonnalise resultat={scorePersonnalise} />}
 
       <Link
         href={`/candidats/${candidat.id}`}
-        className="mt-auto inline-flex items-center gap-2 border-t border-line pt-5 font-display text-[0.92rem] font-medium text-accent-bleu"
+        className={`mt-auto inline-flex items-center gap-2 border-t border-line font-display text-[0.92rem] font-medium text-accent-bleu ${
+          vide ? "pt-4" : "pt-5"
+        }`}
       >
         Voir la fiche complète
         <span aria-hidden="true" className="transition-transform duration-300 group-hover/carte:translate-x-1">→</span>

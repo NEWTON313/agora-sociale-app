@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { CANDIDATS, CLASSES_SOCIALES, THEMES, type ClasseId, type Theme } from "@/lib/data";
+import { CANDIDATS_ALPHABETIQUE, CLASSES_SOCIALES, THEMES, type ClasseId, type Theme } from "@/lib/data";
 import { calculerScorePersonnalise, poidsThemesParDefaut, trierParScorePersonnalise, type PoidsThemes } from "@/lib/priorites";
 import ClasseRail from "./ClasseRail";
 import CarteCandidat from "./CarteCandidat";
@@ -32,14 +32,14 @@ export default function ComparateurClasse() {
   const resultatsPersonnalises = useMemo(() => {
     const map = new Map<string, ReturnType<typeof calculerScorePersonnalise>>();
     if (!modePriorites) return map;
-    for (const candidat of CANDIDATS) {
+    for (const candidat of CANDIDATS_ALPHABETIQUE) {
       map.set(candidat.id, calculerScorePersonnalise(candidat, classeActive, poids));
     }
     return map;
   }, [modePriorites, classeActive, poids]);
 
   const candidatsAffiches =
-    modePriorites && trierParScore ? trierParScorePersonnalise(CANDIDATS, resultatsPersonnalises) : CANDIDATS;
+    modePriorites && trierParScore ? trierParScorePersonnalise(CANDIDATS_ALPHABETIQUE, resultatsPersonnalises) : CANDIDATS_ALPHABETIQUE;
 
   return (
     <div className="grid grid-cols-[220px_1fr] gap-8 max-md:grid-cols-1">

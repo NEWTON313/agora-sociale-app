@@ -81,7 +81,7 @@ export function classerCandidats(
 /**
  * Tri stable et explicite (jamais l'ordre par défaut) : les candidats sans score
  * calculable restent toujours en fin de liste, jamais traités comme un score de 0.
- * À égalité de score, on retombe sur l'ordre alphabétique du nom pour un résultat
+ * À égalité de score, on retombe sur l'ordre alphabétique (identifiant = nom de famille) pour un résultat
  * reproductible plutôt que dépendant du moteur JS.
  */
 export function trierParScorePersonnalise(
@@ -91,10 +91,10 @@ export function trierParScorePersonnalise(
   return [...candidats].sort((a, b) => {
     const scoreA = resultats.get(a.id)?.scoreGlobal ?? null;
     const scoreB = resultats.get(b.id)?.scoreGlobal ?? null;
-    if (scoreA === null && scoreB === null) return a.nom.localeCompare(b.nom);
+    if (scoreA === null && scoreB === null) return a.id.localeCompare(b.id, "fr");
     if (scoreA === null) return 1;
     if (scoreB === null) return -1;
     if (scoreB !== scoreA) return scoreB - scoreA;
-    return a.nom.localeCompare(b.nom);
+    return a.id.localeCompare(b.id, "fr");
   });
 }

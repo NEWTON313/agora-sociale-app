@@ -39,6 +39,11 @@ export default function MethodologiePage() {
         <ul className="list-disc pl-5 space-y-1.5">
           <li>Aucune couleur du site ne reprend les couleurs officielles d&apos;un parti.</li>
           <li>
+            Tout candidat officiellement déclaré, selon les médias de référence, figure dans le comparateur, par
+            ordre alphabétique, y compris quand aucune mesure sourcée n&apos;a encore été recensée (sa carte l&apos;indique
+            explicitement plutôt que d&apos;extrapoler). Un retrait officiel de candidature le retire du site.
+          </li>
+          <li>
             Les candidats sont toujours présentés dans un ordre neutre (alphabétique ou tirage aléatoire affiché),
             jamais par sondage ou popularité.
           </li>

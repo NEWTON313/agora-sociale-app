@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CANDIDATS, CLASSES_SOCIALES, getCandidat } from "@/lib/data";
-
-// Ordre alphabétique des identifiants, jamais par sondage ni popularité (garde-fous de neutralité).
-const candidatsTries = [...CANDIDATS].sort((a, b) => a.id.localeCompare(b.id));
+import { CANDIDATS_ALPHABETIQUE, CLASSES_SOCIALES, getCandidat } from "@/lib/data";
 
 const COULEURS: Record<string, { fg: string; bg: string }> = {
   populaires: { fg: "#3d5a78", bg: "#e2e8ee" },
@@ -15,7 +12,7 @@ const COULEURS: Record<string, { fg: string; bg: string }> = {
 
 // Pré-génère une page statique par candidat au build (SSG).
 export function generateStaticParams() {
-  return CANDIDATS.map((c) => ({ id: c.id }));
+  return CANDIDATS_ALPHABETIQUE.map((c) => ({ id: c.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
@@ -25,7 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   const themes = candidat.mesures.map((m) => m.theme).join(", ");
   const title = `${candidat.nom} (${candidat.parti}) — programme et mesures à la présidentielle 2027`;
-  const description = `Impact des mesures de ${candidat.nom} (${candidat.parti}) sur chaque catégorie sociale : ${themes}. Sources, niveau de confiance et angle mort pour chaque mesure.`;
+  const description = candidat.mesures.length
+    ? `Impact des mesures de ${candidat.nom} (${candidat.parti}) sur chaque catégorie sociale : ${themes}. Sources, niveau de confiance et angle mort pour chaque mesure.`
+    : `${candidat.nom} (${candidat.parti}), candidat déclaré à la présidentielle 2027 : aucune mesure sourcée recensée à ce stade. La fiche sera complétée dès que son programme se précise.`;
 
   return {
     title,
@@ -41,34 +40,47 @@ export default async function FicheCandidatPage({ params }: { params: Promise<{ 
   const candidat = getCandidat(id);
   if (!candidat) notFound();
 
+  const position = CANDIDATS_ALPHABETIQUE.findIndex((c) => c.id === candidat.id);
+  const precedent = position > 0 ? CANDIDATS_ALPHABETIQUE[position - 1] : null;
+  const suivant = position < CANDIDATS_ALPHABETIQUE.length - 1 ? CANDIDATS_ALPHABETIQUE[position + 1] : null;
+
   return (
     <div className="max-w-[1180px] mx-auto px-6 pt-12 pb-24">
-      <nav aria-label="Autres fiches candidats" className="flex flex-wrap items-center gap-2.5 mb-12">
-        <Link href="/candidats" className="font-display text-[0.9rem] text-ink-soft underline-offset-4 hover:text-accent-bleu hover:underline mr-3">
-          ← Tous les candidats
+      <nav aria-label="Navigation entre les fiches" className="flex flex-wrap items-center justify-between gap-4 mb-12 font-display text-[0.92rem]">
+        <Link href="/candidats" className="text-ink-soft underline-offset-4 hover:text-accent-bleu hover:underline">
+          ← Tous les candidats ({CANDIDATS_ALPHABETIQUE.length})
         </Link>
-        {candidatsTries.map((c) => (
-          <Link
-            key={c.id}
-            href={`/candidats/${c.id}`}
-            aria-current={c.id === candidat.id ? "page" : undefined}
-            className={`rounded-full border px-4 py-1.5 font-display text-[0.88rem] transition-colors ${
-              c.id === candidat.id
-                ? "border-accent-bleu bg-accent-bleu text-white"
-                : "border-line-strong bg-paper-raised text-ink-soft hover:border-accent-bleu-soft hover:text-accent-bleu"
-            }`}
-          >
-            {c.nom}
-          </Link>
-        ))}
+        <div className="flex flex-wrap items-center gap-6">
+          {precedent && (
+            <Link href={`/candidats/${precedent.id}`} className="text-ink-soft underline-offset-4 hover:text-accent-bleu hover:underline">
+              ← {precedent.nom}
+            </Link>
+          )}
+          {suivant && (
+            <Link href={`/candidats/${suivant.id}`} className="text-ink-soft underline-offset-4 hover:text-accent-bleu hover:underline">
+              {suivant.nom} →
+            </Link>
+          )}
+        </div>
       </nav>
 
       <div className="pb-10 border-b border-line mb-12">
-        <div className="font-display text-[0.9rem] font-medium text-ink-soft mb-4">
-          {candidat.nom} — {candidat.parti}
+        <div className="font-display text-[0.95rem] font-medium text-ink-soft mb-4">
+          {candidat.parti} · Mesures recensées : {candidat.mesures.length}
         </div>
-        <h1 className="text-[clamp(2.2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">Mesures recensées</h1>
+        <h1 className="text-[clamp(2.2rem,4vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">{candidat.nom}</h1>
       </div>
+
+      {candidat.mesures.length === 0 && (
+        <div className="max-w-[62ch] rounded-2xl border border-dashed border-line-strong bg-paper-deep/50 p-8 mb-16">
+          <h2 className="text-[1.5rem] mb-3">Aucune mesure recensée à ce stade</h2>
+          <p className="text-ink-soft leading-relaxed">
+            {candidat.nom} figure dans le comparateur parce que sa candidature est officiellement déclarée, mais aucune
+            mesure n&apos;a encore pu être recensée avec une source vérifiable dans les médias de référence. Plutôt que
+            d&apos;extrapoler, la fiche reste vide : elle sera complétée dès que son programme se précise.
+          </p>
+        </div>
+      )}
 
       {candidat.mesures.map((mesure) => (
         <div key={mesure.id} className="mb-20">

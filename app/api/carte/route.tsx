@@ -12,6 +12,8 @@ const COULEURS_CLASSES: Record<string, string> = {
 };
 
 const BARRE_LARGEUR = 230;
+const MAX_LIGNES = 12;
+const HAUTEUR_LISTE = 420;
 
 export function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams;
@@ -22,6 +24,15 @@ export function GET(request: NextRequest) {
   const couleurClasse = COULEURS_CLASSES[classe.id];
   const { classement, resultats } = classerCandidats(CANDIDATS, partage.classe, partage.poids);
   const priorites = themesPrioritaires(partage.poids, 3);
+
+  // Avec beaucoup de candidats, la carte affiche ceux dont le score est calculable (au plus MAX_LIGNES, taille
+  // adaptée) et résume les autres ; la liste complète reste toujours consultable sur le site.
+  const calculables = classement.filter((c) => resultats.get(c.id)!.scoreGlobal !== null);
+  const nonCalculables = classement.length - calculables.length;
+  const lignes = calculables.slice(0, MAX_LIGNES);
+  const restants = calculables.length - lignes.length;
+  const hauteurLigne = Math.min(66, Math.floor(HAUTEUR_LISTE / Math.max(lignes.length, 1)));
+  const compact = hauteurLigne < 54;
 
   const headers: Record<string, string> = {
     // Les données (scores) évoluent tous les quelques jours : cache court côté navigateur, plus long côté CDN.
@@ -71,60 +82,70 @@ export function GET(request: NextRequest) {
             <div style={{ display: "flex", fontSize: 17, color: "#7a8090", letterSpacing: 2, marginBottom: 4 }}>
               CORRESPONDANCE AVEC MES PRIORITÉS
             </div>
-            {classement.map((candidat, i) => {
+            {lignes.map((candidat, i) => {
               const r = resultats.get(candidat.id)!;
-              const score = r.scoreGlobal;
-              const largeur = score === null ? 0 : (Math.min(Math.abs(score) / 2, 1) * BARRE_LARGEUR) / 2;
-              const positif = score !== null && score >= 0;
+              const score = r.scoreGlobal!;
+              const largeur = (Math.min(Math.abs(score) / 2, 1) * BARRE_LARGEUR) / 2;
+              const positif = score >= 0;
               return (
-                <div key={candidat.id} style={{ display: "flex", alignItems: "center" }}>
-                  <div style={{ display: "flex", width: 34, fontSize: 26, fontWeight: 700, color: "#7a8090" }}>{i + 1}</div>
+                <div key={candidat.id} style={{ display: "flex", alignItems: "center", height: hauteurLigne }}>
+                  <div style={{ display: "flex", width: 34, fontSize: compact ? 20 : 26, fontWeight: 700, color: "#7a8090" }}>{i + 1}</div>
                   <div style={{ display: "flex", flexDirection: "column", width: 262 }}>
-                    <div style={{ display: "flex", fontSize: 24, fontWeight: 700, lineHeight: 1.1 }}>{candidat.nom}</div>
-                    <div style={{ display: "flex", fontSize: 13, color: "#7a8090", letterSpacing: 1.2, marginTop: 3 }}>
-                      {candidat.parti.toUpperCase()}
-                    </div>
+                    <div style={{ display: "flex", fontSize: compact ? 20 : 24, fontWeight: 700, lineHeight: 1.1 }}>{candidat.nom}</div>
+                    {!compact && (
+                      <div style={{ display: "flex", fontSize: 13, color: "#7a8090", letterSpacing: 1.2, marginTop: 3 }}>
+                        {candidat.parti.toUpperCase()}
+                      </div>
+                    )}
                   </div>
-                  {score === null ? (
-                    <div style={{ display: "flex", fontSize: 18, color: "#7a8090", fontStyle: "italic" }}>non calculable</div>
-                  ) : (
-                    <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        position: "relative",
+                        width: BARRE_LARGEUR,
+                        height: compact ? 12 : 16,
+                        background: "#ffffff",
+                        border: "1px solid #c9ced8",
+                      }}
+                    >
+                      <div style={{ position: "absolute", left: BARRE_LARGEUR / 2 - 1, top: -1, bottom: -1, width: 1, background: "#10131a" }} />
                       <div
                         style={{
-                          display: "flex",
-                          position: "relative",
-                          width: BARRE_LARGEUR,
-                          height: 16,
-                          background: "#ffffff",
-                          border: "1px solid #c9ced8",
+                          position: "absolute",
+                          top: 0,
+                          bottom: 0,
+                          width: largeur,
+                          left: positif ? BARRE_LARGEUR / 2 - 1 : BARRE_LARGEUR / 2 - 1 - largeur,
+                          background: positif ? "#326049" : "#8f382f",
                         }}
-                      >
-                        <div style={{ position: "absolute", left: BARRE_LARGEUR / 2 - 1, top: -1, bottom: -1, width: 1, background: "#10131a" }} />
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: 0,
-                            bottom: 0,
-                            width: largeur,
-                            left: positif ? BARRE_LARGEUR / 2 - 1 : BARRE_LARGEUR / 2 - 1 - largeur,
-                            background: positif ? "#326049" : "#8f382f",
-                          }}
-                        />
+                      />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", width: 96, marginLeft: 14 }}>
+                      <div style={{ display: "flex", fontSize: compact ? 18 : 22, fontWeight: 700, lineHeight: 1.1 }}>
+                        {score > 0 ? "+" : ""}
+                        {score.toFixed(1)}
                       </div>
-                      <div style={{ display: "flex", flexDirection: "column", width: 96, marginLeft: 14 }}>
-                        <div style={{ display: "flex", fontSize: 22, fontWeight: 700, lineHeight: 1.1 }}>
-                          {score > 0 ? "+" : ""}
-                          {score.toFixed(1)}
-                        </div>
+                      {!compact && (
                         <div style={{ display: "flex", fontSize: 13, color: "#7a8090", marginTop: 3 }}>
                           {r.themesCouverts}/{r.themesPonderes} thème{r.themesPonderes > 1 ? "s" : ""}
                         </div>
-                      </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
+            {(nonCalculables > 0 || restants > 0) && (
+              <div style={{ display: "flex", flexDirection: "column", marginTop: 6, fontSize: 15, color: "#454e5e", lineHeight: 1.35 }}>
+                {restants > 0 && <div style={{ display: "flex" }}>+ {restants} autre{restants > 1 ? "s" : ""} candidat{restants > 1 ? "s" : ""} classé{restants > 1 ? "s" : ""} (liste complète sur le site)</div>}
+                {nonCalculables > 0 && (
+                  <div style={{ display: "flex" }}>
+                    {nonCalculables} autre{nonCalculables > 1 ? "s" : ""} candidat{nonCalculables > 1 ? "s" : ""} : score non calculable (aucune mesure recensée)
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

@@ -193,7 +193,7 @@ function MonCandidat({ classeActive, poids }: { classeActive: ResultatClassement
         <Link href="/methodologie#score-personnalise" className="underline">
           méthodologie
         </Link>
-        . Le classement complet ci-dessous reste toujours visible, dans l&apos;ordre de correspondance.
+        . Tous les candidats restent listés ci-dessous : ceux dont le score est calculable dans l&apos;ordre de correspondance, les autres regroupés en fin de liste.
       </p>
 
       <ClassementPersonnalise classement={classement} resultats={resultats} />
