@@ -97,9 +97,9 @@ export interface AvisDonnees {
 }
 
 export const AVIS_DONNEES_REELLES: AvisDonnees = {
-  dateMaj: "2026-10-19",
+  dateMaj: "2026-10-25",
   texte:
-    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : Natacha Polony, qui a annoncé sa candidature le 14 octobre 2026, vient d'y être ajoutée. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027). La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen est déclarée candidate après la réduction de sa peine d'inéligibilité par la cour d'appel de Paris (7 juillet 2026) ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour. Seuls Mélenchon, Attal, Philippe, Retailleau, Le Pen et Tondelier disposent à ce stade de plusieurs mesures sourcées ; les autres candidats sont enrichis progressivement, en priorité ceux qui n'ont encore aucune mesure recensée. Chaque mesure indique sa source et son niveau de confiance.",
+    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : Mira Markovic (Parti animaliste), Gilles Platret, Erwan Rohou, Christian Collovati et Augustin Billetdoux, recensés par franceinfo parmi les candidats déclarés, viennent d'y être ajoutés. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027). La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen est déclarée candidate après la réduction de sa peine d'inéligibilité par la cour d'appel de Paris (7 juillet 2026) ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour. Seuls Mélenchon, Attal, Philippe, Retailleau, Le Pen, Tondelier, Dupont-Aignan, Egger, Glucksmann, Lalanne, Lisnard et Mathieu disposent à ce stade d'au moins une mesure sourcée ; les autres candidats sont enrichis progressivement, en priorité ceux qui n'ont encore aucune mesure recensée. Chaque mesure indique sa source et son niveau de confiance.",
 };
 
 // Remapping vers la taxonomie à 9 thèmes (2026-08-29) : `br-rsa` (RSA/emploi) est classée en
@@ -1321,7 +1321,44 @@ export const CANDIDATS: Candidat[] = [
     id: "lalanne",
     nom: "Francis Lalanne",
     parti: "France Libre",
-    mesures: [],
+    mesures: [
+      {
+        id: "fl-frexit-otan",
+        theme: "Europe et géopolitique",
+        titre: "Sortie de l'Union européenne, de l'OTAN et retour au franc",
+        resumeOfficiel:
+          "Francis Lalanne fait de la rupture avec l'Union européenne et l'OTAN, et du retour à une monnaie nationale, l'un des axes de sa candidature 2027, qu'il présente comme une sortie du système politique et monétaire actuel.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/politique/une-rupture-avec-le-systeme-francis-lalanne-officialise-sa-candidature-pour-2027-181428",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Position centrale revendiquée par le candidat lui-même au moment de l'officialisation de sa candidature, rapportée par Le JDD.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Promesse de reprise de contrôle budgétaire et monétaire présentée comme favorable aux ménages modestes"], risques: ["Une sortie de l'UE et de l'OTAN ferait courir un risque de rupture commerciale et diplomatique dont l'effet sur les prix et l'emploi n'est pas chiffré"], angleMort: "Aucun plan de transition chiffré n'est publié pour un retour au franc ni pour ses effets sur l'épargne et les prix à court terme." },
+          moyennes: { score: 0, avantages: [], risques: ["Les professions dépendant des échanges avec l'UE seraient exposées à une incertitude commerciale et juridique prolongée"], angleMort: "Le calendrier et les modalités pratiques d'une sortie de l'UE et de l'OTAN ne sont pas détaillés." },
+          aisees: { score: -1, avantages: [], risques: ["Un retour au franc ferait courir un risque de volatilité monétaire pouvant affecter l'épargne et les placements financiers"], angleMort: "Aucune étude publique sur la conversion de l'épargne en cas de retour à une monnaie nationale." },
+          retraites: { score: 0, avantages: [], risques: ["Une instabilité monétaire liée à un retour au franc pourrait affecter la valeur réelle des pensions versées"], angleMort: "Le candidat ne chiffre pas l'effet de cette mesure sur le financement ou le pouvoir d'achat des pensions." },
+        },
+      },
+      {
+        id: "fl-abrogation-lois-expression",
+        theme: "Sécurité et justice",
+        titre: "Abrogation des lois Pleven, Gayssot et Avia",
+        resumeOfficiel:
+          "Francis Lalanne propose d'abroger les lois Pleven (1972, répression de l'incitation à la haine raciale), Gayssot (1990, répression du négationnisme) et Avia (2020, lutte contre la haine en ligne), qu'il qualifie de « lois liberticides » muselant le débat public.",
+        sourceOfficielle:
+          "https://www.france24.com/fr/info-en-continu/20260819-pr%C3%A9sidentielle-francis-lalanne-en-meeting-samedi-pour-lancer-sa-campagne",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Mesure nommément citée dans une dépêche AFP reprise par France 24 lors du lancement de sa campagne ; le candidat est notamment soutenu par Dieudonné, condamné à plusieurs reprises pour incitation à la haine raciale, élément de contexte rapporté par la presse.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Présentée par le candidat comme un élargissement de la liberté d'expression pour l'ensemble des citoyens"], risques: ["Suppression de protections pénales spécifiques contre l'incitation à la haine raciale, l'antisémitisme et le négationnisme"], angleMort: "Le candidat ne précise pas par quel dispositif la lutte contre les discours de haine serait assurée après l'abrogation de ces lois." },
+          moyennes: { score: 0, avantages: [], risques: ["Mêmes conséquences sur le cadre légal de protection contre les discours de haine, sans effet économique différencié selon cette catégorie"], angleMort: "Aucune étude ne mesure un effet différencié de cette mesure selon les catégories socio-économiques." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique différencié identifiable pour cette catégorie ; la mesure relève du droit pénal de la liberté d'expression plutôt que de la politique économique." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur cette catégorie." },
+        },
+      },
+    ],
   },
   {
     id: "lassalle",
@@ -1339,13 +1376,87 @@ export const CANDIDATS: Candidat[] = [
     id: "lisnard",
     nom: "David Lisnard",
     parti: "Nouvelle Énergie",
-    mesures: [],
+    mesures: [
+      {
+        id: "dl-fiscalite-capital-entreprises",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Baisse de l'impôt sur les sociétés à 20 % et plafonnement de la fiscalité du capital à 22 %",
+        resumeOfficiel:
+          "David Lisnard propose de ramener l'impôt sur les sociétés à 20 % au niveau national (contre 25 % actuellement) et de plafonner la taxation des revenus du capital à 22 %, pour faciliter l'accès des entreprises, notamment des start-up, au capital.",
+        sourceOfficielle:
+          "https://www.france24.com/fr/info-en-continu/20260527-pr%C3%A9sidentielle-lisnard-veut-lib%C3%A9rer-l-innovation-en-supprimant-le-principe-de-pr%C3%A9caution",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Chiffrage annoncé par le candidat (France 3 Régions, dépêche AFP reprise par France 24) ; aucune étude indépendante ne documente publiquement l'effet budgétaire précis de cette baisse combinée.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: ["Une baisse de la fiscalité des entreprises et du capital, si elle n'est pas compensée, pourrait réduire les recettes publiques disponibles pour les dépenses sociales"], angleMort: "Le candidat ne chiffre pas le coût budgétaire de cette baisse ni les mesures de compensation éventuelles." },
+          moyennes: { score: 0, avantages: ["Présentée par le candidat comme un moyen de soutenir l'investissement et l'emploi dans les entreprises, y compris les PME"], risques: [], angleMort: "L'effet concret sur l'emploi ou les salaires de cette catégorie n'est pas chiffré." },
+          aisees: { score: 2, avantages: ["Baisse directe de la fiscalité sur les revenus du capital (plafonnée à 22 %) et sur les bénéfices des sociétés, qui profite directement aux détenteurs de capital et d'entreprises"], risques: [], angleMort: "Aucune étude publique n'évalue le coût budgétaire de cette mesure ni sa compensation." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur les pensions ; un effet indirect via les recettes publiques n'est pas chiffré par le candidat." },
+        },
+      },
+      {
+        id: "dl-retraite-capitalisation",
+        theme: "Retraites et modèle social",
+        titre: "Retraite hybride : pension minimale par répartition et complément obligatoire par capitalisation",
+        resumeOfficiel:
+          "David Lisnard propose un système de retraite hybride : une pension minimale garantie par répartition et un complément par capitalisation individuelle obligatoire, géré par un véhicule contrôlé par l'État et administré de façon paritaire ; il évoque environ 68 % des cotisations affectées à la répartition et le reste à la capitalisation.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/politique/david-lisnard-au-jdd-notre-systeme-de-retraites-cest-une-pyramide-de-ponzi-132046",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Position défendue par David Lisnard depuis plusieurs années (entretien au JDD), reprise dans le cadre de sa candidature à l'élection présidentielle de 2027 selon un entretien ultérieur au JDD sur son programme.",
+        impactParClasse: {
+          populaires: { score: -1, avantages: ["Maintien d'une pension minimale garantie par répartition"], risques: ["Une part de la retraite devenant dépendante de la capitalisation exposerait les ménages aux revenus modestes, qui épargnent peu, à un complément de retraite plus incertain et dépendant des marchés financiers"], angleMort: "Le candidat ne précise pas de mécanisme d'abondement public pour les ménages ne pouvant pas alimenter suffisamment la part capitalisée." },
+          moyennes: { score: 0, avantages: ["Un complément par capitalisation pourrait, en période de rendement favorable, bonifier la pension totale"], risques: ["Exposition d'une partie de l'épargne retraite aux fluctuations des marchés financiers"], angleMort: "Le taux de rendement attendu de la part capitalisée et sa garantie en cas de crise financière ne sont pas précisés." },
+          aisees: { score: 1, avantages: ["Catégorie la mieux placée pour tirer parti d'un système de capitalisation, qui favorise statistiquement les ménages disposant d'une capacité d'épargne plus importante"], risques: [], angleMort: "Le candidat ne précise pas de plafond à la part capitalisée, qui pourrait accentuer les écarts de pension selon le patrimoine." },
+          retraites: { score: 0, avantages: [], risques: ["Les retraités actuels, déjà liquidés sous le système par répartition, ne bénéficieraient pas de la part capitalisée nouvellement créée"], angleMort: "La transition entre les deux systèmes pour les actifs proches de la retraite n'est pas détaillée." },
+        },
+      },
+      {
+        id: "dl-delit-sejour-irregulier",
+        theme: "Immigration et intégration",
+        titre: "Rétablissement du délit de séjour irrégulier et quotas d'immigration",
+        resumeOfficiel:
+          "David Lisnard propose de rétablir le délit de séjour irrégulier, supprimé par la loi du 31 décembre 2012, et de fixer des quotas d'immigration, ce qui supposerait selon lui une révision constitutionnelle.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/Societe/immigration-david-lisnard-compte-retablir-le-delit-de-sejour-irregulier-182505",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Proposition détaillée rapportée par Le JDD dans un article consacré spécifiquement à cette mesure du candidat.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: ["Un rétablissement du délit de séjour irrégulier exposerait les personnes en situation irrégulière à des poursuites pénales et à la détention"], angleMort: "Le candidat ne chiffre pas les moyens budgétaires et le nombre de places de détention nécessaires pour appliquer cette mesure." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur cette catégorie ; la mesure vise le statut administratif des personnes étrangères en situation irrégulière." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur cette catégorie ; la mesure concerne le statut des personnes étrangères en situation irrégulière, non les retraités français." },
+        },
+      },
+    ],
   },
   {
     id: "mathieu",
     nom: "Benoît Mathieu",
     parti: "Étiquette non précisée",
-    mesures: [],
+    mesures: [
+      {
+        id: "bm-ric-convention-constituante",
+        theme: "Institutions et démocratie",
+        titre: "Référendum d'initiative citoyenne, conventions citoyennes tirées au sort et assemblée citoyenne constituante",
+        resumeOfficiel:
+          "Benoît Mathieu, qui parcourt la France à vélo pour recueillir les 500 parrainages nécessaires à sa candidature, défend un projet de démocratie plus directe : instauration d'un référendum d'initiative citoyenne (RIC), organisation de conventions citoyennes tirées au sort, et création d'une assemblée citoyenne chargée de réécrire la Constitution.",
+        sourceOfficielle:
+          "https://france3-regions.franceinfo.fr/bourgogne-franche-comte/saone-et-loire/je-vais-continuer-jusqu-au-bout-candidat-a-la-presidentielle-2027-il-parcourt-10-000-kilometres-a-velo-pour-recolter-les-parrainages-3338204.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Propositions rapportées par franceinfo (réseau France 3 Régions) ; le candidat, ingénieur sans étiquette partisane, ne détaille pas à ce stade les modalités précises de mise en œuvre (seuils du RIC, composition des conventions citoyennes, procédure de l'assemblée constituante).",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Le RIC et les conventions citoyennes tirées au sort donneraient un droit d'initiative et de décision directe aux citoyens sans condition de diplôme ou de statut social"], risques: [], angleMort: "Les seuils de signatures, le champ d'application du RIC et les modalités de tirage au sort ne sont pas précisés." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          retraites: { score: 0, avantages: ["Une assemblée citoyenne constituante et des conventions tirées au sort offriraient aussi aux retraités un canal de participation directe aux décisions institutionnelles"], risques: [], angleMort: "Aucune précision publique sur la mise en œuvre concrète de ces outils démocratiques pour cette catégorie." },
+        },
+      },
+    ],
   },
   {
     id: "mikolajczak",
@@ -1387,6 +1498,36 @@ export const CANDIDATS: Candidat[] = [
     id: "zemmour",
     nom: "Éric Zemmour",
     parti: "Reconquête",
+    mesures: [],
+  },
+  {
+    id: "markovic",
+    nom: "Mira Markovic",
+    parti: "Parti animaliste",
+    mesures: [],
+  },
+  {
+    id: "platret",
+    nom: "Gilles Platret",
+    parti: "Divers droite",
+    mesures: [],
+  },
+  {
+    id: "rohou",
+    nom: "Erwan Rohou",
+    parti: "Mouvement écologiste indépendant",
+    mesures: [],
+  },
+  {
+    id: "collovati",
+    nom: "Christian Collovati",
+    parti: "Divers",
+    mesures: [],
+  },
+  {
+    id: "billetdoux",
+    nom: "Augustin Billetdoux",
+    parti: "Divers",
     mesures: [],
   },
 ];
