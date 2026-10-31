@@ -97,9 +97,9 @@ export interface AvisDonnees {
 }
 
 export const AVIS_DONNEES_REELLES: AvisDonnees = {
-  dateMaj: "2026-10-19",
+  dateMaj: "2026-10-31",
   texte:
-    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : Natacha Polony, qui a annoncé sa candidature le 14 octobre 2026, vient d'y être ajoutée. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027). La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen est déclarée candidate après la réduction de sa peine d'inéligibilité par la cour d'appel de Paris (7 juillet 2026) ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour. Seuls Mélenchon, Attal, Philippe, Retailleau, Le Pen et Tondelier disposent à ce stade de plusieurs mesures sourcées ; les autres candidats sont enrichis progressivement, en priorité ceux qui n'ont encore aucune mesure recensée. Chaque mesure indique sa source et son niveau de confiance.",
+    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027). La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen est déclarée candidate après la réduction de sa peine d'inéligibilité par la cour d'appel de Paris (7 juillet 2026) ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour. Seuls Mélenchon, Attal, Philippe, Retailleau, Le Pen et Tondelier disposent à ce stade de plusieurs mesures sourcées ; les autres candidats sont enrichis progressivement, en priorité ceux qui n'ont encore aucune mesure recensée. Chaque mesure indique sa source et son niveau de confiance.",
 };
 
 // Remapping vers la taxonomie à 9 thèmes (2026-08-29) : `br-rsa` (RSA/emploi) est classée en
@@ -132,6 +132,18 @@ export const AVIS_DONNEES_REELLES: AvisDonnees = {
 // `xb-republique-territoires` ("Institutions et démocratie", Bertrand) et `kb-fonds-souverain` ("Souveraineté
 // et industrie", Bouamrane). Batho (`batho`) n'a pas reçu de mesure cette exécution, faute de programme 2027
 // suffisamment sourcé à ce stade.
+// Le 2026-10-19, ajout de Natacha Polony (candidature annoncée le 14/10/2026) et de la première mesure pour
+// Dupont-Aignan (3 mesures : `nda-frexit`, `nda-droit-du-sol`, `nda-electricite-30`), Egger (`ce-ric-pouvoir-maires`)
+// et Glucksmann (2 mesures : `rg-heritage-salaires`, `rg-service-civique`) ; Branco, Durif et Kazib vérifiés sans
+// programme 2027 suffisamment sourcé.
+// Le 2026-10-31, aucun ajout ni retrait de candidat (listes de référence franceinfo/LCP/France 24/Le JDD vérifiées,
+// aucune nouvelle déclaration ni aucun retrait depuis Polony ; Xavier Bertrand reste listé comme déclaré malgré une
+// formulation prudente de certaines sources). Enrichissement, par ordre alphabétique en reprenant après Glucksmann :
+// Kazib et Labib revérifiés sans programme 2027 sourcé (aucun changement), Legendre vérifié sans aucune source sur
+// ses propositions. Ajout d'une première mesure pour Lalanne (`fl-ric-generalise`, "Institutions et démocratie") et
+// pour Lassalle (`lassalle-ruralite`, "Services publics"), et de trois mesures pour Lisnard (`lisnard-csg-is`,
+// `lisnard-retraites-capitalisation`, `lisnard-droit-sejour`), qui n'en avait encore aucune (prochaine exécution :
+// reprendre à partir de "mathieu").
 export const CANDIDATS: Candidat[] = [
   {
     id: "melenchon",
@@ -1321,13 +1333,51 @@ export const CANDIDATS: Candidat[] = [
     id: "lalanne",
     nom: "Francis Lalanne",
     parti: "France Libre",
-    mesures: [],
+    mesures: [
+      {
+        id: "fl-ric-generalise",
+        theme: "Institutions et démocratie",
+        titre: "Référendum d'initiative citoyenne généralisé, sur tous les sujets",
+        resumeOfficiel:
+          "Francis Lalanne défend l'instauration d'un référendum d'initiative citoyenne pouvant porter sur tous les sujets, dans le cadre d'un projet qu'il présente comme la création de « la première démocratie au monde », avec reprise de la souveraineté nationale et réforme profonde de la justice.",
+        sourceOfficielle:
+          "https://france3-regions.franceinfo.fr/auvergne-rhone-alpes/loire/presidentielle-2027-on-propose-de-creer-la-premiere-democratie-au-monde-francis-lalanne-tente-de-se-frayer-une-place-dans-le-debat-public-3440997.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Déclaration rapportée par franceinfo (France 3 régions) à l'occasion d'un déplacement de campagne ; les modalités précises du RIC généralisé (seuils de signatures, sujets éventuellement exclus) ne sont pas publiées à ce stade.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Un RIC sur tous les sujets donnerait un droit d'initiative directe aux citoyens, y compris sur des sujets économiques et sociaux"], risques: [], angleMort: "Les seuils de signatures et les modalités pratiques d'un tel RIC ne sont pas précisés publiquement." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Effet non différencié documenté pour cette catégorie, la mesure portant sur le fonctionnement des institutions plutôt que sur le pouvoir d'achat." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable pour cette catégorie à ce stade." },
+          retraites: { score: 0, avantages: ["Un RIC généralisé offrirait aussi aux retraités un droit d'initiative citoyenne sur des sujets les concernant directement"], risques: [], angleMort: "Aucune précision publique sur la mise en œuvre concrète de cet outil pour cette catégorie." },
+        },
+      },
+    ],
   },
   {
     id: "lassalle",
     nom: "Jean Lassalle",
     parti: "Résistons",
-    mesures: [],
+    mesures: [
+      {
+        id: "lassalle-ruralite",
+        theme: "Services publics",
+        titre: "Faire de la ruralité une grande cause nationale, avec un fonds dédié et un hôpital à moins de 40 minutes partout",
+        resumeOfficiel:
+          "Jean Lassalle porte depuis plusieurs campagnes la défense de la ruralité comme priorité nationale : un fonds dédié de plusieurs milliards d'euros par an pour les territoires ruraux et l'objectif d'un accès à un hôpital à moins de 40 minutes partout en France.",
+        sourceOfficielle:
+          "https://france3-regions.franceinfo.fr/nouvelle-aquitaine/pyrenees-atlantiques/election-presidentielle-les-priorites-de-jean-lassalle-candidat-de-la-ruralite-et-pour-un-etat-puissant-2482402.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Position historique de Jean Lassalle, documentée lors de ses campagnes de 2017 et 2022 (franceinfo) ; aucune source récente ne confirme explicitement que cet objectif chiffré (fonds, délai hospitalier) est repris tel quel dans sa candidature 2027, d'où un niveau de confiance « annonce ».",
+        impactParClasse: {
+          populaires: { score: 1, avantages: ["Un accès facilité aux hôpitaux et un fonds dédié aux territoires ruraux bénéficieraient en priorité aux ménages modestes vivant en zone rurale, souvent éloignés des services publics"], risques: [], angleMort: "Le chiffrage exact du fonds pour la version 2027 de la candidature n'est pas confirmé dans une source récente." },
+          moyennes: { score: 0, avantages: ["Amélioration de l'accès aux services publics de santé pour les habitants des zones rurales de cette catégorie"], risques: [], angleMort: "Le financement précis de ce fonds et son articulation avec les budgets régionaux existants ne sont pas détaillés." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Mesure centrée sur les territoires ruraux, sans effet différencié documenté pour cette catégorie." },
+          retraites: { score: 1, avantages: ["Les retraités vivant en zone rurale, souvent confrontés à l'éloignement des services de santé, bénéficieraient directement d'un accès facilité à un hôpital"], risques: [], angleMort: "Aucun chiffrage récent ne confirme le maintien de cet objectif précis (40 minutes) pour la candidature 2027." },
+        },
+      },
+    ],
   },
   {
     id: "legendre",
@@ -1339,7 +1389,61 @@ export const CANDIDATS: Candidat[] = [
     id: "lisnard",
     nom: "David Lisnard",
     parti: "Nouvelle Énergie",
-    mesures: [],
+    mesures: [
+      {
+        id: "lisnard-csg-is",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Baisse de la CSG sur les revenus du travail, de l'impôt sur les sociétés et plafonnement de la taxation du capital",
+        resumeOfficiel:
+          "David Lisnard propose d'abaisser le taux de CSG sur les revenus du travail de 9,2 % à 6,6 %, pour l'aligner sur celui des revenus de remplacement, de réduire l'impôt sur les sociétés de 25 % à 20 %, et de plafonner la taxation des revenus du capital à 22 %.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/politique/depenses-publiques-justice-appel-a-ciotti-ce-quil-faut-retenir-de-linterview-de-david-lisnard-a-cnews-187194",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Chiffrage détaillé (taux précis de CSG et d'impôt sur les sociétés, plafond de taxation du capital) donné par le candidat lors d'une interview sur CNews le 27 octobre 2026, rapportée par Le JDD.",
+        impactParClasse: {
+          populaires: { score: 1, avantages: ["La baisse de la CSG sur les revenus du travail augmente directement le salaire net pour l'ensemble des salariés, y compris les plus modestes"], risques: ["Une baisse de recettes de CSG, qui finance la Sécurité sociale, pose la question de son financement de remplacement, non précisée par le candidat"], angleMort: "Le chiffrage du coût budgétaire de cette double baisse (CSG et impôt sur les sociétés) et son mode de financement ne sont pas publiés." },
+          moyennes: { score: 1, avantages: ["Gain de pouvoir d'achat proportionnel au salaire pour les classes moyennes salariées"], risques: [], angleMort: "L'effet différencié selon le niveau de salaire n'est pas chiffré précisément par le candidat." },
+          aisees: { score: 2, avantages: ["La baisse de l'impôt sur les sociétés et le plafonnement de la taxation des revenus du capital à 22 % bénéficient directement aux détenteurs de capital et aux entreprises"], risques: [], angleMort: "Aucun chiffrage indépendant public du coût de ces baisses pour les finances publiques n'est disponible." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "La mesure vise la CSG sur les revenus du travail ; son effet sur la CSG applicable aux pensions n'est pas précisé par le candidat." },
+        },
+      },
+      {
+        id: "lisnard-retraites-capitalisation",
+        theme: "Retraites et modèle social",
+        titre: "Fusionner les régimes public et privé de retraite et instaurer une part de capitalisation individualisée",
+        resumeOfficiel:
+          "David Lisnard propose de fusionner les régimes de retraite public et privé en un système unique et d'introduire une part de capitalisation individualisée, combinée à la répartition, dans le cadre d'un recentrage plus large de l'État sur ses missions régaliennes.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/politique/david-lisnard-redresser-la-france-ne-se-resume-pas-a-un-slogan-185976",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Position développée par le candidat dans un entretien au JDD ; le barème précis de la part de capitalisation, son caractère obligatoire ou non, son financement et son calendrier de mise en œuvre ne sont pas publiés à ce stade.",
+        impactParClasse: {
+          populaires: { score: -1, avantages: [], risques: ["Une part de capitalisation suppose une capacité d'épargne que les ménages modestes ont structurellement moins les moyens de mobiliser, ce qui pourrait accentuer les inégalités de pension"], angleMort: "Le candidat ne précise pas de mécanisme de compensation pour les ménages sans capacité d'épargne." },
+          moyennes: { score: 0, avantages: [], risques: ["Effet incertain selon la capacité d'épargne de chacun dans cette catégorie"], angleMort: "Le barème de la part de capitalisation et son caractère obligatoire ou non ne sont pas précisés." },
+          aisees: { score: 1, avantages: ["Une part de capitalisation profiterait davantage aux ménages ayant une capacité d'épargne élevée, qui peuvent mieux en tirer parti"], risques: [], angleMort: "Aucun chiffrage du volume de cette part de capitalisation n'est public." },
+          retraites: { score: 0, avantages: [], risques: ["La fusion des régimes public et privé pourrait affecter les modalités de calcul des pensions en cours d'acquisition, sans détail publié"], angleMort: "Le candidat ne précise pas l'effet de la réforme sur les pensions déjà versées ou en cours d'acquisition." },
+        },
+      },
+      {
+        id: "lisnard-droit-sejour",
+        theme: "Immigration et intégration",
+        titre: "Rétablir le délit de séjour irrégulier et instaurer des quotas migratoires",
+        resumeOfficiel:
+          "David Lisnard propose de rétablir le délit de séjour irrégulier, aboli en 2012, et de fixer des quotas migratoires.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/Societe/immigration-david-lisnard-compte-retablir-le-delit-de-sejour-irregulier-182505",
+        niveauConfiance: "confirme",
+        noteConfiance: "Proposition détaillée dans un article dédié du JDD.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: ["Un rétablissement du délit de séjour irrégulier exposerait les personnes en situation irrégulière, population statistiquement plus précaire, à des poursuites pénales"], angleMort: "Le candidat ne précise pas les moyens budgétaires nécessaires pour l'application de cette pénalisation." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur cette catégorie, la mesure visant le statut administratif des personnes en situation irrégulière." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur cette catégorie." },
+        },
+      },
+    ],
   },
   {
     id: "mathieu",
