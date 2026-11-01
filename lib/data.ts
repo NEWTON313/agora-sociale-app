@@ -97,9 +97,9 @@ export interface AvisDonnees {
 }
 
 export const AVIS_DONNEES_REELLES: AvisDonnees = {
-  dateMaj: "2026-10-19",
+  dateMaj: "2026-11-01",
   texte:
-    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : Natacha Polony, qui a annoncé sa candidature le 14 octobre 2026, vient d'y être ajoutée. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027). La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen est déclarée candidate après la réduction de sa peine d'inéligibilité par la cour d'appel de Paris (7 juillet 2026) ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour. Seuls Mélenchon, Attal, Philippe, Retailleau, Le Pen et Tondelier disposent à ce stade de plusieurs mesures sourcées ; les autres candidats sont enrichis progressivement, en priorité ceux qui n'ont encore aucune mesure recensée. Chaque mesure indique sa source et son niveau de confiance.",
+    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027) ; Dominique de Villepin, souvent cité dans la presse, n'est à ce stade que pressenti et n'a pas officiellement déclaré sa candidature, il n'est donc pas inclus. La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 18 des 36 candidats disposent à ce stade d'au moins une mesure sourcée (Mélenchon, Attal, Philippe, Retailleau, Le Pen et Tondelier en ont plusieurs ; Arthaud, Asselineau, Becht, Bertrand, Bouamrane, Dupont-Aignan, Egger, Glucksmann, Lalanne, Lassalle, Lisnard et Mathieu en ont une à trois) ; les 18 autres sont enrichis progressivement, en priorité par ordre alphabétique. Chaque mesure indique sa source et son niveau de confiance.",
 };
 
 // Remapping vers la taxonomie à 9 thèmes (2026-08-29) : `br-rsa` (RSA/emploi) est classée en
@@ -132,6 +132,15 @@ export const AVIS_DONNEES_REELLES: AvisDonnees = {
 // `xb-republique-territoires` ("Institutions et démocratie", Bertrand) et `kb-fonds-souverain` ("Souveraineté
 // et industrie", Bouamrane). Batho (`batho`) n'a pas reçu de mesure cette exécution, faute de programme 2027
 // suffisamment sourcé à ce stade.
+// Le 2026-11-01, ajout de 5 candidats déclarés recensés par le trombinoscope franceinfo (mis à jour au
+// 22/10/2026) et absents du comparateur : `billetdoux`, `collovati`, `markovic`, `platret`, `rohou` (aucune
+// mesure sourcée trouvée à ce stade pour ces 5 candidats). Dominique de Villepin n'est pas ajouté : il n'a
+// pas officiellement déclaré sa candidature à cette date. Enrichissement, en poursuivant par ordre
+// alphabétique des id après Kazib (dernier traité le 19/10) : `fl-frexit` et `fl-ric` (Lalanne),
+// `jla-ruralite` (Lassalle), `dl-fiscalite`, `dl-retraites` et `dl-immigration` (Lisnard), `bm-ric-constituante`
+// (Mathieu). Labib et Legendre ont été vérifiés mais non enrichis (aucun programme 2027 suffisamment sourcé
+// trouvé). Prochaine exécution : reprendre l'enrichissement par équité à partir de `mikolajczak`, puis les 5
+// candidats ajoutés ce jour-ci (`billetdoux`, `collovati`, `markovic`, `platret`, `rohou`), encore sans mesure.
 export const CANDIDATS: Candidat[] = [
   {
     id: "melenchon",
@@ -1140,6 +1149,12 @@ export const CANDIDATS: Candidat[] = [
     ],
   },
   {
+    id: "billetdoux",
+    nom: "Augustin Billetdoux",
+    parti: "Divers",
+    mesures: [],
+  },
+  {
     id: "bouamrane",
     nom: "Karim Bouamrane",
     parti: "Parti socialiste",
@@ -1168,6 +1183,12 @@ export const CANDIDATS: Candidat[] = [
     id: "branco",
     nom: "Juan Branco",
     parti: "Les Ruches",
+    mesures: [],
+  },
+  {
+    id: "collovati",
+    nom: "Christian Collovati",
+    parti: "Étiquette non précisée",
     mesures: [],
   },
   {
@@ -1321,13 +1342,69 @@ export const CANDIDATS: Candidat[] = [
     id: "lalanne",
     nom: "Francis Lalanne",
     parti: "France Libre",
-    mesures: [],
+    mesures: [
+      {
+        id: "fl-frexit",
+        theme: "Europe et géopolitique",
+        titre: "« Frexit » : sortie de l'Union européenne, de la zone euro et de l'OTAN, retour à une monnaie nationale",
+        resumeOfficiel:
+          "Francis Lalanne, candidat soutenu par le mouvement citoyen France Libre, fait de la sortie de l'Union européenne, de la zone euro et de l'OTAN l'axe de sa candidature, avec un retour à une souveraineté monétaire nationale.",
+        sourceOfficielle:
+          "https://www.franceinfo.fr/elections/presidentielle/presidentielle-2027-le-chanteur-francis-lalanne-officiellement-candidat-premier-meeting-vendredi-a-paris_8153588.html",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Position centrale de sa candidature, annoncée au lancement officiel de sa campagne (meeting d'août 2026) et reprise par plusieurs médias (franceinfo, Le JDD, France 24).",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Promesse de reprise de contrôle monétaire et commercial présentée par le candidat comme favorable au pouvoir d'achat"], risques: ["Une sortie de la zone euro ferait courir, selon les économistes cités par les médias, un risque de hausse des prix à l'importation"], angleMort: "Aucun chiffrage ni étude d'impact indépendante n'accompagne la proposition." },
+          moyennes: { score: 0, avantages: [], risques: ["Les professions dépendant des échanges avec l'UE seraient exposées à une incertitude commerciale prolongée en cas de sortie effective"], angleMort: "Le calendrier et les modalités pratiques d'un retour au Franc ne sont pas détaillés publiquement." },
+          aisees: { score: -1, avantages: [], risques: ["Une sortie de la zone euro ferait courir un risque de volatilité monétaire et financière pouvant affecter l'épargne et les placements"], angleMort: "Aucune étude publique sur la conversion de l'épargne en cas de retour à une monnaie nationale." },
+          retraites: { score: 0, avantages: [], risques: ["Une instabilité monétaire liée à une sortie de l'euro pourrait affecter la valeur réelle des pensions versées"], angleMort: "Le candidat ne chiffre pas l'effet d'un tel changement monétaire sur le pouvoir d'achat des pensions." },
+        },
+      },
+      {
+        id: "fl-ric",
+        theme: "Institutions et démocratie",
+        titre: "Référendum d'initiative citoyenne en toutes matières",
+        resumeOfficiel:
+          "Francis Lalanne défend l'instauration d'un référendum d'initiative citoyenne permettant aux citoyens de légiférer ou d'abroger des lois sur l'ensemble des sujets, qu'il présente comme la clé d'une refondation démocratique.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/politique/une-rupture-avec-le-systeme-francis-lalanne-officialise-sa-candidature-pour-2027-181428",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Proposition annoncée publiquement par le candidat lors de l'officialisation de sa candidature (Le JDD) ; les modalités précises (seuils de signatures, sujets exclus, calendrier de mise en œuvre) ne sont pas détaillées à ce stade.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Un RIC en toutes matières donnerait un droit d'initiative directe aux citoyens, y compris sur des sujets sociaux et économiques"], risques: [], angleMort: "Les seuils de signatures et les sujets éventuellement exclus d'un tel RIC ne sont pas précisés publiquement." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          retraites: { score: 0, avantages: ["Le RIC offrirait aussi aux retraités un droit d'initiative citoyenne sur des sujets les concernant directement"], risques: [], angleMort: "Aucune précision publique sur la mise en œuvre concrète de cet outil pour cette catégorie." },
+        },
+      },
+    ],
   },
   {
     id: "lassalle",
     nom: "Jean Lassalle",
     parti: "Résistons",
-    mesures: [],
+    mesures: [
+      {
+        id: "jla-ruralite",
+        theme: "Services publics",
+        titre: "Ruralité « grande cause nationale » : fonds dédié et hôpital à moins de 40 minutes partout en France",
+        resumeOfficiel:
+          "Jean Lassalle porte depuis ses précédentes candidatures la défense de la ruralité comme priorité, avec une enveloppe annuelle dédiée aux territoires ruraux et l'objectif d'un accès à un hôpital à moins de 40 minutes de route en tout point du territoire.",
+        sourceOfficielle:
+          "https://france3-regions.franceinfo.fr/nouvelle-aquitaine/pyrenees-atlantiques/election-presidentielle-les-priorites-de-jean-lassalle-candidat-de-la-ruralite-et-pour-un-etat-puissant-2482402.html",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Position constante de Jean Lassalle, documentée par franceinfo lors de ses candidatures de 2017 et 2022 (« grande cause nationale » pour la ruralité, enveloppe de 3 milliards d'euros par an, hôpital à moins de 40 minutes) et reconduite comme axe de sa candidature 2027, pour laquelle il est recensé parmi les candidats déclarés par franceinfo.",
+        impactParClasse: {
+          populaires: { score: 1, avantages: ["Un accès maintenu aux services hospitaliers de proximité bénéficierait en particulier aux ménages ruraux les plus modestes, pour qui le coût et le temps de déplacement pèsent davantage"], risques: [], angleMort: "Le chiffrage de l'enveloppe de 3 milliards d'euros par an et son mode de financement précis ne sont pas documentés pour 2027." },
+          moyennes: { score: 1, avantages: ["Les classes moyennes résidant en zone rurale bénéficieraient directement du maintien ou de la création de services hospitaliers de proximité"], risques: [], angleMort: "Aucun calendrier précis de déploiement n'est publié." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          retraites: { score: 1, avantages: ["Les retraités en zone rurale, souvent plus dépendants des déplacements pour accéder aux soins, bénéficieraient en priorité d'un hôpital à moins de 40 minutes"], risques: [], angleMort: "Le nombre d'hôpitaux ou de services d'urgence concrètement créés ou maintenus par cette mesure n'est pas chiffré publiquement." },
+        },
+      },
+    ],
   },
   {
     id: "legendre",
@@ -1339,13 +1416,93 @@ export const CANDIDATS: Candidat[] = [
     id: "lisnard",
     nom: "David Lisnard",
     parti: "Nouvelle Énergie",
+    mesures: [
+      {
+        id: "dl-fiscalite",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Baisse de la CSG sur les revenus d'activité et de l'impôt sur les sociétés, plafonnement de la taxation du capital",
+        resumeOfficiel:
+          "David Lisnard propose de ramener la CSG sur les revenus d'activité de 9,2 % à 6,6 %, de baisser l'impôt sur les sociétés de 25 % à 20 %, et de plafonner la taxation des revenus du capital à 22 %, sans dépense publique nouvelle selon le candidat, en s'appuyant sur une baisse de la dépense publique.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/politique/depenses-publiques-justice-appel-a-ciotti-ce-quil-faut-retenir-de-linterview-de-david-lisnard-a-cnews-187194",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Chiffrages annoncés par le candidat en interview (CNews, relayé par Le JDD) ; le détail des économies de dépense publique permettant de financer ces baisses sans creuser le déficit n'est pas documenté par une étude indépendante.",
+        impactParClasse: {
+          populaires: { score: 1, avantages: ["La baisse de la CSG sur les revenus d'activité de 9,2 % à 6,6 % augmenterait le salaire net de l'ensemble des salariés, y compris les plus modestes"], risques: ["Le financement par la seule baisse de la dépense publique, si elle touchait des services publics dont dépendent davantage les ménages modestes, n'est pas documenté"], angleMort: "Les économies de dépense publique censées financer ces baisses ne sont pas détaillées poste par poste." },
+          moyennes: { score: 1, avantages: ["Même effet de hausse du salaire net via la baisse de la CSG, pour l'ensemble des salariés"], risques: [], angleMort: "Aucune étude indépendante ne chiffre l'effet net sur les finances publiques de l'ensemble de ces baisses combinées." },
+          aisees: { score: 1, avantages: ["Le plafonnement de la taxation du capital à 22 % et la baisse de l'IS à 20 % bénéficieraient directement aux détenteurs de capital et aux entreprises"], risques: [], angleMort: "L'effet du plafonnement à 22 % sur les recettes fiscales issues des hauts patrimoines n'est pas chiffré publiquement." },
+          retraites: { score: 0, avantages: [], risques: ["La CSG sur les pensions de retraite suit un barème distinct de celui des revenus d'activité ; le candidat ne précise pas si les retraités bénéficieraient de la même baisse"], angleMort: "Aucune précision publique sur un éventuel ajustement de la CSG applicable aux pensions de retraite." },
+        },
+      },
+      {
+        id: "dl-retraites",
+        theme: "Retraites et modèle social",
+        titre: "Convergence des régimes de retraite public et privé avec une part de capitalisation",
+        resumeOfficiel:
+          "David Lisnard propose de faire converger les systèmes de retraite public et privé et de créer une retraite individualisée mêlant répartition et capitalisation.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/politique/david-lisnard-redresser-la-france-ne-se-resume-pas-a-un-slogan-185976",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Orientation annoncée par le candidat en interview (Le JDD) ; le taux de capitalisation visé, le calendrier de transition et les régimes concernés par la convergence ne sont pas chiffrés publiquement.",
+        impactParClasse: {
+          populaires: { score: -1, avantages: [], risques: ["Une part de capitalisation suppose un effort d'épargne individuel que les ménages aux revenus les plus modestes ont le moins de capacité à fournir, au risque de pensions futures plus faibles pour cette catégorie"], angleMort: "Le candidat ne précise pas de mécanisme de compensation pour les ménages ne pouvant pas épargner." },
+          moyennes: { score: 0, avantages: [], risques: ["L'effort d'épargne nécessaire pour bénéficier pleinement d'une part de capitalisation pourrait peser sur le pouvoir d'achat de cette catégorie"], angleMort: "Aucun chiffrage public du rendement attendu de la part de capitalisation." },
+          aisees: { score: 1, avantages: ["Les ménages aisés, disposant d'une capacité d'épargne plus importante, seraient les mieux placés pour tirer parti d'une part de capitalisation"], risques: [], angleMort: "Aucune précision sur un plafond éventuel limitant l'avantage fiscal lié à la capitalisation pour les hauts revenus." },
+          retraites: { score: 0, avantages: [], risques: ["Les modalités de transition pour les retraités actuels et les actifs proches de la retraite ne sont pas précisées"], angleMort: "Le candidat ne détaille pas si les pensions déjà liquidées seraient affectées par cette convergence des régimes." },
+        },
+      },
+      {
+        id: "dl-immigration",
+        theme: "Immigration et intégration",
+        titre: "Rétablissement du délit de séjour irrégulier et instauration de quotas migratoires",
+        resumeOfficiel:
+          "David Lisnard propose de rétablir le délit de séjour irrégulier, supprimé en 2012, et de fixer des quotas d'immigration, en évoquant une modification constitutionnelle pour s'affranchir de jurisprudences européennes jugées contraignantes.",
+        sourceOfficielle:
+          "https://www.lejdd.fr/Societe/immigration-david-lisnard-compte-retablir-le-delit-de-sejour-irregulier-182505",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Déclaration rapportée par Le JDD ; le niveau des quotas envisagés et les modalités précises de la réforme constitutionnelle évoquée ne sont pas publiés.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: ["Un rétablissement du délit de séjour irrégulier exposerait les personnes en situation irrégulière, population statistiquement plus précaire, à des poursuites pénales et à la détention"], angleMort: "Le candidat ne précise pas les moyens budgétaires nécessaires pour appliquer concrètement cette pénalisation." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur cette catégorie ; la mesure vise le statut administratif des personnes étrangères en situation irrégulière." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifiable sur cette catégorie ; la mesure concerne le statut des personnes étrangères en situation irrégulière, non les retraités français." },
+        },
+      },
+    ],
+  },
+  {
+    id: "markovic",
+    nom: "Mira Markovic",
+    parti: "Parti animaliste",
     mesures: [],
   },
   {
     id: "mathieu",
     nom: "Benoît Mathieu",
     parti: "Étiquette non précisée",
-    mesures: [],
+    mesures: [
+      {
+        id: "bm-ric-constituante",
+        theme: "Institutions et démocratie",
+        titre: "Référendum d'initiative citoyenne, conventions citoyennes tirées au sort et assemblée constituante",
+        resumeOfficiel:
+          "Benoît Mathieu, candidat citoyen parcourant la France à vélo pour réunir ses parrainages, porte une candidature centrée sur une démocratie plus directe : référendum d'initiative citoyenne, conventions citoyennes tirées au sort et réécriture de la Constitution par une assemblée constituante.",
+        sourceOfficielle:
+          "https://france3-regions.franceinfo.fr/bourgogne-franche-comte/saone-et-loire/je-vais-continuer-jusqu-au-bout-candidat-a-la-presidentielle-2027-il-parcourt-10-000-kilometres-a-velo-pour-recolter-les-parrainages-3338204.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Proposition présentée par le candidat lui-même comme conceptuelle plutôt qu'opérationnelle à ce stade (selon le mouvement Solution démocratique, cité par France 3/franceinfo) ; aucune modalité chiffrée ou calendrier de mise en œuvre n'est publié.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Un RIC et des conventions citoyennes tirées au sort donneraient aux citoyens, y compris les plus modestes, un droit d'initiative et de participation directe aux décisions"], risques: [], angleMort: "Les seuils de signatures, le mode de tirage au sort et les sujets couverts par ces outils ne sont pas précisés publiquement." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable sur cette catégorie à ce stade." },
+          retraites: { score: 0, avantages: ["Une assemblée constituante et des conventions citoyennes offriraient aussi aux retraités un droit de participation directe sur des sujets les concernant"], risques: [], angleMort: "Aucune précision publique sur le calendrier ou le coût d'organisation d'une assemblée constituante." },
+        },
+      },
+    ],
   },
   {
     id: "mikolajczak",
@@ -1366,9 +1523,21 @@ export const CANDIDATS: Candidat[] = [
     mesures: [],
   },
   {
+    id: "platret",
+    nom: "Gilles Platret",
+    parti: "Divers droite",
+    mesures: [],
+  },
+  {
     id: "polony",
     nom: "Natacha Polony",
     parti: "Étiquette non précisée",
+    mesures: [],
+  },
+  {
+    id: "rohou",
+    nom: "Erwan Rohou",
+    parti: "Mouvement écologiste indépendant",
     mesures: [],
   },
   {
