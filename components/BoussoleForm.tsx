@@ -43,17 +43,20 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
     setInverse(Object.fromEntries(QUESTIONS.map((q) => [q.id, Math.random() < 0.5])));
   }, []);
 
-  const nbRepondues = QUESTIONS.filter((q) => reponses[q.id]?.choix).length;
+  const nbRepondues = QUESTIONS.filter((q) => reponses[q.id]?.choix || reponses[q.id]?.sansAvis).length;
   const classement = useMemo(() => (resultat ? classerBoussole(reponses) : null), [resultat, reponses]);
   const poidsEco = useMemo(() => poidsThemesDepuisBoussole(reponses), [reponses]);
 
   if (!inverse) return <p className="text-ink-soft">Chargement du test…</p>;
 
   function choisir(id: number, choix: Choix | null) {
-    setReponses((r) => ({ ...r, [id]: { choix, poids: r[id]?.poids ?? 2 } }));
+    setReponses((r) => ({ ...r, [id]: { choix, poids: r[id]?.poids ?? 2, sansAvis: false } }));
+  }
+  function sansAvis(id: number) {
+    setReponses((r) => ({ ...r, [id]: { choix: null, poids: r[id]?.poids ?? 2, sansAvis: !r[id]?.sansAvis } }));
   }
   function pondérer(id: number, poids: Importance) {
-    setReponses((r) => ({ ...r, [id]: { choix: r[id]?.choix ?? null, poids } }));
+    setReponses((r) => ({ ...r, [id]: { choix: r[id]?.choix ?? null, poids, sansAvis: r[id]?.sansAvis } }));
   }
 
   if (resultat && classement) {
@@ -185,7 +188,7 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
                     aria-checked={r?.choix === o.cle}
                     onClick={() => choisir(q.id, r?.choix === o.cle ? null : o.cle)}
                     className={`rounded-xl border px-4 py-3 text-left text-[1rem] leading-snug transition-colors ${
-                      r?.choix === o.cle ? "border-accent-bleu bg-paper-deep font-medium text-ink" : "border-line text-ink-soft hover:border-line-strong"
+                      r?.choix === o.cle ? "border-accent-bleu bg-paper-deep font-medium text-ink" : r?.sansAvis ? "border-line text-ink-faint hover:border-line-strong" : "border-line text-ink-soft hover:border-line-strong"
                     }`}
                   >
                     {o.texte}
@@ -195,10 +198,13 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
               <div className="mt-4 flex flex-wrap items-center gap-3 font-display text-[0.86rem]">
                 <button
                   type="button"
-                  onClick={() => choisir(q.id, null)}
-                  className={`underline underline-offset-4 ${r?.choix ? "text-ink-faint" : "text-ink"}`}
+                  aria-pressed={!!r?.sansAvis}
+                  onClick={() => sansAvis(q.id)}
+                  className={`rounded-full border px-3.5 py-1.5 transition-colors ${
+                    r?.sansAvis ? "border-accent-bleu bg-paper-deep font-medium text-ink" : "border-line text-ink-soft hover:border-line-strong"
+                  }`}
                 >
-                  Sans avis / ni l&apos;un ni l&apos;autre
+                  {r?.sansAvis ? "✓ " : ""}Sans avis / ni l&apos;un ni l&apos;autre
                 </button>
                 {r?.choix && (
                   <span className="flex items-center gap-1.5 text-ink-soft">

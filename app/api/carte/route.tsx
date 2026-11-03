@@ -12,8 +12,8 @@ const COULEURS_CLASSES: Record<string, string> = {
 };
 
 const BARRE_LARGEUR = 230;
-const MAX_LIGNES = 12;
-const HAUTEUR_LISTE = 420;
+const MAX_LIGNES = 10;
+const HAUTEUR_LISTE = 370;
 
 export function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams;
@@ -31,8 +31,9 @@ export function GET(request: NextRequest) {
   const nonCalculables = classement.length - calculables.length;
   const lignes = calculables.slice(0, MAX_LIGNES);
   const restants = calculables.length - lignes.length;
-  const hauteurLigne = Math.min(66, Math.floor(HAUTEUR_LISTE / Math.max(lignes.length, 1)));
-  const compact = hauteurLigne < 54;
+  // Les lignes se touchent (pas d'espacement entre elles) : la hauteur totale est exactement n × hauteurLigne.
+  const hauteurLigne = Math.min(60, Math.floor(HAUTEUR_LISTE / Math.max(lignes.length, 1)));
+  const compact = hauteurLigne < 52;
 
   const headers: Record<string, string> = {
     // Les données (scores) évoluent tous les quelques jours : cache court côté navigateur, plus long côté CDN.
@@ -78,8 +79,8 @@ export function GET(request: NextRequest) {
             </div>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center", gap: 14 }}>
-            <div style={{ display: "flex", fontSize: 17, color: "#7a8090", letterSpacing: 2, marginBottom: 4 }}>
+          <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "flex-start", paddingTop: 36 }}>
+            <div style={{ display: "flex", fontSize: 17, color: "#7a8090", letterSpacing: 2, marginBottom: 14 }}>
               CORRESPONDANCE AVEC MES PRIORITÉS
             </div>
             {lignes.map((candidat, i) => {
@@ -137,7 +138,7 @@ export function GET(request: NextRequest) {
               );
             })}
             {(nonCalculables > 0 || restants > 0) && (
-              <div style={{ display: "flex", flexDirection: "column", marginTop: 6, fontSize: 15, color: "#454e5e", lineHeight: 1.35 }}>
+              <div style={{ display: "flex", flexDirection: "column", marginTop: 12, fontSize: 15, color: "#454e5e", lineHeight: 1.35 }}>
                 {restants > 0 && <div style={{ display: "flex" }}>+ {restants} autre{restants > 1 ? "s" : ""} candidat{restants > 1 ? "s" : ""} classé{restants > 1 ? "s" : ""} (liste complète sur le site)</div>}
                 {nonCalculables > 0 && (
                   <div style={{ display: "flex" }}>
