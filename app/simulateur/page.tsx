@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import SimulateurForm from "@/components/SimulateurForm";
+import ParcoursTest from "@/components/ParcoursTest";
 
 export const metadata: Metadata = {
-  title: "Simulateur : à quelle catégorie sociale appartenez-vous ?",
+  title: "Le test : votre situation, puis vos choix",
   description:
-    "Calculez votre niveau de vie selon la méthode INSEE (revenu du foyer ÷ unités de consommation) et situez-vous automatiquement dans le comparateur des programmes 2027. Aucune donnée conservée.",
+    "En deux étapes : calculez votre catégorie sociale (méthode INSEE), puis choisissez entre deux propositions sur 11 thèmes pour voir quels candidats sont les plus proches de vos choix et l'effet économique estimé de leurs mesures sur votre situation. Aucune donnée conservée.",
   alternates: { canonical: "/simulateur" },
 };
 
@@ -19,15 +19,16 @@ export default function SimulateurPage() {
         />
         <div className="relative max-w-[1180px] mx-auto px-6 py-20 max-[900px]:py-14">
           <div className="flex items-center gap-2.5 font-display text-[0.95rem] text-ink-faint mb-6">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-bleu" />2 minutes, aucune donnée conservée
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-bleu" />2 étapes · 5 minutes · aucune donnée conservée
           </div>
           <h1 className="text-[clamp(2.3rem,4.6vw,3.8rem)] leading-[1.04] tracking-[-0.022em] max-w-[18ch]">
-            À quelle catégorie appartenez-vous&nbsp;?
+            Votre situation, puis vos choix
           </h1>
           <p className="text-[1.25rem] leading-relaxed max-w-[56ch] text-ink-soft mt-7">
-            Ce simulateur calcule votre <strong className="text-ink">niveau de vie</strong> selon la méthode officielle de
-            l&apos;INSEE pour déterminer votre catégorie sociale, puis vous indique quel candidat penche le plus en votre
-            faveur en fonction de votre classe sociale et de vos priorités.
+            <strong className="text-ink">Étape 1 :</strong> votre niveau de vie (méthode INSEE) détermine votre catégorie
+            sociale. <strong className="text-ink">Étape 2 :</strong> 22 choix entre deux propositions pour voir quels
+            candidats sont les plus proches de vos choix, avec à côté l&apos;effet économique estimé de leurs mesures sur votre
+            catégorie.
           </p>
           <div className="mt-8 rounded-xl bg-paper-deep/70 px-5 py-4 text-[0.92rem] leading-relaxed text-ink-soft max-w-[62ch]">
             Le calcul se fait entièrement dans votre navigateur : aucune donnée n&apos;est envoyée ni conservée. Seul le
@@ -37,7 +38,7 @@ export default function SimulateurPage() {
       </section>
 
       <div className="max-w-[760px] mx-auto px-6 py-14 pb-24">
-        <SimulateurForm />
+        <ParcoursTest />
         <p className="mt-10 text-[0.9rem] text-ink-faint leading-relaxed">
           Méthode et sources des seuils : voir la{" "}
           <a href="/methodologie#simulateur" className="underline underline-offset-4 hover:text-accent-bleu">

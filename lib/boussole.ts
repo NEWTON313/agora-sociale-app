@@ -4,8 +4,9 @@
  * n'est calculée que sur les questions où sa position est DOCUMENTÉE ; une position non documentée est écartée,
  * jamais comptée comme un désaccord.
  */
-import { CANDIDATS, type Candidat } from "./data";
+import { CANDIDATS, type Candidat, type Theme } from "./data";
 import { POSITIONS, type Choix } from "./positions";
+import { poidsThemesParDefaut, type NiveauPriorite, type PoidsThemes } from "./priorites";
 
 export interface Question {
   id: number;
@@ -115,4 +116,21 @@ export function classerBoussole(reponses: Reponses, candidats: Candidat[] = CAND
   const classes = tous.filter((p) => p.classe).sort((a, b) => (b.score! - a.score!) || parNom(a, b));
   const autres = tous.filter((p) => !p.classe).sort(parNom);
   return { classes, autres };
+}
+
+/**
+ * Priorités par thème déduites des réponses de la boussole, pour le volet « effet économique estimé sur ma
+ * catégorie » : l'utilisateur ne renseigne ses priorités qu'une fois. Pour chaque thème, on retient l'importance
+ * la plus forte parmi les questions auxquelles il a répondu (0 si aucune). Les thèmes propres à la boussole
+ * (éducation, défense) n'ont pas de mesures chiffrées dans le score économique : ils sont ignorés ici.
+ */
+export function poidsThemesDepuisBoussole(reponses: Reponses): PoidsThemes {
+  const poids = poidsThemesParDefaut();
+  for (const q of QUESTIONS) {
+    const r = reponses[q.id];
+    if (!r?.choix || !(q.theme in poids)) continue;
+    const theme = q.theme as Theme;
+    poids[theme] = Math.max(poids[theme], r.poids) as NiveauPriorite;
+  }
+  return poids;
 }
