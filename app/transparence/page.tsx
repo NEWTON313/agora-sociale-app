@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { AVIS_DONNEES_REELLES, CANDIDATS } from "@/lib/data";
+import { QUESTIONS, SEUIL_COUVERTURE } from "@/lib/boussole";
+import { POSITIONS } from "@/lib/positions";
 
 export const metadata: Metadata = {
   title: "Transparence",
   description:
-    "Qui fait Mon Choix 2027, comment les données sont produites (avec une IA, relues par un humain avant publication depuis le 10/10/2026), quelles sources sont utilisées, quelles limites existent et comment signaler une erreur.",
+    "Qui fait Mon Choix 2027, comment le test (situation puis boussole) et les données sont produits (avec une IA, relues par un humain avant publication depuis le 10/10/2026), quelles sources sont utilisées, quelles limites existent et comment signaler une erreur.",
   alternates: { canonical: "/transparence" },
 };
 
@@ -31,6 +33,9 @@ export default function TransparencePage() {
   const sansMesure = CANDIDATS.filter((c) => c.mesures.length === 0).length;
   const confirmees = mesures.filter((m) => m.niveauConfiance === "confirme").length;
   const sources = sourcesUtilisees();
+  const positionsParCandidat = new Map<string, number>();
+  for (const p of POSITIONS) positionsParCandidat.set(p.candidat, (positionsParCandidat.get(p.candidat) ?? 0) + 1);
+  const classables = CANDIDATS.filter((c) => (positionsParCandidat.get(c.id) ?? 0) >= SEUIL_COUVERTURE).length;
 
   return (
     <div className="max-w-[820px] mx-auto px-6 pt-16 pb-24">
@@ -60,6 +65,20 @@ export default function TransparencePage() {
             <dt className="font-display text-[0.84rem] font-medium text-ink-soft">Dont « confirmées » / « annoncées »</dt>
             <dd className="font-display text-[1.4rem]">
               {confirmees} / {mesures.length - confirmees}
+            </dd>
+          </div>
+          <div>
+            <dt className="font-display text-[0.84rem] font-medium text-ink-soft">Positions documentées (boussole)</dt>
+            <dd className="font-display text-[1.4rem]">
+              {POSITIONS.length} <span className="text-[0.9rem] text-ink-soft">pour {QUESTIONS.length} questions</span>
+            </dd>
+          </div>
+          <div>
+            <dt className="font-display text-[0.84rem] font-medium text-ink-soft">
+              Candidats avec au moins {SEUIL_COUVERTURE} positions (classables)
+            </dt>
+            <dd className="font-display text-[1.4rem]">
+              {classables} <span className="text-[0.9rem] text-ink-soft">sur {CANDIDATS.length}</span>
             </dd>
           </div>
         </dl>
@@ -114,14 +133,57 @@ export default function TransparencePage() {
       </section>
 
       <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">Comment fonctionne le test</h2>
+        <p>
+          Le test se fait en deux étapes, dans le même parcours, et tout reste dans votre navigateur (rien n&apos;est
+          envoyé ni conservé). <strong>Étape 1 :</strong> votre situation détermine votre catégorie sociale.{" "}
+          <strong>Étape 2 :</strong> {QUESTIONS.length} questions, chacune opposant deux propositions formulées de façon
+          symétrique (l&apos;ordre est tiré au hasard à chaque visite), avec « sans avis » possible et une importance de 1
+          à 3.
+        </p>
+        <p className="mt-3">
+          <strong>Le classement repose sur la proximité avec vos choix.</strong> Pour chaque candidat, on ne compte que
+          les questions où sa position est <em>documentée</em> par une source : accord = +importance, désaccord =
+          −importance, ramené de −100 % à +100 %. Une position non documentée est écartée : elle n&apos;est jamais comptée
+          comme un désaccord. Un candidat n&apos;est classé qu&apos;à partir de {SEUIL_COUVERTURE} questions couvertes ;
+          les autres sont listés à part, par ordre alphabétique, sans note. Les égalités se départagent par ordre
+          alphabétique, jamais par le nombre de mesures ni par les sondages.
+        </p>
+        <p className="mt-3">
+          <strong>L&apos;effet économique est une information séparée.</strong> À côté de chaque candidat s&apos;affiche
+          l&apos;effet économique estimé de ses mesures sur votre catégorie (voir plus bas), calculé avec les thèmes de vos
+          réponses. Il ne sert jamais au classement et n&apos;est jamais additionné à la proximité.
+        </p>
+        <p className="mt-3">
+          <strong>Qui a écrit les questions.</strong> Les {QUESTIONS.length} questions ont été rédigées avec l&apos;aide
+          d&apos;une IA et validées par le responsable du site, sans relecture extérieure à ce jour. Elles couvrent 11
+          thèmes : l&apos;éducation et la défense s&apos;ajoutent aux 9 thèmes du score économique. Chaque formulation est
+          un choix éditorial, et nous invitons à les contester (voir plus bas).
+        </p>
+      </section>
+
+      <section className="py-12 border-b border-line">
+        <h2 className="text-[1.7rem] mb-6">Comment une position est établie</h2>
+        <p>
+          Une position (« ce candidat défend l&apos;option A ou B ») n&apos;est enregistrée que si elle découle{" "}
+          <strong>directement</strong> d&apos;une mesure déjà recensée et sourcée : la source de la position est celle de la
+          mesure, visible dans le détail du résultat. Nous ne déduisons jamais une position de l&apos;étiquette du parti, de
+          la famille politique, d&apos;un vote ancien ou d&apos;une absence de déclaration ; une position vague ou
+          ambiguë reste vide. La recherche porte avec la même attention sur les deux options de chaque question, pour ne
+          pas biaiser les données vers les propositions de changement. Le rattachement d&apos;une mesure à une option est
+          une interprétation : c&apos;est pourquoi chaque position est relue avant publication et peut être contestée.
+        </p>
+      </section>
+
+      <section className="py-12 border-b border-line">
         <h2 className="text-[1.7rem] mb-6">Comment une mesure est notée</h2>
         <p>
           Pour chacune des quatre catégories (classes populaires, moyennes, aisées, retraités et inactifs), une mesure
-          reçoit un score de -2 à +2 : une <strong>estimation de l&apos;effet économique direct</strong> sur le niveau
+          reçoit un score de -2 à +2 (utilisé pour le volet « effet économique estimé sur votre catégorie ») : une <strong>estimation de l&apos;effet économique direct</strong> sur le niveau
           de vie de la catégorie (-2 : effet nettement défavorable ; 0 : neutre ou indéterminé ; +2 : effet nettement
           favorable), accompagnée des avantages et des risques documentés et d&apos;un « angle mort » : ce que la mesure
-          ou son chiffrage ne permettent pas de conclure. Le même barème s&apos;applique à tous les candidats, quelle
-          que soit leur famille politique. Cette notation reste une estimation, pas une mesure.
+          ou son chiffrage ne permettent pas de conclure. Un effet seulement possible, indirect ou non chiffré vaut 0. Le même barème s&apos;applique à tous les candidats,
+          quelle que soit leur famille politique. Cette notation reste une estimation, pas une mesure.
         </p>
       </section>
 
@@ -146,6 +208,10 @@ export default function TransparencePage() {
           garanti de la presse française. Les programmes officiels des partis sont à privilégier dès qu&apos;ils sont
           publiés.
         </p>
+        <p className="mt-3">
+          Les comparateurs de think tanks (par exemple celui de la Fondation iFRAP) peuvent servir de simple piste pour
+          savoir où chercher. Ils ne sont jamais une source : aucune mesure ni position n&apos;est reprise d&apos;eux.
+        </p>
       </section>
 
       <section className="py-12 border-b border-line">
@@ -166,13 +232,22 @@ export default function TransparencePage() {
             4 catégories sociales et des seuils de classement (déciles de l&apos;Insee).
           </li>
           <li>
-            <strong>Un seul angle :</strong> l&apos;effet économique sur le niveau de vie. Les valeurs, les libertés,
-            la politique étrangère ou l&apos;écologie ne sont mesurées ici que par leur effet économique direct, et ne
-            remplacent pas la lecture des programmes.
+            <strong>Une couverture inégale des positions.</strong> Seuls {classables} candidats sur {CANDIDATS.length}{" "}
+            ont au moins {SEUIL_COUVERTURE} positions documentées et peuvent être classés par la boussole ; les autres ne
+            sont pas moins proches de vos choix, leurs positions ne sont simplement pas (encore) documentées.
           </li>
           <li>
-            <strong>Un score personnalisé</strong> qui combine des estimations déjà incertaines : ce n&apos;est ni un
-            classement, ni une recommandation de vote.
+            <strong>Des choix binaires et des questions limitées.</strong> Deux options simplifient des positions
+            nuancées, et {QUESTIONS.length} questions ne couvrent pas tout ce qu&apos;un candidat défend (ni le logement,
+            la laïcité, la fin de vie, l&apos;agriculture…).
+          </li>
+          <li>
+            <strong>Le volet économique ne mesure que l&apos;effet économique direct</strong> sur la catégorie, pas les
+            valeurs, et c&apos;est une moyenne de catégorie : l&apos;effet sur un foyer précis peut différer (par exemple selon
+            la composition du foyer ou le niveau de salaire).
+          </li>
+          <li>
+            <strong>Aucun résultat n&apos;est une recommandation de vote.</strong>
           </li>
         </ul>
       </section>
