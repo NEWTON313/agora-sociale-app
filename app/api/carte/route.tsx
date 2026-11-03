@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
-import { CANDIDATS, CLASSES_SOCIALES } from "@/lib/data";
+import { CANDIDATS_ALPHABETIQUE, CLASSES_SOCIALES } from "@/lib/data";
 import { classerCandidats } from "@/lib/priorites";
 import { decoderPartage, themesPrioritaires } from "@/lib/partage";
 
@@ -11,10 +11,18 @@ const COULEURS_CLASSES: Record<string, string> = {
   retraites: "#9c7539",
 };
 
-const BARRE_LARGEUR = 230;
-const MAX_LIGNES = 10;
+/** Hauteur disponible pour la liste de candidats (le reste : titre, notes, pied de carte). */
 const HAUTEUR_LISTE = 370;
+const MAX_UNE_COLONNE = 10;
+const MAX_PAR_COLONNE = 12;
 
+/**
+ * Carte de partage : catégorie sociale, thèmes prioritaires et EFFET ÉCONOMIQUE ESTIMÉ des mesures de chaque candidat
+ * sur cette catégorie. Ce n'est pas un classement : les candidats sont listés par ordre alphabétique (jamais par score)
+ * et tous ceux dont l'effet est calculable apparaissent, sur deux colonnes s'ils sont nombreux. La carte ne contient que
+ * la catégorie et les thèmes prioritaires (jamais revenu, âge, patrimoine ni réponses de la boussole : un lien qui
+ * encoderait des opinions permettrait aussi de fabriquer de fausses cartes).
+ */
 export function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams;
   const partage = decoderPartage({ classe: q.get("classe"), p: q.get("p") });
@@ -22,24 +30,52 @@ export function GET(request: NextRequest) {
 
   const classe = CLASSES_SOCIALES.find((c) => c.id === partage.classe)!;
   const couleurClasse = COULEURS_CLASSES[classe.id];
-  const { classement, resultats } = classerCandidats(CANDIDATS, partage.classe, partage.poids);
+  const { resultats } = classerCandidats(CANDIDATS_ALPHABETIQUE, partage.classe, partage.poids);
   const priorites = themesPrioritaires(partage.poids, 3);
 
-  // Avec beaucoup de candidats, la carte affiche ceux dont le score est calculable (au plus MAX_LIGNES, taille
-  // adaptée) et résume les autres ; la liste complète reste toujours consultable sur le site.
-  const calculables = classement.filter((c) => resultats.get(c.id)!.scoreGlobal !== null);
-  const nonCalculables = classement.length - calculables.length;
-  const lignes = calculables.slice(0, MAX_LIGNES);
-  const restants = calculables.length - lignes.length;
-  // Les lignes se touchent (pas d'espacement entre elles) : la hauteur totale est exactement n × hauteurLigne.
-  const hauteurLigne = Math.min(60, Math.floor(HAUTEUR_LISTE / Math.max(lignes.length, 1)));
-  const compact = hauteurLigne < 52;
+  const calculables = CANDIDATS_ALPHABETIQUE.filter((c) => resultats.get(c.id)!.scoreGlobal !== null);
+  const nonCalculables = CANDIDATS_ALPHABETIQUE.length - calculables.length;
+  const colonnes = calculables.length > MAX_UNE_COLONNE ? 2 : 1;
+  const affiches = calculables.slice(0, colonnes === 1 ? MAX_UNE_COLONNE : MAX_PAR_COLONNE * 2);
+  const restants = calculables.length - affiches.length;
+  const parColonne = Math.ceil(affiches.length / colonnes);
+  const hauteurLigne = colonnes === 1 ? Math.min(60, Math.floor(HAUTEUR_LISTE / Math.max(affiches.length, 1))) : Math.min(34, Math.floor(HAUTEUR_LISTE / parColonne));
+  const colonnesDonnees = Array.from({ length: colonnes }, (_, i) => affiches.slice(i * parColonne, (i + 1) * parColonne));
 
   const headers: Record<string, string> = {
     // Les données (scores) évoluent tous les quelques jours : cache court côté navigateur, plus long côté CDN.
     "Cache-Control": "public, max-age=3600, s-maxage=86400",
   };
   if (q.get("dl") === "1") headers["Content-Disposition"] = 'attachment; filename="mon-choix-2027.png"';
+
+  const barre = (score: number, largeurBarre: number, hauteurBarre: number) => {
+    const largeur = (Math.min(Math.abs(score) / 2, 1) * largeurBarre) / 2;
+    const positif = score >= 0;
+    return (
+      <div
+        style={{
+          display: "flex",
+          position: "relative",
+          width: largeurBarre,
+          height: hauteurBarre,
+          background: "#ffffff",
+          border: "1px solid #c9ced8",
+        }}
+      >
+        <div style={{ position: "absolute", left: largeurBarre / 2 - 1, top: -1, bottom: -1, width: 1, background: "#10131a" }} />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            width: largeur,
+            left: positif ? largeurBarre / 2 - 1 : largeurBarre / 2 - 1 - largeur,
+            background: positif ? "#326049" : "#8f382f",
+          }}
+        />
+      </div>
+    );
+  };
 
   return new ImageResponse(
     (
@@ -64,7 +100,7 @@ export function GET(request: NextRequest) {
                 {classe.nom}
               </div>
 
-              <div style={{ display: "flex", marginTop: 36, fontSize: 17, color: "#7a8090", letterSpacing: 2 }}>MES PRIORITÉS</div>
+              <div style={{ display: "flex", marginTop: 36, fontSize: 17, color: "#7a8090", letterSpacing: 2 }}>MES THÈMES PRIORITAIRES</div>
               <div style={{ display: "flex", flexDirection: "column", marginTop: 10, gap: 8 }}>
                 {priorites.map((theme) => (
                   <div key={theme} style={{ display: "flex", fontSize: 25, lineHeight: 1.2 }}>
@@ -75,74 +111,60 @@ export function GET(request: NextRequest) {
             </div>
 
             <div style={{ display: "flex", fontSize: 16, color: "#454e5e", lineHeight: 1.35 }}>
-              Score calculé d&apos;après mes priorités et les mesures recensées — ce n&apos;est pas une recommandation de vote.
+              Estimation de l&apos;effet économique direct des mesures recensées sur ma catégorie, par ordre alphabétique — ce n&apos;est
+              ni un classement des candidats ni une recommandation de vote.
             </div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "flex-start", paddingTop: 36 }}>
             <div style={{ display: "flex", fontSize: 17, color: "#7a8090", letterSpacing: 2, marginBottom: 14 }}>
-              CORRESPONDANCE AVEC MES PRIORITÉS
+              EFFET ÉCONOMIQUE ESTIMÉ SUR MA CATÉGORIE
             </div>
-            {lignes.map((candidat, i) => {
-              const r = resultats.get(candidat.id)!;
-              const score = r.scoreGlobal!;
-              const largeur = (Math.min(Math.abs(score) / 2, 1) * BARRE_LARGEUR) / 2;
-              const positif = score >= 0;
-              return (
-                <div key={candidat.id} style={{ display: "flex", alignItems: "center", height: hauteurLigne }}>
-                  <div style={{ display: "flex", width: 34, fontSize: compact ? 20 : 26, fontWeight: 700, color: "#7a8090" }}>{i + 1}</div>
-                  <div style={{ display: "flex", flexDirection: "column", width: 262 }}>
-                    <div style={{ display: "flex", fontSize: compact ? 20 : 24, fontWeight: 700, lineHeight: 1.1 }}>{candidat.nom}</div>
-                    {!compact && (
-                      <div style={{ display: "flex", fontSize: 13, color: "#7a8090", letterSpacing: 1.2, marginTop: 3 }}>
-                        {candidat.parti.toUpperCase()}
-                      </div>
-                    )}
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        position: "relative",
-                        width: BARRE_LARGEUR,
-                        height: compact ? 12 : 16,
-                        background: "#ffffff",
-                        border: "1px solid #c9ced8",
-                      }}
-                    >
-                      <div style={{ position: "absolute", left: BARRE_LARGEUR / 2 - 1, top: -1, bottom: -1, width: 1, background: "#10131a" }} />
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          bottom: 0,
-                          width: largeur,
-                          left: positif ? BARRE_LARGEUR / 2 - 1 : BARRE_LARGEUR / 2 - 1 - largeur,
-                          background: positif ? "#326049" : "#8f382f",
-                        }}
-                      />
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column", width: 96, marginLeft: 14 }}>
-                      <div style={{ display: "flex", fontSize: compact ? 18 : 22, fontWeight: 700, lineHeight: 1.1 }}>
-                        {score > 0 ? "+" : ""}
-                        {score.toFixed(1)}
-                      </div>
-                      {!compact && (
-                        <div style={{ display: "flex", fontSize: 13, color: "#7a8090", marginTop: 3 }}>
-                          {r.themesCouverts}/{r.themesPonderes} thème{r.themesPonderes > 1 ? "s" : ""}
+
+            <div style={{ display: "flex", gap: 32 }}>
+              {colonnesDonnees.map((col, ci) => (
+                <div key={ci} style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+                  {col.map((candidat) => {
+                    const r = resultats.get(candidat.id)!;
+                    const score = r.scoreGlobal!;
+                    const signe = `${score > 0 ? "+" : ""}${score.toFixed(1)}`;
+                    return colonnes === 1 ? (
+                      <div key={candidat.id} style={{ display: "flex", alignItems: "center", height: hauteurLigne }}>
+                        <div style={{ display: "flex", flexDirection: "column", width: 296 }}>
+                          <div style={{ display: "flex", fontSize: hauteurLigne < 52 ? 20 : 24, fontWeight: 700, lineHeight: 1.1, whiteSpace: "nowrap" }}>
+                            {candidat.nom}
+                          </div>
+                          {hauteurLigne >= 52 && (
+                            <div style={{ display: "flex", fontSize: 13, color: "#7a8090", letterSpacing: 1.2, marginTop: 3 }}>
+                              {candidat.parti.toUpperCase()}
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  </div>
+                        {barre(score, 230, hauteurLigne < 52 ? 12 : 16)}
+                        <div style={{ display: "flex", marginLeft: 14, width: 56, fontSize: hauteurLigne < 52 ? 18 : 22, fontWeight: 700 }}>{signe}</div>
+                      </div>
+                    ) : (
+                      <div key={candidat.id} style={{ display: "flex", alignItems: "center", height: hauteurLigne }}>
+                        <div style={{ display: "flex", width: 176, fontSize: 15, fontWeight: 700, whiteSpace: "nowrap", overflow: "hidden" }}>{candidat.nom}</div>
+                        {barre(score, 64, 10)}
+                        <div style={{ display: "flex", marginLeft: 8, width: 40, fontSize: 15, fontWeight: 700 }}>{signe}</div>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              ))}
+            </div>
+
             {(nonCalculables > 0 || restants > 0) && (
               <div style={{ display: "flex", flexDirection: "column", marginTop: 12, fontSize: 15, color: "#454e5e", lineHeight: 1.35 }}>
-                {restants > 0 && <div style={{ display: "flex" }}>+ {restants} autre{restants > 1 ? "s" : ""} candidat{restants > 1 ? "s" : ""} classé{restants > 1 ? "s" : ""} (liste complète sur le site)</div>}
+                {restants > 0 && (
+                  <div style={{ display: "flex" }}>
+                    + {restants} autre{restants > 1 ? "s" : ""} candidat{restants > 1 ? "s" : ""} (liste complète sur le site)
+                  </div>
+                )}
                 {nonCalculables > 0 && (
                   <div style={{ display: "flex" }}>
-                    {nonCalculables} autre{nonCalculables > 1 ? "s" : ""} candidat{nonCalculables > 1 ? "s" : ""} : score non calculable (aucune mesure recensée)
+                    {nonCalculables} autre{nonCalculables > 1 ? "s" : ""} candidat{nonCalculables > 1 ? "s" : ""} : effet non calculable (aucune mesure recensée)
                   </div>
                 )}
               </div>

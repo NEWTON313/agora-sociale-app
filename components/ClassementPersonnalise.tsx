@@ -7,6 +7,8 @@ interface Props {
   resultats: Map<string, ScorePersonnaliseResultat>;
   /** Met en avant le premier de la liste (résultat personnel) ; désactivé sur un résultat partagé. */
   attenuerSuivants?: boolean;
+  /** Numérote les candidats (classement) ; désactivé pour une liste alphabétique. */
+  numeroter?: boolean;
 }
 
 /**
@@ -14,7 +16,7 @@ interface Props {
  * repliable mais toujours accessible — les candidats pour lesquels aucune mesure n'est recensée sur les
  * thèmes prioritaires (ordre alphabétique). Aucun candidat n'est jamais retiré de la liste.
  */
-export default function ClassementPersonnalise({ classement, resultats, attenuerSuivants = true }: Props) {
+export default function ClassementPersonnalise({ classement, resultats, attenuerSuivants = true, numeroter = true }: Props) {
   const calculables = classement.filter((c) => resultats.get(c.id)?.scoreGlobal !== null);
   const nonCalculables = classement.filter((c) => resultats.get(c.id)?.scoreGlobal === null);
 
@@ -26,7 +28,7 @@ export default function ClassementPersonnalise({ classement, resultats, attenuer
             <li key={candidat.id} className={attenuerSuivants && i !== 0 ? "opacity-80" : ""}>
               <div className="flex items-baseline justify-between gap-2 mb-1.5">
                 <span className="font-display">
-                  {i + 1}. {candidat.nom}{" "}
+                  {numeroter ? `${i + 1}. ` : ""}{candidat.nom}{" "}
                   <span className="font-display text-[0.84rem] font-medium text-ink-faint">{candidat.parti}</span>
                 </span>
               </div>
