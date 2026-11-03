@@ -6,7 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/simulateur",
-    "/boussole",
     "/candidats",
     "/methodologie",
     "/transparence",

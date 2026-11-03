@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { CANDIDATS } from "./data";
 import { POSITIONS } from "./positions";
-import { QUESTIONS, SEUIL_COUVERTURE, calculerProximite, classerBoussole, type Reponses } from "./boussole";
+import { QUESTIONS, SEUIL_COUVERTURE, calculerProximite, classerBoussole, poidsThemesDepuisBoussole, type Reponses } from "./boussole";
 
 const rep = (r: Record<number, "A" | "B">, poids = 2): Reponses =>
   Object.fromEntries(Object.entries(r).map(([q, choix]) => [Number(q), { choix, poids: poids as 1 | 2 | 3 }]));
@@ -67,5 +67,22 @@ describe("calcul de proximité", () => {
       expect(a.score! >= b.score!).toBe(true);
       if (a.score === b.score) expect(a.candidat.id.localeCompare(b.candidat.id, "fr") <= 0).toBe(true);
     }
+  });
+});
+
+describe("priorités déduites de la boussole", () => {
+  it("retient l'importance la plus forte par thème, 0 sans réponse, et ignore les thèmes propres à la boussole", () => {
+    const r: Reponses = {
+      1: { choix: "A", poids: 1 }, // Pouvoir d'achat
+      2: { choix: "B", poids: 3 }, // Pouvoir d'achat (plus fort)
+      3: { choix: "A", poids: 2 }, // Retraites
+      4: { choix: null, poids: 3 }, // sans avis : ignorée
+      19: { choix: "A", poids: 3 }, // Éducation : pas un thème du score économique
+    };
+    const poids = poidsThemesDepuisBoussole(r);
+    expect(poids["Pouvoir d'achat et économie"]).toBe(3);
+    expect(poids["Retraites et modèle social"]).toBe(2);
+    expect(poids["Immigration et intégration"]).toBe(0);
+    expect(Object.values(poids).filter((n) => n > 0)).toHaveLength(2);
   });
 });

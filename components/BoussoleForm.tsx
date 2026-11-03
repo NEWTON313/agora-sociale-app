@@ -2,10 +2,27 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { QUESTIONS, SEUIL_COUVERTURE, classerBoussole, type Importance, type Reponses } from "@/lib/boussole";
+import { QUESTIONS, SEUIL_COUVERTURE, classerBoussole, poidsThemesDepuisBoussole, type Importance, type Reponses } from "@/lib/boussole";
+import type { Candidat, ClasseId } from "@/lib/data";
+import { calculerScorePersonnalise, type PoidsThemes } from "@/lib/priorites";
 import type { Choix } from "@/lib/positions";
+import PartagerResultat from "./PartagerResultat";
 
 const pct = (n: number) => `${n > 0 ? "+" : ""}${Math.round(n * 100)} %`;
+const signe = (n: number) => `${n > 0 ? "+" : ""}${n.toFixed(1)}`;
+
+/** Effet économique estimé sur la catégorie de la personne : information complémentaire, jamais utilisée pour classer. */
+function EffetEconomique({ candidat, classe, poids }: { candidat: Candidat; classe: ClasseId; poids: PoidsThemes }) {
+  const r = calculerScorePersonnalise(candidat, classe, poids);
+  return (
+    <span>
+      {r.scoreGlobal === null
+        ? "non calculable (aucune mesure recensée sur vos thèmes prioritaires)"
+        : `${signe(r.scoreGlobal)} (${r.themesCouverts} thème${r.themesCouverts > 1 ? "s" : ""} couvert${r.themesCouverts > 1 ? "s" : ""} sur ${r.themesPonderes})`}
+    </span>
+  );
+}
+
 const IMPORTANCES: { v: Importance; label: string }[] = [
   { v: 1, label: "Peu" },
   { v: 2, label: "Important" },
@@ -16,7 +33,7 @@ const IMPORTANCES: { v: Importance; label: string }[] = [
  * Test « boussole » : choix entre deux propositions, importance, puis proximité avec les positions DOCUMENTÉES
  * de chaque candidat. L'ordre des options A/B est tiré au hasard à chaque visite. Rien n'est envoyé ni conservé.
  */
-export default function BoussoleForm() {
+export default function BoussoleForm({ classe, onModifierSituation }: { classe: ClasseId | null; onModifierSituation: () => void }) {
   const [inverse, setInverse] = useState<Record<number, boolean> | null>(null);
   const [reponses, setReponses] = useState<Reponses>({});
   const [resultat, setResultat] = useState(false);
@@ -28,6 +45,7 @@ export default function BoussoleForm() {
 
   const nbRepondues = QUESTIONS.filter((q) => reponses[q.id]?.choix).length;
   const classement = useMemo(() => (resultat ? classerBoussole(reponses) : null), [resultat, reponses]);
+  const poidsEco = useMemo(() => poidsThemesDepuisBoussole(reponses), [reponses]);
 
   if (!inverse) return <p className="text-ink-soft">Chargement du test…</p>;
 
@@ -46,6 +64,13 @@ export default function BoussoleForm() {
           des candidats (chacune renvoie à une source). Une position non documentée est écartée : ce n&apos;est jamais un
           désaccord. Un candidat n&apos;est classé qu&apos;à partir de {SEUIL_COUVERTURE} questions couvertes. Ce n&apos;est pas
           une recommandation de vote.
+          {classe && (
+            <>
+              {" "}
+              À côté de chaque candidat, l&apos;<strong className="text-ink">effet économique estimé sur votre catégorie</strong>{" "}
+              est une information distincte (calculée avec les thèmes de vos réponses) : elle ne sert pas au classement.
+            </>
+          )}
         </div>
 
         <h2 className="text-[1.5rem] mb-4">Proximité avec vos choix</h2>
@@ -69,6 +94,12 @@ export default function BoussoleForm() {
                   D&apos;accord sur {p.accords} question{p.accords > 1 ? "s" : ""} sur {p.documentees} où sa position est
                   documentée ({p.documentees} sur {p.repondues} auxquelles vous avez répondu).
                 </p>
+                {classe && (
+                  <p className="font-display text-[0.88rem] text-ink-soft mt-1">
+                    Effet économique estimé sur votre catégorie :{" "}
+                    <EffetEconomique candidat={p.candidat} classe={classe} poids={poidsEco} />
+                  </p>
+                )}
                 <details className="mt-3">
                   <summary className="cursor-pointer font-display text-[0.86rem] text-accent-bleu">Voir le détail et les sources</summary>
                   <ul className="mt-2 flex flex-col gap-2 text-[0.88rem] text-ink-soft">
@@ -102,6 +133,12 @@ export default function BoussoleForm() {
                 {p.candidat.nom}{" "}
                 <span className="text-[0.82rem] text-ink-faint">
                   · {p.documentees} position{p.documentees > 1 ? "s" : ""} documentée{p.documentees > 1 ? "s" : ""}
+                  {classe && (
+                    <>
+                      {" "}
+                      · effet économique : <EffetEconomique candidat={p.candidat} classe={classe} poids={poidsEco} />
+                    </>
+                  )}
                 </span>
               </li>
             ))}
@@ -112,10 +149,14 @@ export default function BoussoleForm() {
           <button type="button" onClick={() => setResultat(false)} className="underline underline-offset-4">
             ← Modifier mes réponses
           </button>
+          <button type="button" onClick={onModifierSituation} className="underline underline-offset-4">
+            ← Modifier ma situation (étape 1)
+          </button>
           <Link href="/transparence" className="underline underline-offset-4">
             Comment ces positions sont établies
           </Link>
         </div>
+        {classe && <PartagerResultat classe={classe} poids={poidsEco} />}
       </div>
     );
   }
