@@ -44,7 +44,8 @@ export const QUESTIONS: Question[] = [
 export const SEUIL_COUVERTURE = 3;
 
 export type Importance = 1 | 2 | 3;
-export type Reponses = Record<number, { choix: Choix | null; poids: Importance }>;
+/** `sansAvis` : la personne a explicitement répondu « ni l'un ni l'autre » (la question est alors écartée du calcul). */
+export type Reponses = Record<number, { choix: Choix | null; poids: Importance; sansAvis?: boolean }>;
 
 export interface DetailQuestion {
   question: number;
