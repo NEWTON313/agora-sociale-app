@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import ClassementPersonnalise from "@/components/ClassementPersonnalise";
-import { CANDIDATS, CLASSES_SOCIALES, THEMES } from "@/lib/data";
+import { CANDIDATS_ALPHABETIQUE, CLASSES_SOCIALES, THEMES } from "@/lib/data";
 import { decoderPartage, encoderPartage } from "@/lib/partage";
 import { classerCandidats, LABELS_PRIORITE } from "@/lib/priorites";
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const qs = encoderPartage(partage.classe, partage.poids);
   const titre = "Mon résultat — Mon Choix 2027";
   const description =
-    "Voici ce que donne le comparateur selon ma catégorie sociale et mes priorités. À toi d'essayer : 2 minutes, aucune donnée conservée.";
+    "Voici l'effet économique estimé des mesures des candidats sur ma catégorie sociale, selon mes thèmes prioritaires. À toi d'essayer : 5 minutes, aucune donnée conservée.";
   // Chemins relatifs : metadataBase (hôte www, voir lib/site.ts) les rend absolus.
   const image = `/api/carte?${qs}`;
   return {
@@ -42,7 +42,9 @@ export default async function ResultatPage({ searchParams }: { searchParams: Sea
   if (!partage) redirect("/simulateur");
 
   const classe = CLASSES_SOCIALES.find((c) => c.id === partage.classe)!;
-  const { classement, resultats } = classerCandidats(CANDIDATS, partage.classe, partage.poids);
+  // Ordre alphabétique : l'effet économique estimé n'est pas un classement des candidats.
+  const { classement, resultats } = classerCandidats(CANDIDATS_ALPHABETIQUE, partage.classe, partage.poids);
+  const alphabetique = [...classement].sort((a, b) => a.id.localeCompare(b.id, "fr"));
   const priorites = THEMES.filter((t) => partage.poids[t] > 0).sort((a, b) => partage.poids[b] - partage.poids[a]);
 
   return (
@@ -66,7 +68,7 @@ export default async function ResultatPage({ searchParams }: { searchParams: Sea
 
       <div className="max-w-[760px] mx-auto px-6 py-14 pb-24">
         <div className="p-9 bg-paper-raised border border-line rounded-2xl shadow-elevated max-sm:p-6">
-          <div className="font-display text-[0.95rem] font-medium text-ink mb-3">Priorités indiquées</div>
+          <div className="font-display text-[0.95rem] font-medium text-ink mb-3">Thèmes prioritaires indiqués</div>
           <ul className="flex flex-col gap-2 mb-6">
             {priorites.map((t) => (
               <li key={t} className="flex justify-between gap-3 text-[1rem] border-b border-line pb-2">
@@ -79,28 +81,29 @@ export default async function ResultatPage({ searchParams }: { searchParams: Sea
           </ul>
 
           <p className="text-[0.92rem] text-ink-soft italic mb-6 leading-relaxed">
-            Score calculé d&apos;après ces priorités et les mesures recensées pour cette catégorie sociale. Ce n&apos;est
-            ni un jugement de valeur ni une recommandation de vote — voir la{" "}
+            <strong className="not-italic">Effet économique estimé</strong> des mesures recensées sur cette catégorie
+            sociale, pour ces thèmes. Les candidats sont listés par ordre alphabétique : ce n&apos;est ni un classement, ni
+            un jugement de valeur, ni une recommandation de vote — voir la{" "}
             <Link href="/methodologie#score-personnalise" className="underline">
               méthodologie
             </Link>
-            . Le classement complet est toujours affiché.
+            .
           </p>
 
-          <ClassementPersonnalise classement={classement} resultats={resultats} attenuerSuivants={false} />
+          <ClassementPersonnalise classement={alphabetique} resultats={resultats} attenuerSuivants={false} numeroter={false} />
         </div>
 
         <div className="mt-10 p-9 rounded-2xl bg-accent-bleu text-white max-sm:p-6">
           <h2 className="text-[1.7rem] mb-3">Et pour vous&nbsp;?</h2>
           <p className="text-[1.02rem] text-white/80 mb-6 max-w-[52ch]">
-            Le résultat dépend de la situation et des priorités de chacun. Refaites le calcul avec les vôtres : 2
-            minutes, le calcul se fait dans votre navigateur et rien n&apos;est conservé.
+            Le résultat dépend de la situation et des choix de chacun. Refaites le test avec les vôtres : le
+            calcul se fait dans votre navigateur et rien n&apos;est conservé.
           </p>
           <Link
             href="/simulateur"
             className="inline-flex items-center gap-3 bg-white text-accent-bleu font-display text-[1.02rem] font-medium px-7 py-3.5 rounded-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_-10px_rgba(0,0,0,0.5)]"
           >
-            Faire le test, 2 minutes →
+            Faire le test →
           </Link>
         </div>
       </div>

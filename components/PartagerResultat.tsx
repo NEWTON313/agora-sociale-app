@@ -5,7 +5,7 @@ import type { ClasseId } from "@/lib/data";
 import type { PoidsThemes } from "@/lib/priorites";
 import { encoderPartage } from "@/lib/partage";
 
-const TEXTE_PARTAGE = "Voici ce que donne le comparateur Mon Choix 2027 pour ma situation et mes priorités. À toi d'essayer :";
+const TEXTE_PARTAGE = "Voici l'effet économique estimé des mesures des candidats sur ma situation, selon mes thèmes prioritaires (Mon Choix 2027). À toi d'essayer :";
 
 const boutonBase =
   "font-display text-[0.95rem] font-medium px-6 py-3 rounded-md border transition-all duration-300 inline-flex items-center";
@@ -62,8 +62,8 @@ export default function PartagerResultat({ classe, poids }: { classe: ClasseId; 
           Partager mon résultat
         </button>
         <p className="text-[0.9rem] text-ink-faint max-w-[58ch]">
-          Facultatif. Seuls votre catégorie sociale et vos priorités sont utilisées pour créer la carte : jamais
-          votre revenu, votre âge ni votre patrimoine.
+          Facultatif. Seuls votre catégorie sociale et vos thèmes prioritaires sont utilisés pour créer la carte : jamais
+          votre revenu, votre âge, votre patrimoine ni vos réponses aux questions.
         </p>
       </div>
     );
@@ -75,14 +75,15 @@ export default function PartagerResultat({ classe, poids }: { classe: ClasseId; 
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={urlImage}
-        alt="Carte de résultat : ma catégorie sociale, mes priorités et le classement complet des candidats selon ces priorités"
+        alt="Carte de résultat : ma catégorie sociale, mes thèmes prioritaires et l'effet économique estimé des mesures de chaque candidat sur ma catégorie, par ordre alphabétique"
         width={1200}
         height={630}
         className="w-full h-auto border border-line rounded-xl"
       />
       <p className="text-[0.9rem] text-ink-faint mt-4">
-        La carte montre le classement complet et précise que ce n&apos;est pas une recommandation de vote. Elle
-        n&apos;inclut ni votre revenu ni aucune donnée personnelle.
+        La carte montre l&apos;effet économique estimé, par ordre alphabétique, et précise que ce n&apos;est ni un
+        classement ni une recommandation de vote. Elle n&apos;inclut ni votre revenu, ni vos réponses, ni aucune donnée
+        personnelle.
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         {partageNatif && (
