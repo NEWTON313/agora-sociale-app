@@ -53,4 +53,12 @@ export const POSITIONS: Position[] = [
   { candidat: "philippe", question: 22, choix: "A", mesureId: "ep-ukraine-otan" },
   { candidat: "asselineau", question: 22, choix: "B", mesureId: "fa-frexit" },
   { candidat: "dupont-aignan", question: 22, choix: "B", mesureId: "nda-frexit" },
+  // 3 — âge légal (ajouté le 2026-11-06)
+  { candidat: "bouamrane", question: 3, choix: "B", mesureId: "kb-retraite-65-ans" },
+  // 10 — régulation de l'installation des médecins (ajouté le 2026-11-06)
+  { candidat: "batho", question: 10, choix: "A", mesureId: "db-reguler-installation-medecins" },
+  // 15 — RIC (ajouté le 2026-11-06)
+  { candidat: "batho", question: 15, choix: "A", mesureId: "db-ric-pouvoir-maires" },
+  // 20 — service national obligatoire (ajouté le 2026-11-06)
+  { candidat: "batho", question: 20, choix: "B", mesureId: "db-service-national-volontaire" },
 ];
