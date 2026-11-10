@@ -57,4 +57,9 @@ export const POSITIONS: Position[] = [
   { candidat: "bouamrane", question: 3, choix: "B", mesureId: "kb-retraite-65-ans" },
   // 10 — régulation de l'installation des médecins (ajouté le 2026-11-06)
   { candidat: "batho", question: 10, choix: "A", mesureId: "db-reguler-installation-medecins" },
+  // Mélenchon : programme publié le 2026-11-06 (LCP, France 24)
+  { candidat: "melenchon", question: 1, choix: "A", mesureId: "jlm-smic-1700" },
+  { candidat: "melenchon", question: 13, choix: "A", mesureId: "jlm-moratoire-libre-echange" },
+  { candidat: "melenchon", question: 16, choix: "A", mesureId: "jlm-proportionnelle-49-3" },
+  { candidat: "melenchon", question: 22, choix: "B", mesureId: "jlm-otan-commandement-integre" },
 ];
