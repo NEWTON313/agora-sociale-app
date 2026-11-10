@@ -152,7 +152,7 @@ export default function TransparencePage() {
         <p className="mt-3">
           <strong>L&apos;effet économique est une information séparée.</strong> À côté de chaque candidat s&apos;affiche
           l&apos;effet économique estimé de ses mesures sur votre catégorie (voir plus bas), calculé avec les thèmes de vos
-          réponses. Il ne sert jamais au classement et n&apos;est jamais additionné à la proximité.
+          réponses. Il ne sert jamais au classement par proximité et n&apos;est jamais additionné à la proximité.
         </p>
         <p className="mt-3">
           <strong>Qui a écrit les questions.</strong> Les {QUESTIONS.length} questions ont été rédigées avec l&apos;aide

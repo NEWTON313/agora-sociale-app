@@ -71,7 +71,7 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
             <>
               {" "}
               À côté de chaque candidat, l&apos;<strong className="text-ink">effet économique estimé sur votre catégorie</strong>{" "}
-              est une information distincte (calculée avec les thèmes de vos réponses) : elle ne sert pas au classement.
+              est une information distincte (calculée avec les thèmes de vos réponses) : elle ne sert pas au classement par proximité.
             </>
           )}
         </div>

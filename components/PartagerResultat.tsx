@@ -75,14 +75,14 @@ export default function PartagerResultat({ classe, poids }: { classe: ClasseId; 
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={urlImage}
-        alt="Carte de résultat : ma catégorie sociale, mes thèmes prioritaires et l'effet économique estimé des mesures de chaque candidat sur ma catégorie, par ordre alphabétique"
+        alt="Carte de résultat : ma catégorie sociale, mes thèmes prioritaires et l'effet économique estimé des mesures de chaque candidat sur ma catégorie, du plus favorable au moins favorable"
         width={1200}
         height={630}
         className="w-full h-auto border border-line rounded-xl"
       />
       <p className="text-[0.9rem] text-ink-faint mt-4">
-        La carte montre l&apos;effet économique estimé, par ordre alphabétique, et précise que ce n&apos;est ni un
-        classement ni une recommandation de vote. Elle n&apos;inclut ni votre revenu, ni vos réponses, ni aucune donnée
+        La carte montre l&apos;effet économique estimé, du plus favorable au moins favorable, et précise que ce n&apos;est
+        ni un jugement sur les candidats ni une recommandation de vote. Elle n&apos;inclut ni votre revenu, ni vos réponses, ni aucune donnée
         personnelle.
       </p>
       <div className="mt-4 flex flex-wrap gap-3">

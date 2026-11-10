@@ -7,7 +7,7 @@ interface Props {
   resultats: Map<string, ScorePersonnaliseResultat>;
   /** Met en avant le premier de la liste (résultat personnel) ; désactivé sur un résultat partagé. */
   attenuerSuivants?: boolean;
-  /** Numérote les candidats (classement) ; désactivé pour une liste alphabétique. */
+  /** Numérote les candidats ; désactivé pour ne pas suggérer une précision que les égalités de score démentent. */
   numeroter?: boolean;
 }
 
