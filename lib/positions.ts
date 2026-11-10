@@ -62,4 +62,6 @@ export const POSITIONS: Position[] = [
   { candidat: "melenchon", question: 13, choix: "A", mesureId: "jlm-moratoire-libre-echange" },
   { candidat: "melenchon", question: 16, choix: "A", mesureId: "jlm-proportionnelle-49-3" },
   { candidat: "melenchon", question: 22, choix: "B", mesureId: "jlm-otan-commandement-integre" },
+  // Ruffin : Smic à 1 700 € net (franceinfo, 2026-11-06)
+  { candidat: "ruffin", question: 1, choix: "A", mesureId: "frf-smic-1700" },
 ];
