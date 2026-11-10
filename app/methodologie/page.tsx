@@ -49,8 +49,11 @@ export default function MethodologiePage() {
             explicitement plutôt que d&apos;extrapoler). Un retrait officiel de candidature le retire du site.
           </li>
           <li>
-            Les candidats sont toujours présentés dans un ordre neutre (alphabétique ou tirage aléatoire affiché),
-            jamais par sondage ou popularité.
+            Les candidats sont présentés dans un ordre neutre (alphabétique ou tirage aléatoire affiché), jamais par
+            sondage ou popularité. Une seule exception, annoncée à l&apos;écran : la carte de partage et la page de
+            résultat partagé classent les candidats du plus favorable au moins favorable selon l&apos;effet économique
+            estimé de leurs mesures recensées sur la catégorie de la personne (à égalité : ordre alphabétique ; les
+            candidats sans effet calculable ne sont pas classés).
           </li>
           <li>
             Le lexique est passé au crible : « réforme », « mesure », « proposition » sont préférés à des termes

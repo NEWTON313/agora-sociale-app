@@ -42,9 +42,8 @@ export default async function ResultatPage({ searchParams }: { searchParams: Sea
   if (!partage) redirect("/simulateur");
 
   const classe = CLASSES_SOCIALES.find((c) => c.id === partage.classe)!;
-  // Ordre alphabétique : l'effet économique estimé n'est pas un classement des candidats.
+  // Du plus favorable au moins favorable (à égalité : ordre alphabétique) ; sans effet calculable : en fin de liste.
   const { classement, resultats } = classerCandidats(CANDIDATS_ALPHABETIQUE, partage.classe, partage.poids);
-  const alphabetique = [...classement].sort((a, b) => a.id.localeCompare(b.id, "fr"));
   const priorites = THEMES.filter((t) => partage.poids[t] > 0).sort((a, b) => partage.poids[b] - partage.poids[a]);
 
   return (
@@ -82,15 +81,15 @@ export default async function ResultatPage({ searchParams }: { searchParams: Sea
 
           <p className="text-[0.92rem] text-ink-soft italic mb-6 leading-relaxed">
             <strong className="not-italic">Effet économique estimé</strong> des mesures recensées sur cette catégorie
-            sociale, pour ces thèmes. Les candidats sont listés par ordre alphabétique : ce n&apos;est ni un classement, ni
-            un jugement de valeur, ni une recommandation de vote — voir la{" "}
+            sociale, pour ces thèmes. Les candidats sont classés du plus favorable au moins favorable (à égalité : ordre
+            alphabétique) ; ce n&apos;est ni un jugement de valeur, ni une recommandation de vote — voir la{" "}
             <Link href="/methodologie#score-personnalise" className="underline">
               méthodologie
             </Link>
             .
           </p>
 
-          <ClassementPersonnalise classement={alphabetique} resultats={resultats} attenuerSuivants={false} numeroter={false} />
+          <ClassementPersonnalise classement={classement} resultats={resultats} attenuerSuivants={false} numeroter={false} />
         </div>
 
         <div className="mt-10 p-9 rounded-2xl bg-accent-bleu text-white max-sm:p-6">

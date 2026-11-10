@@ -18,8 +18,9 @@ const MAX_PAR_COLONNE = 12;
 
 /**
  * Carte de partage : catégorie sociale, thèmes prioritaires et EFFET ÉCONOMIQUE ESTIMÉ des mesures de chaque candidat
- * sur cette catégorie. Ce n'est pas un classement : les candidats sont listés par ordre alphabétique (jamais par score)
- * et tous ceux dont l'effet est calculable apparaissent, sur deux colonnes s'ils sont nombreux. La carte ne contient que
+ * sur cette catégorie, du plus favorable au moins favorable (à égalité : ordre alphabétique ; les candidats sans effet
+ * calculable ne sont jamais classés, ils sont résumés en note). Tous ceux dont l'effet est calculable apparaissent, sur
+ * deux colonnes s'ils sont nombreux. La carte ne contient que
  * la catégorie et les thèmes prioritaires (jamais revenu, âge, patrimoine ni réponses de la boussole : un lien qui
  * encoderait des opinions permettrait aussi de fabriquer de fausses cartes).
  */
@@ -30,10 +31,10 @@ export function GET(request: NextRequest) {
 
   const classe = CLASSES_SOCIALES.find((c) => c.id === partage.classe)!;
   const couleurClasse = COULEURS_CLASSES[classe.id];
-  const { resultats } = classerCandidats(CANDIDATS_ALPHABETIQUE, partage.classe, partage.poids);
+  const { classement, resultats } = classerCandidats(CANDIDATS_ALPHABETIQUE, partage.classe, partage.poids);
   const priorites = themesPrioritaires(partage.poids, 3);
 
-  const calculables = CANDIDATS_ALPHABETIQUE.filter((c) => resultats.get(c.id)!.scoreGlobal !== null);
+  const calculables = classement.filter((c) => resultats.get(c.id)!.scoreGlobal !== null);
   const nonCalculables = CANDIDATS_ALPHABETIQUE.length - calculables.length;
   const colonnes = calculables.length > MAX_UNE_COLONNE ? 2 : 1;
   const affiches = calculables.slice(0, colonnes === 1 ? MAX_UNE_COLONNE : MAX_PAR_COLONNE * 2);
@@ -111,8 +112,8 @@ export function GET(request: NextRequest) {
             </div>
 
             <div style={{ display: "flex", fontSize: 16, color: "#454e5e", lineHeight: 1.35 }}>
-              Estimation de l&apos;effet économique direct des mesures recensées sur ma catégorie, par ordre alphabétique — ce n&apos;est
-              ni un classement des candidats ni une recommandation de vote.
+              Estimation de l&apos;effet économique direct des mesures recensées sur ma catégorie, classée du plus favorable au
+              moins favorable — ce n&apos;est ni un jugement sur les candidats ni une recommandation de vote.
             </div>
           </div>
 
