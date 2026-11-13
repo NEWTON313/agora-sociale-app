@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/candidats",
     "/methodologie",
     "/transparence",
+    "/mentions-legales",
     "/methodologie/fiscalite-patrimoine",
     "/methodologie/retraites",
     "/methodologie/jeunesse",
