@@ -2,9 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { QUESTIONS, SEUIL_COUVERTURE, classerBoussole, poidsThemesDepuisBoussole, type Importance, type Reponses } from "@/lib/boussole";
+import {
+  QUESTIONS,
+  SEUIL_COUVERTURE,
+  classerBoussole,
+  poidsThemesDepuisBoussole,
+  type DetailQuestion,
+  type Importance,
+  type Reponses,
+} from "@/lib/boussole";
 import type { Candidat, ClasseId } from "@/lib/data";
-import { formatPourcentage, formatScore } from "@/lib/format";
+import { formatIndice, formatScore } from "@/lib/format";
+import { nomMedia } from "@/lib/sources";
 import { calculerScorePersonnalise, type PoidsThemes } from "@/lib/priorites";
 import type { Choix } from "@/lib/positions";
 import PartagerResultat from "./PartagerResultat";
@@ -19,6 +28,63 @@ function EffetEconomique({ candidat, classe, poids }: { candidat: Candidat; clas
         ? "non calculable (aucune mesure recensée sur vos thèmes prioritaires)"
         : `${formatScore(r.scoreGlobal)} (${r.themesCouverts} thème${r.themesCouverts > 1 ? "s" : ""} couvert${r.themesCouverts > 1 ? "s" : ""} sur ${r.themesPonderes})`}
     </span>
+  );
+}
+
+const LIBELLE_VALIDATION: Record<DetailQuestion["validation"], string> = {
+  officielle: "Programme ou site officiel",
+  recoupee: "Recoupée par plusieurs médias",
+  unique: "Source unique, à recouper",
+};
+
+/** Date de source (AAAA-MM-JJ ou AAAA-MM) au format français court. */
+function dateCourte(date: string): string {
+  const [a, m, j] = date.split("-");
+  return j ? `${j}/${m}/${a}` : `${m}/${a}`;
+}
+
+/**
+ * Une ligne du détail d'un résultat : la question, le choix de la personne, la position du candidat, puis ce qui
+ * l'établit (mesure, citation, sources datées) et son niveau de validation.
+ */
+function DetailPosition({ detail, choixUtilisateur }: { detail: DetailQuestion; choixUtilisateur: Choix }) {
+  const q = QUESTIONS.find((x) => x.id === detail.question)!;
+  const texte = (c: Choix) => (c === "A" ? q.a : q.b);
+  return (
+    <li className="border-t border-line pt-3">
+      <div className="font-display text-[0.86rem]">
+        <strong className={`font-medium ${detail.accord ? "text-positif" : "text-negatif"}`}>
+          {detail.accord ? "D'accord" : "Pas d'accord"}
+        </strong>{" "}
+        <span className="text-ink-faint">
+          · question {detail.question} · {q.theme}
+        </span>
+      </div>
+      <p className="mt-1">
+        <span className="text-ink-faint">Votre choix :</span> {texte(choixUtilisateur)}
+      </p>
+      {!detail.accord && (
+        <p className="mt-1">
+          <span className="text-ink-faint">Sa position :</span> {texte(detail.choixCandidat)}
+        </p>
+      )}
+      <p className="mt-1">
+        <span className="text-ink-faint">Établie par :</span> {detail.titreMesure}.
+        {detail.citation && <> «&nbsp;{detail.citation}&nbsp;»</>}
+      </p>
+      <p className="mt-1 font-display text-[0.8rem] text-ink-faint">
+        {LIBELLE_VALIDATION[detail.validation]} —{" "}
+        {detail.sources.map((s, i) => (
+          <span key={s.url}>
+            {i > 0 && ", "}
+            <a href={s.url} className="underline underline-offset-4" target="_blank" rel="noopener noreferrer">
+              {nomMedia(s.url)}
+            </a>
+            {s.date && ` (${dateCourte(s.date)})`}
+          </span>
+        ))}
+      </p>
+    </li>
   );
 }
 
@@ -73,7 +139,9 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
         <div className="rounded-xl bg-paper-deep/70 px-5 py-4 text-[0.92rem] leading-relaxed text-ink-soft mb-8">
           Ce classement mesure la <strong className="text-ink">proximité entre vos choix et les positions documentées</strong>{" "}
           des candidats (chacune renvoie à une source). Une position non documentée est écartée : ce n&apos;est jamais un
-          désaccord. Un candidat n&apos;est classé qu&apos;à partir de {SEUIL_COUVERTURE} questions couvertes. Ce n&apos;est pas
+          désaccord. Un candidat n&apos;est classé qu&apos;à partir de {SEUIL_COUVERTURE} questions couvertes. L&apos;
+          <strong className="text-ink">indice de proximité</strong> va de −100 à +100 et tient compte du nombre de
+          questions documentées : un accord sur peu de questions pèse moins qu&apos;un accord sur beaucoup. Ce n&apos;est pas
           une recommandation de vote.
           {classe && (
             <>
@@ -99,12 +167,28 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
                     {i + 1}. {p.candidat.nom}{" "}
                     <span className="text-[0.84rem] font-medium text-ink-faint">{p.candidat.parti}</span>
                   </span>
-                  <span className="shrink-0 whitespace-nowrap font-display text-[1.15rem] font-medium">{formatPourcentage(p.score!)}</span>
+                  <span className="shrink-0 whitespace-nowrap font-display text-[1.15rem] font-medium">
+                    <span className="sr-only">Indice de proximité : </span>
+                    {formatIndice(p.indice!)}
+                    <span className="text-[0.8rem] font-normal text-ink-faint"> / 100</span>
+                  </span>
                 </div>
                 <p className="font-display text-[0.88rem] text-ink-soft mt-1">
                   D&apos;accord sur {p.accords} question{p.accords > 1 ? "s" : ""} sur {p.documentees} où sa position est
-                  documentée ({p.documentees} sur {p.repondues} auxquelles vous avez répondu).
+                  documentée.
                 </p>
+                <div className="mt-2.5">
+                  <div
+                    className="h-1.5 overflow-hidden rounded-full bg-paper-deep"
+                    role="img"
+                    aria-label={`Position documentée sur ${p.documentees} des ${p.repondues} questions auxquelles vous avez répondu`}
+                  >
+                    <div className="h-full rounded-full bg-accent-bleu-soft" style={{ width: `${(p.documentees / p.repondues) * 100}%` }} />
+                  </div>
+                  <p className="mt-1 font-display text-[0.8rem] text-ink-faint">
+                    Couverture : sa position est documentée sur {p.documentees} de vos {p.repondues} réponses.
+                  </p>
+                </div>
                 {classe && (
                   <p className="font-display text-[0.88rem] text-ink-soft mt-1">
                     Effet économique estimé sur votre catégorie :{" "}
@@ -113,15 +197,9 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
                 )}
                 <details className="mt-3">
                   <summary className="cursor-pointer font-display text-[0.86rem] text-accent-bleu">Voir le détail et les sources</summary>
-                  <ul className="mt-2 flex flex-col gap-2 text-[0.88rem] text-ink-soft">
+                  <ul className="mt-3 flex flex-col gap-3 text-[0.88rem] text-ink-soft">
                     {p.details.map((d) => (
-                      <li key={d.question}>
-                        <strong className="font-medium text-ink">{d.accord ? "D'accord" : "Pas d'accord"}</strong> — question{" "}
-                        {d.question} : {d.titreMesure}.{" "}
-                        <a href={d.source} className="underline underline-offset-4" target="_blank" rel="noopener noreferrer">
-                          Source
-                        </a>
-                      </li>
+                      <DetailPosition key={d.question} detail={d} choixUtilisateur={reponses[d.question].choix!} />
                     ))}
                   </ul>
                 </details>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AVIS_DONNEES_REELLES, CANDIDATS } from "@/lib/data";
-import { QUESTIONS, SEUIL_COUVERTURE } from "@/lib/boussole";
-import { POSITIONS } from "@/lib/positions";
+import { K_PRUDENCE, QUESTIONS, SEUIL_COUVERTURE } from "@/lib/boussole";
+import { POSITIONS, niveauValidation, type NiveauValidation } from "@/lib/positions";
 
 export const metadata: Metadata = {
   title: "Transparence",
@@ -36,6 +36,20 @@ export default function TransparencePage() {
   const positionsParCandidat = new Map<string, number>();
   for (const p of POSITIONS) positionsParCandidat.set(p.candidat, (positionsParCandidat.get(p.candidat) ?? 0) + 1);
   const classables = CANDIDATS.filter((c) => (positionsParCandidat.get(c.id) ?? 0) >= SEUIL_COUVERTURE).length;
+
+  // Niveau de validation de chaque position (programme officiel, recoupée par plusieurs médias, source unique).
+  const validations: Record<NiveauValidation, number> = { officielle: 0, recoupee: 0, unique: 0 };
+  for (const p of POSITIONS) {
+    const mesure = CANDIDATS.find((c) => c.id === p.candidat)?.mesures.find((m) => m.id === p.mesureId);
+    if (mesure) validations[niveauValidation(p, mesure.sourceOfficielle)]++;
+  }
+  // Couverture de chaque question : combien de candidats ont une position documentée pour l'option A et pour l'option B.
+  const couverture = QUESTIONS.map((q) => ({
+    question: q,
+    a: POSITIONS.filter((p) => p.question === q.id && p.choix === "A").length,
+    b: POSITIONS.filter((p) => p.question === q.id && p.choix === "B").length,
+  }));
+  const questionsVides = couverture.filter((c) => c.a + c.b === 0).length;
 
   return (
     <div className="max-w-[820px] mx-auto px-6 pt-16 pb-24">
@@ -79,6 +93,20 @@ export default function TransparencePage() {
             </dt>
             <dd className="font-display text-[1.4rem]">
               {classables} <span className="text-[0.9rem] text-ink-soft">sur {CANDIDATS.length}</span>
+            </dd>
+          </div>
+          <div>
+            <dt className="font-display text-[0.84rem] font-medium text-ink-soft">
+              Positions établies par un programme officiel / recoupées par plusieurs médias / à source unique
+            </dt>
+            <dd className="font-display text-[1.4rem]">
+              {validations.officielle} / {validations.recoupee} / {validations.unique}
+            </dd>
+          </div>
+          <div>
+            <dt className="font-display text-[0.84rem] font-medium text-ink-soft">Questions sans aucune position documentée</dt>
+            <dd className="font-display text-[1.4rem]">
+              {questionsVides} <span className="text-[0.9rem] text-ink-soft">sur {QUESTIONS.length}</span>
             </dd>
           </div>
         </dl>
@@ -144,10 +172,19 @@ export default function TransparencePage() {
         <p className="mt-3">
           <strong>Le classement repose sur la proximité avec vos choix.</strong> Pour chaque candidat, on ne compte que
           les questions où sa position est <em>documentée</em> par une source : accord = +importance, désaccord =
-          −importance, ramené de −100 % à +100 %. Une position non documentée est écartée : elle n&apos;est jamais comptée
-          comme un désaccord. Un candidat n&apos;est classé qu&apos;à partir de {SEUIL_COUVERTURE} questions couvertes ;
-          les autres sont listés à part, par ordre alphabétique, sans note. Les égalités se départagent par ordre
-          alphabétique, jamais par le nombre de mesures ni par les sondages.
+          −importance. Une position non documentée est écartée : elle n&apos;est jamais comptée comme un désaccord. Un
+          candidat n&apos;est classé qu&apos;à partir de {SEUIL_COUVERTURE} questions couvertes ; les autres sont listés à
+          part, par ordre alphabétique, sans note. Les égalités se départagent par ordre alphabétique, jamais par le
+          nombre de mesures ni par les sondages.
+        </p>
+        <p className="mt-3">
+          <strong>L&apos;indice de proximité est prudent.</strong> Il va de −100 à +100. On divise le total des accords et
+          désaccords par la somme des importances <em>augmentée de {K_PRUDENCE}</em>, comme si chaque candidat avait en
+          plus trois questions d&apos;importance moyenne sans accord ni désaccord. Un résultat obtenu sur peu de questions
+          est ainsi ramené vers zéro. Exemple, avec une importance moyenne partout : 3 accords sur 3 questions donnent
+          6 ÷ (6 + {K_PRUDENCE}) = +50 ; 7 accords et 1 désaccord sur 8 questions donnent 12 ÷ (16 + {K_PRUDENCE}) = +55.
+          Sans cette prudence, le premier (+100 %) serait passé devant le second (+75 %) alors qu&apos;on en sait bien
+          moins sur lui. Le nombre de questions documentées est affiché sous chaque indice.
         </p>
         <p className="mt-3">
           <strong>L&apos;effet économique est une information séparée.</strong> À côté de chaque candidat s&apos;affiche
@@ -166,13 +203,69 @@ export default function TransparencePage() {
         <h2 className="text-[1.7rem] mb-6">Comment une position est établie</h2>
         <p>
           Une position (« ce candidat défend l&apos;option A ou B ») n&apos;est enregistrée que si elle découle{" "}
-          <strong>directement</strong> d&apos;une mesure déjà recensée et sourcée : la source de la position est celle de la
-          mesure, visible dans le détail du résultat. Nous ne déduisons jamais une position de l&apos;étiquette du parti, de
-          la famille politique, d&apos;un vote ancien ou d&apos;une absence de déclaration ; une position vague ou
-          ambiguë reste vide. La recherche porte avec la même attention sur les deux options de chaque question, pour ne
-          pas biaiser les données vers les propositions de changement. Le rattachement d&apos;une mesure à une option est
-          une interprétation : c&apos;est pourquoi chaque position est relue avant publication et peut être contestée.
+          <strong>directement</strong> d&apos;une mesure déjà recensée et sourcée. Nous ne déduisons jamais une position de
+          l&apos;étiquette du parti, de la famille politique, d&apos;un vote ancien ou d&apos;une absence de déclaration ;
+          une position vague ou ambiguë reste vide. La recherche porte avec la même attention sur les deux options de
+          chaque question, pour ne pas biaiser les données vers les propositions de changement. Le rattachement d&apos;une
+          mesure à une option est une interprétation : c&apos;est pourquoi chaque position est relue avant publication et
+          peut être contestée.
         </p>
+        <p className="mt-3">
+          <strong>Nous ne sollicitons pas les équipes de campagne.</strong> Les positions viennent uniquement de sources
+          publiques, et chacune porte un niveau de validation affiché dans le détail du résultat :
+        </p>
+        <ul className="list-disc pl-5 mt-3 space-y-1.5">
+          <li>
+            <strong>Programme ou site officiel</strong> ({validations.officielle}) : la position figure dans le programme
+            publié par le candidat ou son parti, consulté directement. C&apos;est la source privilégiée dès qu&apos;un
+            programme est publié.
+          </li>
+          <li>
+            <strong>Recoupée par plusieurs médias</strong> ({validations.recoupee}) : au moins deux médias de référence
+            indépendants rapportent la même position.
+          </li>
+          <li>
+            <strong>Source unique, à recouper</strong> ({validations.unique}) : une seule source de presse à ce jour. La
+            position compte dans le calcul, mais elle est signalée et doit être confirmée par une deuxième source.
+          </li>
+        </ul>
+        <details className="mt-6 rounded-xl bg-paper-deep/60 px-5 py-4">
+          <summary className="cursor-pointer font-display text-[0.95rem] font-medium text-ink">
+            Couverture de chaque question : combien de candidats de chaque côté
+          </summary>
+          <p className="text-[0.9rem] text-ink-soft mt-3 mb-3">
+            Une question sans position ne change rien au résultat ; une question où tous les candidats documentés sont du
+            même côté ne les départage pas. Ce tableau permet de le vérifier.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-[0.88rem]">
+              <thead className="font-display text-[0.8rem] text-ink-soft">
+                <tr>
+                  <th scope="col" className="py-1.5 pr-3 font-medium">N°</th>
+                  <th scope="col" className="py-1.5 pr-3 font-medium">Thème</th>
+                  <th scope="col" className="py-1.5 pr-3 font-medium">Option A</th>
+                  <th scope="col" className="py-1.5 font-medium">Option B</th>
+                </tr>
+              </thead>
+              <tbody>
+                {couverture.map(({ question, a, b }) => (
+                  <tr key={question.id} className="border-t border-line align-top">
+                    <td className="py-1.5 pr-3 tabular-nums">{question.id}</td>
+                    <td className="py-1.5 pr-3">{question.theme}</td>
+                    <td className="py-1.5 pr-3">
+                      <span className="tabular-nums font-medium">{a}</span>{" "}
+                      <span className="text-ink-faint">· {question.a}</span>
+                    </td>
+                    <td className="py-1.5">
+                      <span className="tabular-nums font-medium">{b}</span>{" "}
+                      <span className="text-ink-faint">· {question.b}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </details>
       </section>
 
       <section className="py-12 border-b border-line">
@@ -202,11 +295,17 @@ export default function TransparencePage() {
           ))}
         </ul>
         <p className="mt-3">
-          La recherche automatique est volontairement limitée à quatre médias (franceinfo, Le JDD, LCP, France 24),
-          pour éviter les sites agrégateurs de fiabilité non vérifiée. Ce choix a un coût que nous assumons : certains
-          médias ne peuvent pas être consultés par l&apos;outil, et ce périmètre n&apos;est pas un panel pluraliste
-          garanti de la presse française. Les programmes officiels des partis sont à privilégier dès qu&apos;ils sont
-          publiés.
+          <strong>Les programmes officiels d&apos;abord.</strong> Dès qu&apos;un candidat publie son programme, il devient
+          la source de référence : nous le lisons directement sur son site de campagne ou celui de son parti, et nous
+          citons la phrase exacte. C&apos;est le cas aujourd&apos;hui pour le programme de Jean-Luc Mélenchon, publié le 6
+          novembre 2026.
+        </p>
+        <p className="mt-3">
+          <strong>Sinon, la presse de référence, recoupée.</strong> La recherche est volontairement limitée à quatre
+          médias (franceinfo, Le JDD, LCP, France 24), pour éviter les sites agrégateurs de fiabilité non vérifiée, et
+          nous cherchons une deuxième source indépendante pour chaque position. Ce choix a un coût que nous assumons :
+          certains médias ne peuvent pas être consultés par l&apos;outil, et ce périmètre n&apos;est pas un panel
+          pluraliste garanti de la presse française.
         </p>
         <p className="mt-3">
           Les comparateurs de think tanks (par exemple celui de la Fondation iFRAP) peuvent servir de simple piste pour

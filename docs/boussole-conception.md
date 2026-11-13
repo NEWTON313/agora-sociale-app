@@ -79,3 +79,18 @@ Remarques sur les thèmes :
 - Les positions sont codées à partir de la presse par une IA, relues par un humain avant publication.
 - Au départ, peu de candidats auront des positions documentées sur beaucoup de questions : la couverture sera affichée et
   progressera avec le temps.
+
+## 6. Évolutions du 13 novembre 2026 (phase 1 de la feuille de route)
+
+- **Indice de proximité prudent.** Le classement ne se fait plus sur l'accord brut mais sur
+  `indice = Σ(±importance) / (Σ importance + K_PRUDENCE)`, avec `K_PRUDENCE = 6` (trois questions d'importance moyenne
+  sans accord ni désaccord). But : qu'un accord sur 3 questions sur 3 (indice +50) ne passe plus devant un accord sur 7
+  questions sur 8 (indice +55). L'accord brut reste calculé (`score`) et le nombre de questions documentées est affiché.
+- **Sources et validation des positions.** Les équipes de campagne ne sont pas sollicitées. Chaque position porte un
+  niveau calculé : « officielle » (programme ou site officiel lu directement), « recoupée » (au moins deux médias de
+  domaines différents) ou « unique » (une seule source de presse, affichée « à recouper »). Champs ajoutés dans
+  `lib/positions.ts` : `typeSource`, `dateSource`, `citation`, `recoupements[]`.
+- **Programme officiel d'abord.** Quand un candidat publie son programme, il devient la source de référence et la
+  citation exacte est enregistrée (premier cas : « L'Avenir en commun », 6 novembre 2026).
+- **Détail explicable.** Le résultat affiche, pour chaque question, le choix de la personne, la position du candidat,
+  la mesure, la citation, les sources datées et le niveau de validation.

@@ -5,7 +5,7 @@
  * jamais comptée comme un désaccord.
  */
 import { CANDIDATS, type Candidat, type Theme } from "./data";
-import { POSITIONS, type Choix } from "./positions";
+import { POSITIONS, niveauValidation, type Choix, type NiveauValidation, type TypeSource } from "./positions";
 import { poidsThemesParDefaut, type NiveauPriorite, type PoidsThemes } from "./priorites";
 
 export interface Question {
@@ -43,22 +43,44 @@ export const QUESTIONS: Question[] = [
 /** Nombre minimal de questions répondues ET documentées pour qu'un candidat soit classé. */
 export const SEUIL_COUVERTURE = 3;
 
+/**
+ * Prudence de l'indice de proximité : on fait comme si chaque candidat avait, en plus, trois questions d'importance
+ * moyenne (3 × 2 = 6) sans accord ni désaccord. Un score obtenu sur peu de questions est ainsi ramené vers zéro :
+ * 3 accords sur 3 (indice +50) ne passent plus devant 7 accords sur 8 (indice +55).
+ */
+export const K_PRUDENCE = 6;
+
 export type Importance = 1 | 2 | 3;
 /** `sansAvis` : la personne a explicitement répondu « ni l'un ni l'autre » (la question est alors écartée du calcul). */
 export type Reponses = Record<number, { choix: Choix | null; poids: Importance; sansAvis?: boolean }>;
+
+export interface SourceCitee {
+  url: string;
+  type: TypeSource;
+  date?: string;
+}
 
 export interface DetailQuestion {
   question: number;
   accord: boolean;
   choixCandidat: Choix;
-  source: string;
   titreMesure: string;
+  /** Phrase de la source principale qui établit la position, quand elle est enregistrée. */
+  citation?: string;
+  /** Source principale (celle de la mesure) puis recoupements. */
+  sources: SourceCitee[];
+  validation: NiveauValidation;
 }
 
 export interface Proximite {
   candidat: Candidat;
-  /** De -1 (opposé sur tout) à +1 (d'accord sur tout) ; null si aucune question documentée. */
+  /** Accord brut, de -1 (opposé sur tout) à +1 (d'accord sur tout) ; null si aucune question documentée. */
   score: number | null;
+  /**
+   * Indice de proximité, de -1 à +1 : l'accord brut ramené vers zéro quand peu de questions sont documentées
+   * (voir K_PRUDENCE). C'est lui qui sert au classement ; null si aucune question documentée.
+   */
+  indice: number | null;
   accords: number;
   desaccords: number;
   /** Questions répondues où la position du candidat est documentée. */
@@ -91,13 +113,25 @@ export function calculerProximite(candidat: Candidat, reponses: Reponses): Proxi
     sommePoids += poids;
     if (accord) accords++;
     else desaccords++;
-    details.push({ question: q.id, accord, choixCandidat: pos.choix, source: mesure.sourceOfficielle, titreMesure: mesure.titre });
+    details.push({
+      question: q.id,
+      accord,
+      choixCandidat: pos.choix,
+      titreMesure: mesure.titre,
+      citation: pos.citation,
+      sources: [
+        { url: mesure.sourceOfficielle, type: pos.typeSource ?? "presse", date: pos.dateSource },
+        ...(pos.recoupements ?? []).map((r) => ({ url: r.url, type: r.type, date: r.date })),
+      ],
+      validation: niveauValidation(pos, mesure.sourceOfficielle),
+    });
   }
 
   const documentees = accords + desaccords;
   return {
     candidat,
     score: sommePoids === 0 ? null : somme / sommePoids,
+    indice: sommePoids === 0 ? null : somme / (sommePoids + K_PRUDENCE),
     accords,
     desaccords,
     documentees,
@@ -108,13 +142,13 @@ export function calculerProximite(candidat: Candidat, reponses: Reponses): Proxi
 }
 
 /**
- * Classe tous les candidats : ceux dont la couverture suffit, par proximité décroissante (égalités : ordre
- * alphabétique), puis les autres — listés à part, jamais présentés comme un mauvais score.
+ * Classe tous les candidats : ceux dont la couverture suffit, par indice de proximité décroissant (égalités :
+ * ordre alphabétique), puis les autres — listés à part, jamais présentés comme un mauvais score.
  */
 export function classerBoussole(reponses: Reponses, candidats: Candidat[] = CANDIDATS) {
   const tous = candidats.map((c) => calculerProximite(c, reponses));
   const parNom = (a: Proximite, b: Proximite) => a.candidat.id.localeCompare(b.candidat.id, "fr");
-  const classes = tous.filter((p) => p.classe).sort((a, b) => (b.score! - a.score!) || parNom(a, b));
+  const classes = tous.filter((p) => p.classe).sort((a, b) => (b.indice! - a.indice!) || parNom(a, b));
   const autres = tous.filter((p) => !p.classe).sort(parNom);
   return { classes, autres };
 }
