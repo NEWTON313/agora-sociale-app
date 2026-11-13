@@ -193,7 +193,7 @@ export default function SimulateurForm({ onContinuer, onPasser }: { onContinuer:
             <input
               id="revenuMensuel"
               name="revenuMensuel"
-              type="number"
+              type="number" inputMode="numeric"
               min={0}
               step={10}
               required
@@ -210,15 +210,15 @@ export default function SimulateurForm({ onContinuer, onPasser }: { onContinuer:
         <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="nbAdultes" className="font-display text-[0.95rem] font-medium">Adultes du foyer</label>
-            <input id="nbAdultes" name="nbAdultes" type="number" min={1} max={6} defaultValue={1} required className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <input id="nbAdultes" name="nbAdultes" type="number" inputMode="numeric" min={1} max={6} defaultValue={1} required className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="nbEnfants14Plus" className="font-display text-[0.95rem] font-medium">Enfants ≥ 14 ans</label>
-            <input id="nbEnfants14Plus" name="nbEnfants14Plus" type="number" min={0} max={8} defaultValue={0} className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <input id="nbEnfants14Plus" name="nbEnfants14Plus" type="number" inputMode="numeric" min={0} max={8} defaultValue={0} className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="nbEnfantsMoins14" className="font-display text-[0.95rem] font-medium">Enfants &lt; 14 ans</label>
-            <input id="nbEnfantsMoins14" name="nbEnfantsMoins14" type="number" min={0} max={8} defaultValue={0} className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <input id="nbEnfantsMoins14" name="nbEnfantsMoins14" type="number" inputMode="numeric" min={0} max={8} defaultValue={0} className="px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
           </div>
         </div>
 
@@ -239,7 +239,7 @@ export default function SimulateurForm({ onContinuer, onPasser }: { onContinuer:
           <input
             id="anneeNaissance"
             name="anneeNaissance"
-            type="number"
+            type="number" inputMode="numeric"
             min={1940}
             max={2010}
             placeholder="Ex : 1978"
@@ -269,7 +269,7 @@ export default function SimulateurForm({ onContinuer, onPasser }: { onContinuer:
         <div className="flex flex-col gap-1.5">
           <label htmlFor="patrimoineNet" className="font-display text-[0.95rem] font-medium">Patrimoine net estimé (optionnel)</label>
           <div className="flex items-center gap-2">
-            <input id="patrimoineNet" name="patrimoineNet" type="number" min={0} step={1000} placeholder="Ex : 150000" className="flex-1 px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
+            <input id="patrimoineNet" name="patrimoineNet" type="number" inputMode="numeric" min={0} step={1000} placeholder="Ex : 150000" className="flex-1 px-4 py-3 border border-line-strong bg-white rounded-lg transition-shadow focus:shadow-[0_0_0_3px_rgba(16,19,26,0.08)] focus:outline-none focus:border-accent-bleu" />
             <span className="font-display text-[0.95rem] text-ink-soft">€</span>
           </div>
           <p className="text-[0.8rem] text-ink-soft">Immobilier, épargne, placements, moins les dettes. Laissez vide si vous préférez ne pas répondre.</p>

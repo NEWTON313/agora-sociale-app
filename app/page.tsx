@@ -1,13 +1,14 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import ComparateurClasse from "@/components/ComparateurClasse";
-import { AVIS_DONNEES_REELLES, CANDIDATS, THEMES } from "@/lib/data";
+import { QUESTIONS } from "@/lib/boussole";
+import { AVIS_DONNEES_REELLES, CANDIDATS } from "@/lib/data";
 
-const EXEMPLE_REGISTRE = [
-  { label: "Classes populaires", width: 38, sens: "pos" as const },
-  { label: "Classes moyennes", width: 15, sens: "pos" as const },
-  { label: "Classes aisées", width: 42, sens: "neg" as const },
-  { label: "Retraités et inactifs", width: 8, sens: "pos" as const },
+// Aperçu fictif du résultat du test (proximité avec les positions documentées) : aucun candidat réel.
+const EXEMPLE_RESULTAT = [
+  { label: "Candidat A", score: "+75 %", width: 38, sens: "pos" as const, detail: "7 accords sur 8 positions documentées" },
+  { label: "Candidat B", score: "+20 %", width: 10, sens: "pos" as const, detail: "3 accords sur 5 positions documentées" },
+  { label: "Candidat C", score: "−33 %", width: 17, sens: "neg" as const, detail: "1 accord sur 3 positions documentées" },
 ];
 
 export default function HomePage() {
@@ -23,22 +24,23 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-2.5 font-display text-[0.95rem] text-ink-faint mb-7 animate-rise">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-bleu" />
-              {CANDIDATS.length} candidats · {THEMES.length} thèmes · zéro étiquette partisane
+              {CANDIDATS.length} candidats · {QUESTIONS.length} questions · zéro étiquette partisane
             </div>
 
             <h1
               className="font-body font-semibold text-[clamp(2.6rem,5.4vw,4.5rem)] leading-[1.03] tracking-[-0.022em] max-w-[16ch] animate-rise"
               style={{ animationDelay: "0.05s" }}
             >
-              Quel candidat colle vraiment à votre situation&nbsp;?
+              Quels candidats sont proches de vos choix&nbsp;?
             </h1>
 
             <p
               className="text-[1.3rem] leading-relaxed max-w-[50ch] text-ink-soft mt-8 animate-rise"
               style={{ animationDelay: "0.12s" }}
             >
-              Deux minutes de questions, une méthode INSEE, un score calculé à partir de <strong className="text-ink">vos</strong>{" "}
-              priorités. Le classement est toujours complet : jamais un seul nom mis en avant.
+              Cinq minutes, deux étapes : votre situation, puis {QUESTIONS.length} choix entre deux propositions. Le test
+              compare vos réponses aux positions <strong className="text-ink">documentées et sourcées</strong> des
+              candidats, et montre à part l&apos;effet économique estimé de leurs mesures sur votre catégorie.
             </p>
 
             <div className="mt-11 flex items-center gap-7 flex-wrap animate-rise" style={{ animationDelay: "0.18s" }}>
@@ -46,23 +48,28 @@ export default function HomePage() {
                 href="/simulateur"
                 className="group inline-flex items-center gap-3 bg-accent-bleu text-white font-display font-medium text-[1.05rem] px-8 py-4 rounded-md shadow-[0_14px_32px_-10px_rgba(30,58,95,0.55)] transition-all duration-300 hover:bg-accent-bleu-soft hover:-translate-y-0.5"
               >
-                Faire le test, 2 minutes
+                Faire le test, 5 minutes
                 <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
               <a
                 href="#comparateur"
                 className="font-display text-[1rem] text-ink-soft underline decoration-line-strong underline-offset-[6px] transition-colors hover:text-accent-bleu hover:decoration-accent-bleu"
               >
-                Explorer sans faire le test
+                Explorer les programmes sans faire le test
               </a>
             </div>
 
             <p className="mt-9 text-[0.9rem] text-ink-faint max-w-[56ch] animate-rise" style={{ animationDelay: "0.24s" }}>
-              Ce site ne soutient aucun candidat.{" "}
+              Ce site ne soutient aucun candidat et ne conserve aucune donnée. Les positions de nombreux candidats ne sont
+              pas encore documentées : voir la{" "}
               <Link href="/methodologie" className="underline underline-offset-4 hover:text-accent-bleu">
-                Voir la méthodologie
+                méthodologie
               </Link>{" "}
-              et les règles de collecte des données.
+              et la page{" "}
+              <Link href="/transparence" className="underline underline-offset-4 hover:text-accent-bleu">
+                Transparence
+              </Link>
+              .
             </p>
           </div>
 
@@ -74,11 +81,14 @@ export default function HomePage() {
             <div className="font-display text-[0.92rem] font-medium text-ink pb-5 mb-6 border-b border-line">
               Votre résultat pourrait ressembler à ça
             </div>
-            <div className="flex flex-col gap-5">
-              {EXEMPLE_REGISTRE.map((row) => (
-                <div key={row.label} className="grid grid-cols-[148px_1fr] items-center gap-4">
-                  <div className="font-display text-[0.88rem] text-ink-soft">{row.label}</div>
-                  <div className="relative h-2.5 rounded-full bg-paper-deep overflow-hidden">
+            <div className="flex flex-col gap-6">
+              {EXEMPLE_RESULTAT.map((row) => (
+                <div key={row.label}>
+                  <div className="flex items-baseline justify-between gap-4 font-display">
+                    <span className="text-[0.95rem] font-medium text-ink">{row.label}</span>
+                    <span className="text-[0.95rem] font-medium tabular-nums whitespace-nowrap">{row.score}</span>
+                  </div>
+                  <div className="relative mt-2 h-2.5 rounded-full bg-paper-deep overflow-hidden">
                     <div className="absolute left-1/2 top-0 bottom-0 w-px bg-line-strong" />
                     <div
                       className={`absolute top-0 bottom-0 ${
@@ -87,11 +97,12 @@ export default function HomePage() {
                       style={{ width: `${row.width}%` }}
                     />
                   </div>
+                  <div className="mt-1.5 font-display text-[0.82rem] text-ink-faint">{row.detail}</div>
                 </div>
               ))}
             </div>
             <div className="mt-7 pt-5 border-t border-line font-body text-[0.85rem] text-ink-faint italic">
-              Exemple illustratif — pas une mesure réelle
+              Exemple illustratif — candidats fictifs
             </div>
           </div>
         </div>

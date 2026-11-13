@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
-  --font-body: "Source Serif 4", Georgia, serif;
-  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  /* --font-display, --font-body et --font-mono sont définies par next/font (app/layout.tsx). */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 

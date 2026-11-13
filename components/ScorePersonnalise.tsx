@@ -1,3 +1,4 @@
+import { formatScore } from "@/lib/format";
 import type { ScorePersonnalise as ScorePersonnaliseResultat } from "@/lib/priorites";
 
 function scoreToWidth(score: number) {
@@ -17,7 +18,7 @@ export default function ScorePersonnalise({ resultat }: { resultat: ScorePersonn
 
   const width = scoreToWidth(scoreGlobal);
   const positif = scoreGlobal >= 0;
-  const couleur = scoreGlobal > 0 ? "#326049" : scoreGlobal < 0 ? "#8f382f" : "#6b7280";
+  const couleur = scoreGlobal > 0 ? "#326049" : scoreGlobal < 0 ? "#8f382f" : "#5c6370";
 
   return (
     <div className="rounded-xl bg-paper-deep/60 px-4 py-3.5">
@@ -26,14 +27,13 @@ export default function ScorePersonnalise({ resultat }: { resultat: ScorePersonn
           Score personnalisé selon vos priorités
         </span>
         <span className="font-display text-[0.9rem] font-medium tabular-nums whitespace-nowrap" style={{ color: couleur }}>
-          {scoreGlobal > 0 ? "+" : scoreGlobal < 0 ? "−" : ""}
-          {Math.abs(scoreGlobal).toFixed(1)} / 2
+          {formatScore(scoreGlobal)} / 2
         </span>
       </div>
       <div
         className="relative h-2.5 rounded-full bg-paper-raised overflow-hidden"
         role="img"
-        aria-label={`Score personnalisé ${scoreGlobal.toFixed(1)} sur une échelle de -2 à 2, ${themesCouverts} sur ${themesPonderes} thèmes prioritaires couverts`}
+        aria-label={`Score personnalisé ${formatScore(scoreGlobal)} sur une échelle de -2 à 2, ${themesCouverts} sur ${themesPonderes} thèmes prioritaires couverts`}
       >
         <div className="absolute left-1/2 top-0 bottom-0 w-px bg-line-strong z-10" />
         <div

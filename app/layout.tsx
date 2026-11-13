@@ -1,9 +1,36 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
+
+// Polices servies par le site (fichiers dans app/fonts, licence OFL) : aucune requête vers un service tiers.
+const fontDisplay = localFont({
+  src: "./fonts/space-grotesk-latin-wght-normal.woff2",
+  weight: "300 700",
+  variable: "--font-display",
+  display: "swap",
+  fallback: ["Arial Narrow", "sans-serif"],
+});
+const fontBody = localFont({
+  src: "./fonts/source-serif-4-latin-wght-normal.woff2",
+  weight: "200 900",
+  variable: "--font-body",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+});
+const fontMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
+  ],
+  variable: "--font-mono",
+  display: "swap",
+  preload: false,
+  fallback: ["Courier New", "monospace"],
+});
 
 const SITE_TITLE = "Mon Choix 2027";
 const SITE_DESCRIPTION =
@@ -41,21 +68,22 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#f6f4ef",
+};
+
+// `court` : libellé affiché sur téléphone, pour que les quatre liens tiennent sur une ligne sans défilement.
 const NAV = [
-  { href: "/simulateur", label: "Le test" },
-  { href: "/candidats", label: "Fiches candidats" },
-  { href: "/methodologie", label: "Méthodologie" },
+  { href: "/simulateur", label: "Le test", court: "Le test" },
+  { href: "/candidats", label: "Fiches candidats", court: "Candidats" },
+  { href: "/methodologie", label: "Méthodologie", court: "Méthode" },
+  { href: "/transparence", label: "Transparence", court: "Transparence" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -71,6 +99,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-paper text-ink font-body text-[17px] leading-[1.6]">
+        <a
+          href="#contenu"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-md focus:bg-accent-bleu focus:px-4 focus:py-3 focus:font-display focus:text-white"
+        >
+          Aller au contenu
+        </a>
         <div
           aria-hidden="true"
           className="h-1 w-full"
@@ -80,25 +114,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         <header className="sticky top-0 z-[100] border-b border-line bg-paper/85 backdrop-blur-xl">
-          <div className="max-w-[1180px] mx-auto px-6 flex items-center justify-between flex-wrap gap-x-10 gap-y-2 py-4">
+          <div className="max-w-[1180px] mx-auto px-6 flex items-center justify-between flex-wrap gap-x-10 py-2 sm:py-3">
             <Link href="/" className="font-body text-[1.55rem] font-semibold tracking-[-0.02em] no-underline">
               <span className="text-accent-bleu">Mon</span> <span className="text-ink">Choix 2027</span>
             </Link>
-            <nav className="flex flex-nowrap gap-8 font-display text-[0.95rem] font-medium overflow-x-auto">
+            <nav
+              aria-label="Navigation principale"
+              className="flex w-full justify-between font-display text-[0.9rem] font-medium sm:w-auto sm:justify-start sm:gap-8 sm:text-[0.95rem]"
+            >
               {NAV.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="whitespace-nowrap border-b-2 border-transparent py-1 text-ink-soft transition-colors hover:border-accent-bleu hover:text-accent-bleu"
+                  aria-label={item.label}
+                  className="inline-flex min-h-[44px] items-center whitespace-nowrap text-ink-soft underline-offset-8 transition-colors hover:text-accent-bleu hover:underline"
                 >
-                  {item.label}
+                  <span className="sm:hidden">{item.court}</span>
+                  <span className="hidden sm:inline">{item.label}</span>
                 </Link>
               ))}
             </nav>
           </div>
         </header>
 
-        {children}
+        <main id="contenu">{children}</main>
 
         <footer className="border-t border-line bg-paper-deep">
           <div className="max-w-[1180px] mx-auto px-6 py-12 flex flex-wrap justify-between gap-x-12 gap-y-6">
