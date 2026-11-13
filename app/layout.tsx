@@ -149,9 +149,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div className="flex flex-col gap-2 font-display text-[0.92rem] text-ink-faint">
               <div>Projet citoyen · Présidentielle 2027</div>
-              <div className="flex gap-5">
+              <div className="flex flex-wrap gap-x-5 gap-y-2">
                 <Link href="/methodologie" className="underline underline-offset-4 hover:text-ink">Méthodologie</Link>
                 <Link href="/transparence" className="underline underline-offset-4 hover:text-ink">Transparence</Link>
+                <Link href="/mentions-legales" className="underline underline-offset-4 hover:text-ink">Mentions légales</Link>
               </div>
             </div>
           </div>
