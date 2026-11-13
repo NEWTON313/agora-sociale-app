@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatPourcentage, formatScore } from "./format";
+import { formatIndice, formatPourcentage, formatScore } from "./format";
 
 describe("formatScore", () => {
   it("utilise la virgule décimale et un signe explicite", () => {
@@ -12,6 +12,14 @@ describe("formatScore", () => {
     expect(formatScore(0)).toBe("0,0");
     expect(formatScore(-0.04)).toBe("0,0");
     expect(formatScore(0.04)).toBe("0,0");
+  });
+});
+
+describe("formatIndice", () => {
+  it("ramène l'indice sur une échelle de −100 à +100, sans unité", () => {
+    expect(formatIndice(0.546)).toBe("+55");
+    expect(formatIndice(-0.2)).toBe("−20");
+    expect(formatIndice(0)).toBe("0");
   });
 });
 

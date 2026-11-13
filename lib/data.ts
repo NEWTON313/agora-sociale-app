@@ -97,7 +97,7 @@ export interface AvisDonnees {
 }
 
 export const AVIS_DONNEES_REELLES: AvisDonnees = {
-  dateMaj: "2026-11-10",
+  dateMaj: "2026-11-13",
   texte:
     "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées ; aucun nouvel ajout ni retrait n'a été identifié depuis (vérification du 06/11/2026). Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027) ; Dominique de Villepin, souvent cité dans la presse, répète ne pas être encore candidat (3 novembre 2026, France Inter), il n'est donc pas inclus. La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 22 des 36 candidats disposent à ce stade d'au moins une mesure sourcée (Mélenchon, Attal, Philippe, Retailleau, Le Pen, Tondelier, Batho, Bouamrane, Dupont-Aignan, Glucksmann, Lalanne, Lisnard et Platret en ont plusieurs ; Arthaud, Asselineau, Becht, Bertrand, Collovati, Egger, Lassalle, Markovic et Mathieu en ont une seule) ; les 14 autres sont enrichis progressivement, en priorité par ordre alphabétique. Chaque mesure indique sa source et son niveau de confiance.",
 };
@@ -428,6 +428,42 @@ export const CANDIDATS: Candidat[] = [
           moyennes: { score: 0, avantages: [], risques: ["Effet possible sur les prix de produits importés, non chiffré"], angleMort: "Aucun chiffrage public de l'effet sur les prix ou l'emploi, ni du périmètre exact du moratoire." },
           aisees: { score: 0, avantages: [], risques: ["Effet possible sur les investissements et les mouvements de capitaux, non chiffré"], angleMort: "Aucun chiffrage public de l'effet sur les capitaux ou les entreprises exportatrices." },
           retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifié, faute de chiffrage public." },
+        },
+      },
+      {
+        id: "jlm-ric",
+        theme: "Institutions et démocratie",
+        titre: "Instaurer le référendum d'initiative citoyenne (RIC)",
+        resumeOfficiel:
+          "Le programme prévoit d'« instaurer le référendum d'initiative citoyenne (RIC) » : des citoyens ayant recueilli suffisamment de signatures pourraient révoquer des élus, proposer une loi ou en abroger une.",
+        sourceOfficielle:
+          "https://melenchon2027.fr/programme/livre/fonder-la-6e-republique/chapitre1",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Mesure lue directement dans le programme officiel « L'Avenir en commun » (6e édition, publiée le 6 novembre 2026) sur le site de campagne melenchon2027.fr.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: [], angleMort: "Réforme institutionnelle sans effet économique direct identifiable." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Réforme institutionnelle sans effet économique direct identifiable." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Réforme institutionnelle sans effet économique direct identifiable." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Réforme institutionnelle sans effet économique direct identifiable." },
+        },
+      },
+      {
+        id: "jlm-europe-nouveaux-traites",
+        theme: "Europe et géopolitique",
+        titre: "Rester dans l'Union européenne et la zone euro, proposer de nouveaux traités et désobéir aux règles jugées bloquantes",
+        resumeOfficiel:
+          "Le programme affirme : « Avec nous, la France ne sortira ni de l'Union, ni de la zone euro ». Il prévoit de proposer de nouveaux traités européens, soumis à référendum, et « la désobéissance aux règles bloquantes, chaque fois que cela sera nécessaire ».",
+        sourceOfficielle:
+          "https://melenchon2027.fr/programme/livre/un-monde-ordonne/chapitre1",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Mesure lue directement dans le programme officiel « L'Avenir en commun » (6e édition, publiée le 6 novembre 2026) sur le site de campagne melenchon2027.fr.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable : les règles visées et les conséquences d'une désobéissance ne sont pas chiffrées." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable : les règles visées et les conséquences d'une désobéissance ne sont pas chiffrées." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable : les règles visées et les conséquences d'une désobéissance ne sont pas chiffrées." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable : les règles visées et les conséquences d'une désobéissance ne sont pas chiffrées." },
         },
       },
     ],
@@ -1158,14 +1194,14 @@ export const CANDIDATS: Candidat[] = [
       {
         id: "na-smic-2000",
         theme: "Pouvoir d'achat et économie",
-        titre: "Smic porté à 2 000 euros nets par mois",
+        titre: "Smic porté à 2 200 euros nets par mois",
         resumeOfficiel:
-          "Porte-parole de Lutte ouvrière, candidate pour la quatrième fois à la présidentielle, elle réclame une augmentation générale des salaires avec un Smic net mensuel de 2 000 euros, indexé sur l'inflation.",
+          "Porte-parole de Lutte ouvrière, candidate pour la quatrième fois à la présidentielle, elle a plaidé pour un Smic à 2 200 euros nets lors de son premier meeting de campagne (26 septembre 2026). Elle réclamait 2 000 euros nets en mai 2026, avec une augmentation générale des salaires indexée sur l'inflation.",
         sourceOfficielle:
-          "https://www.franceinfo.fr/replay-magazine/franceinfo/l-invite-politique/prix-du-carburant-nathalie-arthaud-porte-parole-de-lutte-ouvriere-souhaite-la-mise-en-place-du-smic-a-2-000-euros-net-par-mois_7978223.html",
+          "https://www.france24.com/fr/info-en-continu/20260926-plus-l%C3%A9on-trotski-que-l%C3%A9on-xiv-premier-meeting-de-campagne-pour-arthaud-et-lo",
         niveauConfiance: "confirme",
         noteConfiance:
-          "Déclaration rapportée directement par franceinfo lors d'une interview politique ; la revendication d'une hausse générale des salaires indexée sur l'inflation est une ligne constante de Lutte ouvrière, documentée sur ses candidatures successives depuis 2007.",
+          "Montant de 2 200 euros nets rapporté par France 24 (dépêche AFP du 26 septembre 2026, premier meeting de campagne) ; le montant de 2 000 euros nets avait été rapporté par franceinfo le 22 mai 2026. La revendication d'une hausse générale des salaires indexée sur l'inflation est une ligne constante de Lutte ouvrière.",
         impactParClasse: {
           populaires: { score: 2, avantages: ["Hausse immédiate du pouvoir d'achat pour les salariés au Smic ou proches du Smic, catégorie où cette population est surreprésentée"], risques: ["Risque de destruction d'emplois peu qualifiés évoqué par certains économistes si la hausse n'est pas accompagnée d'allègements de charges, non chiffré par la candidate"], angleMort: "Aucun chiffrage public du coût pour les employeurs ni du mode de financement (charges, aides, répercussion sur les prix)." },
           moyennes: { score: 0, avantages: ["Bénéfice direct pour les foyers de cette catégorie dont les revenus reposent sur un ou plusieurs salaires proches du Smic (par exemple deux salaires au Smic)", "Effet d'entraînement possible sur les salaires immédiatement supérieurs au Smic, non chiffré"], risques: ["Aucun effet direct pour un salarié déjà rémunéré au-dessus de 2 000 euros nets", "Si financée par une hausse de cotisations ou de la fiscalité, cette catégorie pourrait contribuer sans bénéficier directement de la revalorisation"], angleMort: "Effet très variable au sein de la catégorie selon la composition du foyer et le niveau de salaire ; aucune indication publique sur le financement précis de la mesure." },
