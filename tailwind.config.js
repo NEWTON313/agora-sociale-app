@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         ink: "#10131a",
         "ink-soft": "#454e5e",
-        "ink-faint": "#6b7280",
+        "ink-faint": "#5c6370",
         paper: "#f6f4ef",
         "paper-deep": "#ece9e1",
         "paper-raised": "#ffffff",

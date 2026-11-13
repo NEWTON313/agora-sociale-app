@@ -1,19 +1,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Candidat, ClasseId, Theme } from "@/lib/data";
-import type { ScorePersonnalise as ScorePersonnaliseResultat } from "@/lib/priorites";
 import BadgeParti from "./BadgeParti";
 import Ledger from "./Ledger";
-import ScorePersonnalise from "./ScorePersonnalise";
 
 interface Props {
   candidat: Candidat;
   theme: Theme;
   classeActive: ClasseId;
-  scorePersonnalise?: ScorePersonnaliseResultat;
 }
 
-export default function CarteCandidat({ candidat, theme, classeActive, scorePersonnalise }: Props) {
+export default function CarteCandidat({ candidat, theme, classeActive }: Props) {
   // .filter() et non .find() : un même thème peut regrouper plusieurs mesures d'un candidat
   // (ex. Édouard Philippe sur "Pouvoir d'achat et économie") depuis l'élargissement à 9 thèmes.
   const mesures = candidat.mesures.filter((m) => m.theme === theme);
@@ -60,7 +57,7 @@ export default function CarteCandidat({ candidat, theme, classeActive, scorePers
 
             <span
               className="inline-flex items-center gap-2 self-start font-display text-[0.82rem]"
-              style={{ color: confirme ? "#326049" : "#6b7280" }}
+              style={{ color: confirme ? "#326049" : "#5c6370" }}
             >
               <span className="h-1.5 w-1.5 rounded-full" style={{ background: confirme ? "#326049" : "#a7aeb9" }} />
               {confirme ? "Confirmé par plusieurs médias" : "Annoncé, détails à préciser"}
@@ -83,8 +80,6 @@ export default function CarteCandidat({ candidat, theme, classeActive, scorePers
             : `+ ${nbMasquees} autre${nbMasquees > 1 ? "s" : ""} mesure${nbMasquees > 1 ? "s" : ""} sur ce thème`}
         </button>
       )}
-
-      {scorePersonnalise && <ScorePersonnalise resultat={scorePersonnalise} />}
 
       <Link
         href={`/candidats/${candidat.id}`}

@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { CANDIDATS_ALPHABETIQUE, CLASSES_SOCIALES } from "@/lib/data";
+import { formatScore } from "@/lib/format";
 import { classerCandidats } from "@/lib/priorites";
 import { decoderPartage, themesPrioritaires } from "@/lib/partage";
 
@@ -14,7 +15,7 @@ const COULEURS_CLASSES: Record<string, string> = {
 /** Hauteur disponible pour la liste de candidats (le reste : titre, notes, pied de carte). */
 const HAUTEUR_LISTE = 370;
 const MAX_UNE_COLONNE = 10;
-const MAX_PAR_COLONNE = 12;
+const MAX_PAR_COLONNE = 14;
 
 /**
  * Carte de partage : catégorie sociale, thèmes prioritaires et EFFET ÉCONOMIQUE ESTIMÉ des mesures de chaque candidat
@@ -128,7 +129,7 @@ export function GET(request: NextRequest) {
                   {col.map((candidat) => {
                     const r = resultats.get(candidat.id)!;
                     const score = r.scoreGlobal!;
-                    const signe = `${score > 0 ? "+" : ""}${score.toFixed(1)}`;
+                    const signe = formatScore(score);
                     return colonnes === 1 ? (
                       <div key={candidat.id} style={{ display: "flex", alignItems: "center", height: hauteurLigne }}>
                         <div style={{ display: "flex", flexDirection: "column", width: 296 }}>

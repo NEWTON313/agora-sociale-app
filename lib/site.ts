@@ -4,3 +4,9 @@
  * côté Vercel, donc www est l'adresse canonique.
  */
 export const SITE_URL = "https://www.monchoix2027.com";
+
+/**
+ * Image d'aperçu par défaut (app/opengraph-image.tsx). Une page qui redéfinit `openGraph` ou `twitter` dans ses
+ * métadonnées n'hérite plus de l'image du site : elle doit la reprendre explicitement.
+ */
+export const IMAGE_APERCU = { url: "/opengraph-image", width: 1200, height: 630, alt: "Mon Choix 2027 — comparateur citoyen et non partisan" };

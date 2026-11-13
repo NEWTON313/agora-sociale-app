@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { QUESTIONS, SEUIL_COUVERTURE, classerBoussole, poidsThemesDepuisBoussole, type Importance, type Reponses } from "@/lib/boussole";
 import type { Candidat, ClasseId } from "@/lib/data";
+import { formatPourcentage, formatScore } from "@/lib/format";
 import { calculerScorePersonnalise, type PoidsThemes } from "@/lib/priorites";
 import type { Choix } from "@/lib/positions";
 import PartagerResultat from "./PartagerResultat";
 
-const pct = (n: number) => `${n > 0 ? "+" : ""}${Math.round(n * 100)} %`;
-const signe = (n: number) => `${n > 0 ? "+" : ""}${n.toFixed(1)}`;
 
 /** Effet économique estimé sur la catégorie de la personne : information complémentaire, jamais utilisée pour classer. */
 function EffetEconomique({ candidat, classe, poids }: { candidat: Candidat; classe: ClasseId; poids: PoidsThemes }) {
@@ -18,7 +17,7 @@ function EffetEconomique({ candidat, classe, poids }: { candidat: Candidat; clas
     <span>
       {r.scoreGlobal === null
         ? "non calculable (aucune mesure recensée sur vos thèmes prioritaires)"
-        : `${signe(r.scoreGlobal)} (${r.themesCouverts} thème${r.themesCouverts > 1 ? "s" : ""} couvert${r.themesCouverts > 1 ? "s" : ""} sur ${r.themesPonderes})`}
+        : `${formatScore(r.scoreGlobal)} (${r.themesCouverts} thème${r.themesCouverts > 1 ? "s" : ""} couvert${r.themesCouverts > 1 ? "s" : ""} sur ${r.themesPonderes})`}
     </span>
   );
 }
@@ -37,6 +36,15 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
   const [inverse, setInverse] = useState<Record<number, boolean> | null>(null);
   const [reponses, setReponses] = useState<Reponses>({});
   const [resultat, setResultat] = useState(false);
+
+  // En passant du questionnaire au résultat (et inversement), on revient au début du bloc, pas en haut de la page.
+  const racine = useRef<HTMLDivElement>(null);
+  const resultatPrecedent = useRef(resultat);
+  useEffect(() => {
+    if (resultatPrecedent.current === resultat) return;
+    resultatPrecedent.current = resultat;
+    racine.current?.scrollIntoView({ block: "start" });
+  }, [resultat]);
 
   // Tirage au hasard après l'hydratation (évite un écart entre rendu serveur et client).
   useEffect(() => {
@@ -61,7 +69,7 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
 
   if (resultat && classement) {
     return (
-      <div>
+      <div ref={racine} className="scroll-mt-48">
         <div className="rounded-xl bg-paper-deep/70 px-5 py-4 text-[0.92rem] leading-relaxed text-ink-soft mb-8">
           Ce classement mesure la <strong className="text-ink">proximité entre vos choix et les positions documentées</strong>{" "}
           des candidats (chacune renvoie à une source). Une position non documentée est écartée : ce n&apos;est jamais un
@@ -91,7 +99,7 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
                     {i + 1}. {p.candidat.nom}{" "}
                     <span className="text-[0.84rem] font-medium text-ink-faint">{p.candidat.parti}</span>
                   </span>
-                  <span className="font-display text-[1.15rem] font-medium">{pct(p.score!)}</span>
+                  <span className="shrink-0 whitespace-nowrap font-display text-[1.15rem] font-medium">{formatPourcentage(p.score!)}</span>
                 </div>
                 <p className="font-display text-[0.88rem] text-ink-soft mt-1">
                   D&apos;accord sur {p.accords} question{p.accords > 1 ? "s" : ""} sur {p.documentees} où sa position est
@@ -165,7 +173,7 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
   }
 
   return (
-    <div>
+    <div ref={racine} className="scroll-mt-48">
       <ol className="flex flex-col gap-6">
         {QUESTIONS.map((q) => {
           const r = reponses[q.id];
@@ -235,10 +243,7 @@ export default function BoussoleForm({ classe, onModifierSituation }: { classe: 
         <button
           type="button"
           disabled={nbRepondues === 0}
-          onClick={() => {
-            setResultat(true);
-            window.scrollTo({ top: 0 });
-          }}
+          onClick={() => setResultat(true)}
           className="rounded-xl bg-accent-bleu px-5 py-2.5 font-display text-[0.95rem] font-medium text-white disabled:opacity-40"
         >
           Voir ma proximité avec les candidats

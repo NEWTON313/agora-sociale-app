@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ClasseId } from "@/lib/data";
 import BoussoleForm from "./BoussoleForm";
 import SimulateurForm from "./SimulateurForm";
@@ -14,9 +14,14 @@ export default function ParcoursTest() {
   const [etape, setEtape] = useState<1 | 2>(1);
   const [classe, setClasse] = useState<ClasseId | null>(null);
 
+  const etapes = useRef<HTMLElement>(null);
+
+  // On ramène l'écran sur le fil des étapes (et non tout en haut de la page) : la personne arrive directement
+  // sur l'étape, sans retraverser l'introduction. Le fil est placé au-dessus des deux étapes : sa position ne
+  // dépend pas de celle qui est affichée, on peut donc défiler tout de suite.
   function aller(e: 1 | 2) {
     setEtape(e);
-    window.scrollTo({ top: 0 });
+    etapes.current?.scrollIntoView({ block: "start" });
   }
 
   const pastille = (n: 1 | 2, label: string) => (
@@ -24,7 +29,7 @@ export default function ParcoursTest() {
       type="button"
       onClick={() => aller(n)}
       aria-current={etape === n ? "step" : undefined}
-      className={`flex items-center gap-2.5 font-display text-[0.92rem] ${etape === n ? "font-medium text-ink" : "text-ink-faint hover:text-ink-soft"}`}
+      className={`flex min-h-[44px] items-center gap-2.5 font-display text-[0.92rem] ${etape === n ? "font-medium text-ink" : "text-ink-faint hover:text-ink-soft"}`}
     >
       <span
         className={`flex h-6 w-6 items-center justify-center rounded-full text-[0.8rem] ${etape === n ? "bg-accent-bleu text-white" : "bg-paper-deep"}`}
@@ -37,7 +42,11 @@ export default function ParcoursTest() {
 
   return (
     <>
-      <nav aria-label="Étapes du test" className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-line pb-4">
+      <nav
+        ref={etapes}
+        aria-label="Étapes du test"
+        className="mb-8 flex scroll-mt-32 flex-wrap items-center gap-x-6 border-b border-line pb-2"
+      >
         {pastille(1, "Votre situation")}
         <span aria-hidden="true" className="text-ink-faint">→</span>
         {pastille(2, "Vos choix")}

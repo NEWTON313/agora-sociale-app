@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import BadgeParti from "@/components/BadgeParti";
 import { CANDIDATS_ALPHABETIQUE, CLASSES_SOCIALES, getCandidat } from "@/lib/data";
+import { IMAGE_APERCU } from "@/lib/site";
 
 const COULEURS: Record<string, { fg: string; bg: string }> = {
   populaires: { fg: "#3d5a78", bg: "#e2e8ee" },
@@ -31,8 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     title,
     description,
     alternates: { canonical: `/candidats/${candidat.id}` },
-    openGraph: { title, description, url: `/candidats/${candidat.id}` },
-    twitter: { title, description },
+    openGraph: { title, description, url: `/candidats/${candidat.id}`, images: [IMAGE_APERCU] },
+    twitter: { title, description, images: [IMAGE_APERCU.url] },
   };
 }
 
