@@ -97,9 +97,9 @@ export interface AvisDonnees {
 }
 
 export const AVIS_DONNEES_REELLES: AvisDonnees = {
-  dateMaj: "2026-11-13",
+  dateMaj: "2026-11-21",
   texte:
-    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées ; aucun nouvel ajout ni retrait n'a été identifié depuis (vérification du 06/11/2026). Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027) ; Dominique de Villepin, souvent cité dans la presse, répète ne pas être encore candidat (3 novembre 2026, France Inter), il n'est donc pas inclus. La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 22 des 36 candidats disposent à ce stade d'au moins une mesure sourcée (Mélenchon, Attal, Philippe, Retailleau, Le Pen, Tondelier, Batho, Bouamrane, Dupont-Aignan, Glucksmann, Lalanne, Lisnard et Platret en ont plusieurs ; Arthaud, Asselineau, Becht, Bertrand, Collovati, Egger, Lassalle, Markovic et Mathieu en ont une seule) ; les 14 autres sont enrichis progressivement, en priorité par ordre alphabétique. Chaque mesure indique sa source et son niveau de confiance.",
+    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées ; depuis, le judoka Teddy Riner a annoncé sa candidature le 9 novembre 2026 (franceinfo, LCP, France 24), sans étiquette de parti : il a été ajouté. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027) ; Dominique de Villepin, souvent cité dans la presse, répète ne pas être encore candidat (3 novembre 2026, France Inter), il n'est donc pas inclus. La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 26 des 37 candidats disposent à ce stade d'au moins une mesure sourcée (melenchon, attal, philippe, retailleau, le-pen, tondelier, bouamrane, dupont-aignan, glucksmann, lalanne, lisnard, platret, riner, roussel, ruffin, zemmour en ont plusieurs ; arthaud, asselineau, batho, becht, bertrand, collovati, egger, lassalle, markovic, mathieu en ont une seule) ; les 11 autres sont enrichis progressivement, en priorité par ordre alphabétique. Chaque mesure indique sa source et son niveau de confiance.",
 };
 
 // Remapping vers la taxonomie à 9 thèmes (2026-08-29) : `br-rsa` (RSA/emploi) est classée en
@@ -1012,6 +1012,42 @@ export const CANDIDATS: Candidat[] = [
           retraites: { score: 0, avantages: ["Peut répondre à une demande de fermeté perçue comme rassurante par une partie des retraités, catégorie statistiquement plus sensible au sentiment d'insécurité selon les enquêtes de victimation"], risques: [], angleMort: "Aucune donnée chiffrée n'établit de lien direct entre cette mesure et la sécurité spécifique des retraités." },
         },
       },
+      {
+        id: "br-fonctionnaires",
+        theme: "Services publics",
+        titre: "Ne pas remplacer 400 000 fonctionnaires partant à la retraite d'ici 2032",
+        resumeOfficiel:
+          "Dans son plan d'économies de 197 milliards d'euros sur cinq ans (12 octobre 2026), Bruno Retailleau prévoit « le non-remplacement d'ici 2032 de 400.000 fonctionnaires partis à la retraite », en supprimant aussi des agences et des opérateurs de l'État. Il affirme qu'« avec l'IA, on peut économiser 300 000 postes » dans la fonction publique d'État et territoriale.",
+        sourceOfficielle:
+          "https://lcp.fr/actualites/face-a-une-france-quasiment-en-faillite-bruno-retailleau-presente-un-plan-d-economies-de",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Mesure chiffrée présentée en conférence de presse le 12 octobre 2026 (LCP) et confirmée lors de l'opération « Nos services publics » de franceinfo le 12 novembre 2026.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: ["Moins d'agents publics peut réduire l'accès aux services publics de proximité, dont cette catégorie dépend davantage ; effet non chiffré"], angleMort: "Les services concernés par les non-remplacements ne sont pas détaillés." },
+          moyennes: { score: 0, avantages: [], risques: ["Les agents publics, nombreux dans cette catégorie, verraient les recrutements se réduire ; effet non chiffré"], angleMort: "Les services concernés par les non-remplacements ne sont pas détaillés." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Le plan présente ces économies comme la contrepartie de baisses de prélèvements ; l'effet net pour cette catégorie n'est pas chiffré." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifié sur les pensions ; l'effet sur l'accès aux services publics n'est pas chiffré." },
+        },
+      },
+      {
+        id: "br-prisons",
+        theme: "Sécurité et justice",
+        titre: "Construire 40 000 places de prison supplémentaires",
+        resumeOfficiel:
+          "Lors de l'opération « Nos services publics » de franceinfo (12 novembre 2026), Bruno Retailleau propose de construire 40 000 places de prison supplémentaires et de consacrer « un peu moins de 2 milliards » au recrutement de magistrats. Il défend des peines de prison courtes, de « deux semaines, trois semaines, un mois ».",
+        sourceOfficielle:
+          "https://www.franceinfo.fr/elections/presidentielle/presidentielle-bruno-retailleau-veut-economiser-300-000-postes-dans-la-fonction-publique-grace-a-l-intelligence-artificielle_8279522.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Chiffres rapportés par franceinfo le 12 novembre 2026 ; calendrier et financement détaillé non précisés, et pas encore recoupés par un second média.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+        },
+      },
     ],
   },
   {
@@ -1182,6 +1218,42 @@ export const CANDIDATS: Candidat[] = [
           moyennes: { score: 0, avantages: [], risques: [], angleMort: "Même angle mort que pour les autres catégories : effet dépendant de textes futurs non déterminés par cette seule mesure." },
           aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable à ce stade." },
           retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable à ce stade." },
+        },
+      },
+      {
+        id: "mt-retraites",
+        theme: "Retraites et modèle social",
+        titre: "Abroger la réforme de 2023 pour revenir à 62 ans, avec l'objectif de 60 ans pour les carrières longues et les métiers pénibles",
+        resumeOfficiel:
+          "Marine Tondelier veut abroger la dernière réforme des retraites — « On revient mécaniquement à 62 ans en un trait de plume » — et garde l'objectif d'un départ à 60 ans, en priorité pour les personnes ayant commencé à travailler tôt ou exercé un métier pénible. Le financement passerait notamment par un retour sur une partie des exonérations de cotisations accordées aux entreprises.",
+        sourceOfficielle:
+          "https://www.franceinfo.fr/economie/retraite/reforme-des-retraites/changement-de-systeme-passage-a-60-ou-a-65-ans-capitalisation-que-proposent-les-principaux-candidats-a-l-election-presidentielle-pour-les-retraites_8215784.html",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Position rapportée par franceinfo (30 septembre 2026, avec citation directe) et par LCP (16 septembre 2026) dans leurs comparatifs des propositions sur les retraites.",
+        impactParClasse: {
+          populaires: { score: 1, avantages: ["Un retour à 62 ans, et à 60 ans pour les carrières longues et les métiers pénibles, bénéficie d'abord aux carrières commencées tôt, plus représentées dans cette catégorie"], risques: ["Financement non chiffré publiquement"], angleMort: "Le calendrier du passage à 60 ans et les critères de pénibilité ne sont pas précisés." },
+          moyennes: { score: 0, avantages: ["Départ possible plus tôt que dans le calendrier de la réforme de 2023"], risques: ["Financement non chiffré publiquement"], angleMort: "L'effet dépend de l'âge de début de carrière et du métier exercé ; aucun chiffrage par profil n'est disponible." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Le retour sur des exonérations de cotisations pèserait sur les entreprises ; l'effet pour cette catégorie n'est pas chiffré." },
+          retraites: { score: 1, avantages: ["Les personnes proches de la retraite partiraient plus tôt que dans le calendrier de la réforme de 2023"], risques: [], angleMort: "Aucun effet sur les pensions déjà liquidées ; l'équilibre financier du système n'est pas chiffré." },
+        },
+      },
+      {
+        id: "mt-heritages",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Contribution de 10 % sur les héritages de plus de 4 millions d'euros",
+        resumeOfficiel:
+          "Les Écologistes proposent une contribution supplémentaire de 10 % sur les héritages de plus de 4 millions d'euros, avec un taux supplémentaire au-delà de 13 millions. Marine Tondelier résume : « La 'grande transmission' doit financer la 'grande transition' ».",
+        sourceOfficielle:
+          "https://lcp.fr/actualites/heritages-et-droits-de-succession-que-proposent-les-candidats-a-l-election",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Proposition chiffrée rapportée par LCP et par franceinfo le 27 août 2026 dans leurs comparatifs sur la taxation des héritages.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: [], angleMort: "Catégorie non concernée par le seuil de 4 millions d'euros ; l'usage précis des recettes pour cette catégorie n'est pas chiffré." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Catégorie non concernée par le seuil de 4 millions d'euros ; l'usage précis des recettes pour cette catégorie n'est pas chiffré." },
+          aisees: { score: -1, avantages: [], risques: ["Hausse de la fiscalité sur les héritages supérieurs à 4 millions d'euros, qui ne concerne que la partie la plus fortunée de cette catégorie"], angleMort: "Le nombre de successions concernées et le rendement attendu ne sont pas détaillés dans les sources consultées." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Catégorie non concernée, sauf patrimoine supérieur à 4 millions d'euros transmis." },
         },
       },
     ],
@@ -1844,6 +1916,49 @@ export const CANDIDATS: Candidat[] = [
     mesures: [],
   },
   {
+    id: "riner",
+    nom: "Teddy Riner",
+    parti: "Étiquette non précisée",
+    mesures: [
+      {
+        id: "tr-retraites",
+        theme: "Retraites et modèle social",
+        titre: "Réformer les retraites en gardant la répartition, sans écarter une part de capitalisation",
+        resumeOfficiel:
+          "Teddy Riner prône une réforme des retraites — « le système actuel ne tient pas » — en promettant de garder le « système solidaire par répartition », sans écarter « une part de capitalisation ». Il ne précise ni âge légal ni calendrier.",
+        sourceOfficielle:
+          "https://lcp.fr/actualites/retraites-salaires-securite-que-propose-teddy-riner-pour-la-presidentielle-444935",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Propos rapportés par LCP (10 novembre 2026) et France 24 (9 novembre 2026), au lendemain de l'annonce de sa candidature ; aucun âge, durée de cotisation ni chiffrage n'est précisé.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: [], angleMort: "Aucun âge, durée de cotisation ni part de capitalisation n'est précisé : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun âge, durée de cotisation ni part de capitalisation n'est précisé : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun âge, durée de cotisation ni part de capitalisation n'est précisé : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun âge, durée de cotisation ni part de capitalisation n'est précisé : aucun effet économique direct ne peut être attribué à cette catégorie." },
+        },
+      },
+      {
+        id: "tr-travail-salaires",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Augmenter le salaire net par des allègements de charges et assouplir les 35 heures",
+        resumeOfficiel:
+          "Teddy Riner veut « augmenter le salaire net » par des allègements de charges, réduire l'écart entre salaire brut et salaire net, et « sortir du carcan figé des 35 heures, mais sans le remettre en question », pour « permettre aux Français qui le veulent, d'augmenter leurs revenus en travaillant plus ».",
+        sourceOfficielle:
+          "https://lcp.fr/actualites/retraites-salaires-securite-que-propose-teddy-riner-pour-la-presidentielle-444935",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Propos rapportés par LCP (10 novembre 2026) et France 24 (9 novembre 2026) ; ni le montant des allègements, ni leur financement, ni les modalités sur le temps de travail ne sont précisés.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Une hausse du salaire net bénéficierait aux salariés, sans montant annoncé"], risques: ["Le financement des allègements de charges n'est pas précisé"], angleMort: "Montant et financement non précisés : aucun effet chiffré ne peut être attribué à cette catégorie." },
+          moyennes: { score: 0, avantages: ["Une hausse du salaire net bénéficierait aux salariés, sans montant annoncé"], risques: ["Le financement des allègements de charges n'est pas précisé"], angleMort: "Montant et financement non précisés : aucun effet chiffré ne peut être attribué à cette catégorie." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Montant et financement non précisés : aucun effet chiffré ne peut être attribué à cette catégorie." },
+          retraites: { score: 0, avantages: [], risques: ["Des allègements de cotisations peuvent réduire les recettes de la protection sociale, selon leur financement"], angleMort: "Financement non précisé : aucun effet chiffré ne peut être attribué à cette catégorie." },
+        },
+      },
+    ],
+  },
+  {
     id: "rohou",
     nom: "Erwan Rohou",
     parti: "Mouvement écologiste indépendant",
@@ -1888,6 +2003,24 @@ export const CANDIDATS: Candidat[] = [
           moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable pour cette catégorie : secteurs, calendrier et financement non précisés dans les sources consultées." },
           aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable pour cette catégorie : secteurs, calendrier et financement non précisés dans les sources consultées." },
           retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable pour cette catégorie : secteurs, calendrier et financement non précisés dans les sources consultées." },
+        },
+      },
+      {
+        id: "fbr-securite-60000",
+        theme: "Sécurité et justice",
+        titre: "Créer 60 000 postes de policiers, gendarmes et douaniers de proximité",
+        resumeOfficiel:
+          "Lors de l'opération « Nos services publics » de franceinfo (12 novembre 2026), Fabien Roussel propose de créer 60 000 postes de « policiers, gendarmes et douaniers » de proximité ; son plan pour la sécurité est évalué à « un milliard d'euros ».",
+        sourceOfficielle:
+          "https://www.franceinfo.fr/elections/replay-nos-services-publics-retrouvez-les-interviews-de-huit-des-principaux-candidats-a-la-presidentielle_8279891.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Chiffres rapportés par franceinfo le 12 novembre 2026 ; pas encore recoupés par un second média lu directement.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
         },
       },
     ],
@@ -1992,6 +2125,60 @@ export const CANDIDATS: Candidat[] = [
           moyennes: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable pour cette catégorie ; le nombre de personnes concernées et l'économie attendue ne sont pas chiffrés." },
           aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable pour cette catégorie ; le nombre de personnes concernées et l'économie attendue ne sont pas chiffrés." },
           retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet économique direct identifiable pour cette catégorie ; le nombre de personnes concernées et l'économie attendue ne sont pas chiffrés." },
+        },
+      },
+      {
+        id: "ez-fonctionnaires",
+        theme: "Services publics",
+        titre: "Ne pas renouveler 800 000 emplois publics, en sanctuarisant 2,2 millions d'emplois",
+        resumeOfficiel:
+          "Lors de l'opération « Nos services publics » de franceinfo (12 novembre 2026), Éric Zemmour dit vouloir « ne pas renouveler 800 000 emplois » dans la fonction publique — « Un tiers des départs à la retraite ne sont pas remplacés » — et « sanctuariser 2,2 millions d'emplois », dont les enseignants, les médecins et le personnel soignant.",
+        sourceOfficielle:
+          "https://franceinfo.fr/elections/presidentielle/presidentielle-eric-zemmour-souhaite-supprimer-800-000-postes-dans-la-fonction-publique_8279303.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Chiffres rapportés par franceinfo le 12 novembre 2026 ; pas encore recoupés par un second média.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: ["Moins d'agents publics peut réduire l'accès aux services publics de proximité, dont cette catégorie dépend davantage ; effet non chiffré"], angleMort: "Les services concernés par les non-renouvellements ne sont pas détaillés, hors emplois « sanctuarisés »." },
+          moyennes: { score: 0, avantages: [], risques: ["Les agents publics, nombreux dans cette catégorie, verraient les recrutements se réduire ; effet non chiffré"], angleMort: "Les services concernés par les non-renouvellements ne sont pas détaillés, hors emplois « sanctuarisés »." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifié ; l'usage des économies attendues n'est pas précisé." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Aucun effet direct identifié sur les pensions ; l'effet sur l'accès aux services publics n'est pas chiffré." },
+        },
+      },
+      {
+        id: "ez-prisons",
+        theme: "Sécurité et justice",
+        titre: "Construire 100 000 places de prison en préfabriqué et recruter 40 000 gardiens",
+        resumeOfficiel:
+          "Lors de l'opération « Nos services publics » de franceinfo (12 novembre 2026), Éric Zemmour propose de construire 100 000 places de prison en préfabriqué et de recruter 40 000 gardiens de prison.",
+        sourceOfficielle:
+          "https://franceinfo.fr/elections/presidentielle/presidentielle-eric-zemmour-souhaite-supprimer-800-000-postes-dans-la-fonction-publique_8279303.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Chiffres rapportés par franceinfo le 12 novembre 2026 ; calendrier et financement non précisés, pas encore recoupés par un second média.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Mesure non chiffrée à ce stade : aucun effet économique direct ne peut être attribué à cette catégorie." },
+        },
+      },
+      {
+        id: "ez-retraites",
+        theme: "Retraites et modèle social",
+        titre: "Repousser l'âge légal à 64, voire 65 ans, et basculer progressivement vers la capitalisation",
+        resumeOfficiel:
+          "Selon le comparatif de franceinfo (30 septembre 2026), Éric Zemmour propose de repousser l'âge légal de départ à 64, voire 65 ans, et de basculer progressivement vers la capitalisation : « Le système par répartition est mort et condamné » ; « On va progressivement mettre de la capitalisation ».",
+        sourceOfficielle:
+          "https://www.franceinfo.fr/economie/retraite/reforme-des-retraites/changement-de-systeme-passage-a-60-ou-a-65-ans-capitalisation-que-proposent-les-principaux-candidats-a-l-election-presidentielle-pour-les-retraites_8215784.html",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Position rapportée par franceinfo le 30 septembre 2026, avec citations directes ; âge exact et calendrier non arrêtés, pas encore recoupée par un second média.",
+        impactParClasse: {
+          populaires: { score: -1, avantages: [], risques: ["Un âge légal maintenu à 64 ans ou porté à 65 ans pèse davantage sur les carrières commencées tôt et les métiers physiques, plus représentés dans cette catégorie"], angleMort: "Âge exact, calendrier et éventuelles dérogations (carrières longues, pénibilité) non précisés." },
+          moyennes: { score: -1, avantages: [], risques: ["Départ maintenu à 64 ans ou repoussé à 65 ans pour les carrières standards"], angleMort: "Âge exact et calendrier non précisés ; la part de capitalisation n'est pas chiffrée." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "L'effet d'une part de capitalisation dépend de sa taille et de ses règles, non précisées." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Mesure portant sur les départs futurs ; aucun effet direct identifié sur les pensions déjà versées." },
         },
       },
     ],
