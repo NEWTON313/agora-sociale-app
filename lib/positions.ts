@@ -328,4 +328,49 @@ export const POSITIONS: Position[] = [
       { url: "https://www.france24.com/fr/france/20261106-france-insoumise-jean-luc-melenchon-presente-programme-presidentielle-2027-fidele-volonte-rupture-lfi", type: "presse", date: "2026-11-06" },
     ],
   },
+  // Ajouts du 2026-11-21 : positions établies par le programme officiel ou recoupées par deux médias
+  {
+    candidat: "tondelier", question: 2, choix: "B", mesureId: "mt-heritages",
+    dateSource: "2026-08-27",
+    citation: "La 'grande transmission' doit financer la 'grande transition'",
+    recoupements: [{ url: "https://www.franceinfo.fr/elections/presidentielle/surtaxer-les-mega-heritages-ou-reduire-les-droits-de-succession-le-debat-fiscal-qui-divise-la-gauche-et-la-droite-pour-la-presidentielle_8163758.html", type: "presse", date: "2026-08-27", citation: "une hausse de la contribution sur les héritages de plus de 4 millions d'euros" }],
+  },
+  {
+    candidat: "le-pen", question: 3, choix: "A", mesureId: "mlp-retraites",
+    recoupements: [
+      { url: "https://www.franceinfo.fr/economie/retraite/reforme-des-retraites/changement-de-systeme-passage-a-60-ou-a-65-ans-capitalisation-que-proposent-les-principaux-candidats-a-l-election-presidentielle-pour-les-retraites_8215784.html", type: "presse", date: "2026-09-30", citation: "à 62 ans, voire 60 ans" },
+      { url: "https://www.france24.com/fr/france/20260827-premier-d%C3%A9bat-de-la-pr%C3%A9sidentielle-2027-les-principales-propositions-des-candidats", type: "presse", date: "2026-08-27", citation: "à 42 ans de cotisations et un âge légal de 62 ans" },
+    ],
+  },
+  {
+    candidat: "tondelier", question: 3, choix: "A", mesureId: "mt-retraites",
+    dateSource: "2026-09-30",
+    citation: "On revient mécaniquement à 62 ans en un trait de plume",
+    recoupements: [{ url: "https://lcp.fr/actualites/presidentielle-que-proposent-les-candidats-a-l-elysee-sur-les-retraites-441751", type: "presse", date: "2026-09-16" }],
+  },
+  {
+    candidat: "attal", question: 4, choix: "A", mesureId: "ga-retraites",
+    recoupements: [{ url: "https://www.franceinfo.fr/economie/retraite/reforme-des-retraites/changement-de-systeme-passage-a-60-ou-a-65-ans-capitalisation-que-proposent-les-principaux-candidats-a-l-election-presidentielle-pour-les-retraites_8215784.html", type: "presse", date: "2026-09-30", citation: "d'ajouter une part de capitalisation" }],
+  },
+  {
+    candidat: "philippe", question: 4, choix: "A", mesureId: "ep-retraites-65-ans",
+    dateSource: "2026-09-29",
+    recoupements: [{ url: "https://lcp.fr/actualites/retraites-edouard-philippe-veut-porter-l-age-de-depart-a-65-ans-et-la-duree-de", type: "presse", date: "2026-09-29", citation: "construire un système différent, mixte, qui associera répartition et capitalisation" }],
+  },
+  {
+    candidat: "melenchon", question: 4, choix: "B", mesureId: "jlm-retraites",
+    dateSource: "2026-11-06",
+    recoupements: [
+      {
+        url: "https://melenchon2027.fr/programme/livre/mettre-en-securite-sociale/chapitre1", type: "officielle", date: "2026-11-06",
+        citation: "Supprimer les avantages fiscaux de la retraite par capitalisation pour financer le système par répartition",
+      },
+    ],
+  },
+  {
+    candidat: "retailleau", question: 9, choix: "A", mesureId: "br-fonctionnaires",
+    dateSource: "2026-10-12",
+    citation: "avec notamment le non-remplacement d'ici 2032 de 400.000 fonctionnaires partis à la retraite",
+    recoupements: [{ url: "https://www.franceinfo.fr/elections/presidentielle/presidentielle-bruno-retailleau-veut-economiser-300-000-postes-dans-la-fonction-publique-grace-a-l-intelligence-artificielle_8279522.html", type: "presse", date: "2026-11-12", citation: "400 000 non-renouvellements de postes de fonctionnaires" }],
+  },
 ];
