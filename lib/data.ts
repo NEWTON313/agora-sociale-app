@@ -99,7 +99,7 @@ export interface AvisDonnees {
 export const AVIS_DONNEES_REELLES: AvisDonnees = {
   dateMaj: "2026-11-21",
   texte:
-    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées ; depuis, le judoka Teddy Riner a annoncé sa candidature le 9 novembre 2026 (franceinfo, LCP, France 24), sans étiquette de parti : il a été ajouté. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027) ; Dominique de Villepin, souvent cité dans la presse, répète ne pas être encore candidat (3 novembre 2026, France Inter), il n'est donc pas inclus. La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 26 des 37 candidats disposent à ce stade d'au moins une mesure sourcée (melenchon, attal, philippe, retailleau, le-pen, tondelier, bouamrane, dupont-aignan, glucksmann, lalanne, lisnard, platret, riner, roussel, ruffin, zemmour en ont plusieurs ; arthaud, asselineau, batho, becht, bertrand, collovati, egger, lassalle, markovic, mathieu en ont une seule) ; les 11 autres sont enrichis progressivement, en priorité par ordre alphabétique. Chaque mesure indique sa source et son niveau de confiance.",
+    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées ; depuis, le judoka Teddy Riner a annoncé sa candidature le 9 novembre 2026 (franceinfo, LCP, France 24), sans étiquette de parti : il a été ajouté. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027) ; Dominique de Villepin, souvent cité dans la presse, répète ne pas être encore candidat (3 novembre 2026, France Inter), il n'est donc pas inclus. La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 29 des 37 candidats disposent à ce stade d'au moins une mesure sourcée (melenchon, attal, philippe, retailleau, le-pen, tondelier, bouamrane, dupont-aignan, glucksmann, lalanne, lisnard, platret, riner, roussel, ruffin, zemmour, branco, kazib et labib en ont plusieurs ; arthaud, asselineau, batho, becht, bertrand, collovati, egger, lassalle, markovic, mathieu en ont une seule). Les 8 autres (Billetdoux, Durif, Legendre, Mikolajczak, Mlekuz, Philippot, Polony, Rohou) n'ont encore aucune mesure sourcée : soit aucun programme écrit n'est publié, soit les textes n'ont pas pu être lus ou recoupés dans les sources retenues. Le comparateur l'indique plutôt que d'extrapoler. Chaque mesure indique sa source et son niveau de confiance.",
 };
 
 // Remapping vers la taxonomie à 9 thèmes (2026-08-29) : `br-rsa` (RSA/emploi) est classée en
@@ -158,6 +158,12 @@ export const AVIS_DONNEES_REELLES: AvisDonnees = {
 // ont été retirées avec leurs mesures. Prochaine exécution : reprendre
 // l'enrichissement par équité à partir de `roussel`, puis `ruffin`, `zemmour`, `branco`, `durif`, `kazib`,
 // `labib`, `legendre`, `mlekuz`, `philippot`, `polony` (ordre alphabétique des id restés sans mesure).
+// Le 2026-11-21, enrichissement des 11 candidats sans mesure, à partir des seuls textes officiels lus
+// directement (pas de résumé tiers) : `branco` (3 mesures, ruches.org/le-projet), `kazib` (3 mesures,
+// anasse2027.fr/programme), `labib` (3 mesures, discours du 12/09/2026 publié sur le site du NPA-R, niveau
+// « annonce »). Restés sans mesure : `billetdoux`, `durif`, `legendre`, `mikolajczak`, `mlekuz`, `polony`,
+// `rohou` (aucun programme écrit trouvé dans les sources autorisées ou sources contradictoires) ; `philippot`
+// (programme publié en PDF sur les-patriotes.fr, mais le PDF n'a pas pu être lu, donc aucune citation).
 export const CANDIDATS: Candidat[] = [
   {
     id: "melenchon",
@@ -1435,7 +1441,59 @@ export const CANDIDATS: Candidat[] = [
     id: "branco",
     nom: "Juan Branco",
     parti: "Les Ruches",
-    mesures: [],
+    mesures: [
+      {
+        id: "jb-smic-1500",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Relèvement du seuil minimal national du Smic à 1 500 euros nets",
+        resumeOfficiel:
+          "Programme de Juan Branco : « Déconcentration du SMIC, avec réhaussement du seuil minimal national à 1500 euros net ».",
+        sourceOfficielle: "https://ruches.org/le-projet",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Citation exacte du programme publié par le mouvement (section « L'Économie », sous-partie « Travail »), relue le 21/11/2026. Le texte ne précise pas ce que recouvre la « déconcentration » du Smic. Lecture partielle de la page, qui comporte d'autres mesures.",
+        impactParClasse: {
+          populaires: { score: 2, avantages: ["Hausse du salaire minimum pour les salariés au Smic, catégorie surreprésentée dans les classes populaires"], risques: ["Risque d'emplois peu qualifiés évoqué par certains économistes si la hausse n'est pas accompagnée d'allègements, non chiffré par le candidat"], angleMort: "Aucun chiffrage public du coût pour les employeurs ni du mode de financement ; la « déconcentration » n'est pas expliquée." },
+          moyennes: { score: 0, avantages: ["Effet indirect possible sur les salaires proches du Smic, selon l'ampleur de la revalorisation des grilles"], risques: ["Hausse des coûts salariaux pour les petites entreprises et les artisans, non chiffrée"], angleMort: "Aucun chiffrage de l'effet sur les grilles salariales ni sur les prix." },
+          aisees: { score: -1, avantages: [], risques: ["Catégorie identifiée comme contributrice probable si la hausse est financée par les cotisations ou la fiscalité"], angleMort: "Le texte ne décrit pas de mécanisme de financement." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Le passage ne dit pas si la revalorisation s'étend aux pensions de retraite." },
+        },
+      },
+      {
+        id: "jb-abattement-retraites",
+        theme: "Retraites et modèle social",
+        titre: "Suppression de l'abattement fiscal de 10 % sur les retraites",
+        resumeOfficiel:
+          "Programme de Juan Branco : « Suppression de l'abattement fiscal de 10% pour les retraites ».",
+        sourceOfficielle: "https://ruches.org/le-projet",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Citation exacte du programme publié par le mouvement (section « L'Économie », sous-partie « Travail »), relue le 21/11/2026.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: [], risques: ["Retraités modestes imposables : hausse d'impôt probablement limitée, mais non chiffrée"], angleMort: "Aucune estimation publique du gain ou de la perte par niveau de pension." },
+          moyennes: { score: -1, avantages: [], risques: ["Retraités à pension intermédiaire imposables : l'abattement disparaît, ce qui augmente leur impôt sur le revenu"], angleMort: "Pas de chiffrage public par niveau de pension." },
+          aisees: { score: -1, avantages: [], risques: ["Retraités à pensions élevées : hausse d'impôt directe par la suppression de l'abattement"], angleMort: "Pas de chiffrage ni de seuil précisé." },
+          retraites: { score: -1, avantages: [], risques: ["Retraités imposables directement touchés par la suppression de l'abattement"], angleMort: "Le texte ne prévoit ni compensation ni seuil ; l'effet dépend des revenus de chacun." },
+        },
+      },
+      {
+        id: "jb-267-taxes",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Suppression de 267 taxes, dont 117 sans rendement connu",
+        resumeOfficiel:
+          "Programme de Juan Branco : « Suppression de 267 taxes, dont 117 taxes sans rendement connu ».",
+        sourceOfficielle: "https://ruches.org/le-projet",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Citation exacte du programme publié par le mouvement (section « L'Économie », sous-partie « Fiscalité et prélèvements »), relue le 21/11/2026. Le passage ne liste pas les 267 taxes.",
+        impactParClasse: {
+          populaires: { score: 0, avantages: ["Simplification fiscale, et allègement possible si les taxes supprimées pèsent sur les ménages modestes"], risques: ["Perte de recettes pour les services financés par ces taxes, non chiffrée"], angleMort: "Le texte ne dit pas quelles taxes sont concernées ni leur rendement." },
+          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Même limite : les taxes supprimées ne sont pas nommées." },
+          aisees: { score: 0, avantages: [], risques: [], angleMort: "Aucune estimation publique de l'effet de la suppression sur les prélèvements de cette catégorie." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Le texte ne précise pas l'effet sur les retraités." },
+        },
+      },
+    ],
   },
   {
     id: "collovati",
@@ -1655,13 +1713,117 @@ export const CANDIDATS: Candidat[] = [
     id: "kazib",
     nom: "Anasse Kazib",
     parti: "Révolution permanente",
-    mesures: [],
+    mesures: [
+      {
+        id: "ak-smic-2000",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Smic à 2 000 euros nets, hausse des salaires de 500 euros et indexation sur l'inflation",
+        resumeOfficiel:
+          "Sur le site de la candidature : « SMIC à 2000 € net, revalorisation de toutes les allocations, augmentation des salaires de 500 €, indexation sur l'inflation ».",
+        sourceOfficielle: "https://anasse2027.fr/programme",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Citation exacte du site officiel de la candidature, relue le 21/11/2026. Le site indique que le programme 2027 est en cours d'élaboration : ces mesures sont les premières publiées.",
+        impactParClasse: {
+          populaires: { score: 2, avantages: ["Hausse immédiate du pouvoir d'achat pour les salariés au Smic et ceux dont les salaires sont proches"], risques: ["Risque d'emplois peu qualifiés évoqué par certains économistes si la hausse n'est pas accompagnée d'allègements, non chiffré"], angleMort: "Aucun chiffrage public du coût pour les employeurs ni du mode de financement." },
+          moyennes: { score: 1, avantages: ["Hausse générale de 500 euros des salaires, si elle s'applique à toutes les grilles"], risques: ["Hausse des coûts salariaux pour les petites entreprises et les artisans, non chiffrée"], angleMort: "Le texte ne précise ni le mode d'application ni le financement de la hausse de 500 euros." },
+          aisees: { score: -1, avantages: [], risques: ["Catégorie identifiée comme contributrice probable si la hausse est financée par les cotisations ou l'impôt"], angleMort: "Pas de mécanisme de financement chiffré dans le texte publié." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Le texte ne mentionne pas les pensions de retraite dans cette revalorisation." },
+        },
+      },
+      {
+        id: "ak-retraite-60",
+        theme: "Retraites et modèle social",
+        titre: "Retraite à 60 ans, 55 ans pour les métiers pénibles, sans condition d'annuité",
+        resumeOfficiel:
+          "Sur le site de la candidature : « Retraite à 60 ans et 55 ans pour les métiers pénibles, sans conditions d'annuité ».",
+        sourceOfficielle: "https://anasse2027.fr/programme",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Citation exacte du site officiel de la candidature, relue le 21/11/2026. Le programme 2027 étant en cours d'élaboration, cette mesure est une première proposition publiée.",
+        impactParClasse: {
+          populaires: { score: 2, avantages: ["Départ plus tôt pour les salariés aux métiers pénibles, catégorie surreprésentée dans les classes populaires"], risques: ["Coût pour les finances sociales, non chiffré, et pensions plus faibles si la durée de cotisation est plus courte"], angleMort: "Le texte ne précise ni le financement ni le montant des pensions à 60 ans." },
+          moyennes: { score: 1, avantages: ["Départ à la retraite à 60 ans sans condition d'annuité"], risques: ["Hausse des cotisations ou de l'impôt nécessaire pour financer le coût, non chiffrée"], angleMort: "Aucun chiffrage du coût ni du financement." },
+          aisees: { score: -1, avantages: [], risques: ["Catégorie identifiée comme contributrice probable si le financement passe par les cotisations ou l'impôt"], angleMort: "Pas de mécanisme de financement chiffré." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Le texte ne prévoit pas de revalorisation des pensions déjà versées." },
+        },
+      },
+      {
+        id: "ak-logements-vides",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Expropriation des logements vides, plafonnement et gel des loyers",
+        resumeOfficiel:
+          "Sur le site de la candidature : « Expropriation des logements vides, plafonnement et gel des loyers ».",
+        sourceOfficielle: "https://anasse2027.fr/programme",
+        niveauConfiance: "confirme",
+        noteConfiance:
+          "Citation exacte du site officiel de la candidature, relue le 21/11/2026. Le site indique que le programme 2027 est en cours d'élaboration.",
+        impactParClasse: {
+          populaires: { score: 2, avantages: ["Loyers plafonnés et gelés pour les locataires, catégorie surreprésentée parmi les locataires modestes"], risques: ["Risque de baisse de l'offre locative et de l'entretien si les propriétaires se retirent, évoqué par certains économistes"], angleMort: "Aucun chiffrage du nombre de logements concernés ni de l'indemnisation des propriétaires." },
+          moyennes: { score: 0, avantages: ["Locataires des classes moyennes protégés contre les hausses de loyer"], risques: ["Propriétaires bailleurs de cette catégorie touchés par le plafonnement"], angleMort: "Le texte ne définit pas ce qu'est un logement « vide »." },
+          aisees: { score: -1, avantages: [], risques: ["Propriétaires de biens locatifs ou vacants directement concernés par l'expropriation"], angleMort: "Pas de critère précisé pour qualifier un logement de vide ni de modalités d'indemnisation." },
+          retraites: { score: 1, avantages: ["Retraités locataires protégés contre la hausse des loyers"], risques: [], angleMort: "Le texte ne distingue pas les petits propriétaires retraités." },
+        },
+      },
+    ],
   },
   {
     id: "labib",
     nom: "Selma Labib",
     parti: "NPA-Révolutionnaires",
-    mesures: [],
+    mesures: [
+      {
+        id: "sl-salaires-pensions-400",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Hausse de 400 euros par mois des salaires et des pensions",
+        resumeOfficiel:
+          "Dans son intervention à la Fête de l'Humanité : « Il faut augmenter les salaires et les pensions de 400 euros par mois pour tous et toutes. »",
+        sourceOfficielle: "https://npa-revolutionnaires.org/articles/intervention-de-selma-labib-a-la-fete-de-lhumanite-2026",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Propos d'un discours (Fête de l'Humanité, 12 septembre 2026), publiés sur le site du NPA-R le 15 septembre, relus le 21/11/2026. Aucun programme écrit n'a été trouvé à ce stade. Le financement est seulement évoqué (« faire payer les actionnaires et les milliardaires »), sans chiffrage.",
+        impactParClasse: {
+          populaires: { score: 2, avantages: ["Hausse de revenu immédiate pour les salariés et les retraités modestes"], risques: ["Coût pour les employeurs et les finances publiques, non chiffré"], angleMort: "Pas de financement précisé ; la candidate évoque seulement une contribution des actionnaires et des hauts revenus." },
+          moyennes: { score: 1, avantages: ["Hausse de revenu pour les salariés des classes moyennes"], risques: ["Hausse de la charge salariale pour les petites entreprises et les artisans, non chiffrée"], angleMort: "Le discours ne précise pas si la hausse est proportionnelle au salaire ou forfaitaire." },
+          aisees: { score: -1, avantages: [], risques: ["Catégorie identifiée comme contributrice probable si le financement passe par la fiscalité des revenus élevés ou des actionnaires"], angleMort: "Le discours ne précise pas le mécanisme de financement." },
+          retraites: { score: 2, avantages: ["Hausse de 400 euros par mois des pensions, mentionnée explicitement"], risques: ["Coût pour les finances de la Sécurité sociale, non chiffré"], angleMort: "Pas de chiffrage ni de calendrier." },
+        },
+      },
+      {
+        id: "sl-plancher-2000",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Aucun revenu net inférieur à 2 000 euros",
+        resumeOfficiel:
+          "Dans son intervention à la Fête de l'Humanité : « Il ne faut pas un seul revenu sous les 2000 euros net. »",
+        sourceOfficielle: "https://npa-revolutionnaires.org/articles/intervention-de-selma-labib-a-la-fete-de-lhumanite-2026",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Propos d'un discours (Fête de l'Humanité, 12 septembre 2026), relus le 21/11/2026. Aucun programme écrit n'a été trouvé à ce stade. Le texte ne précise pas comment ce plancher serait atteint.",
+        impactParClasse: {
+          populaires: { score: 2, avantages: ["Relèvement de tous les bas revenus au-dessus de 2 000 euros nets"], risques: ["Coût et effets sur l'emploi non chiffrés ; une règle de ce type peut peser sur l'emploi des personnes peu qualifiées"], angleMort: "Le discours ne dit pas si le plancher vise les revenus d'activité seuls ou aussi les allocations." },
+          moyennes: { score: 0, avantages: [], risques: ["Hausse des coûts salariaux pour les entreprises employant des bas salaires, non chiffrée"], angleMort: "Pas de chiffrage de l'effet sur les grilles salariales." },
+          aisees: { score: -1, avantages: [], risques: ["Catégorie identifiée comme contributrice probable si le plancher est financé par les hauts revenus ou les entreprises"], angleMort: "Pas de mécanisme de financement chiffré." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Le discours ne dit pas si le plancher concerne aussi les pensions." },
+        },
+      },
+      {
+        id: "sl-temps-travail",
+        theme: "Pouvoir d'achat et économie",
+        titre: "Réduction importante du temps de travail, sans perte de salaire ni hausse de la charge de travail",
+        resumeOfficiel:
+          "Dans son intervention à la Fête de l'Humanité : « il faut drastiquement diminuer le temps de travail sans perte de salaire et sans augmentation de la charge de travail », « sous le contrôle des salariés eux-mêmes ».",
+        sourceOfficielle: "https://npa-revolutionnaires.org/articles/intervention-de-selma-labib-a-la-fete-de-lhumanite-2026",
+        niveauConfiance: "annonce",
+        noteConfiance:
+          "Propos d'un discours (Fête de l'Humanité, 12 septembre 2026), relus le 21/11/2026. La candidate rejette les 32 heures et critique les 35 heures, sans proposer de durée chiffrée.",
+        impactParClasse: {
+          populaires: { score: 1, avantages: ["Plus de temps libre sans perte de revenu, si la mesure est appliquée"], risques: ["Hausse des coûts pour les employeurs, avec un risque pour les petites entreprises, non chiffré"], angleMort: "Aucune durée ni calendrier précisés." },
+          moyennes: { score: 1, avantages: ["Gain de temps pour les salariés, sans baisse de salaire"], risques: ["Charge pour les entreprises, notamment les PME, non chiffrée"], angleMort: "Pas de chiffrage du coût ni de calendrier." },
+          aisees: { score: -1, avantages: [], risques: ["Coût pour les employeurs et les actionnaires, sans chiffrage"], angleMort: "Le discours ne précise pas la part de ce coût qui serait supportée par les entreprises." },
+          retraites: { score: 0, avantages: [], risques: [], angleMort: "Mesure concernant les actifs ; le discours ne précise pas d'effet sur les pensions." },
+        },
+      },
+    ],
   },
   {
     id: "lalanne",
