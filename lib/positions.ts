@@ -83,7 +83,6 @@ export const POSITIONS: Position[] = [
       { url: "https://www.france24.com/fr/france/20261106-france-insoumise-jean-luc-melenchon-presente-programme-presidentielle-2027-fidele-volonte-rupture-lfi", type: "presse", date: "2026-11-06", citation: "hausse du smic à 1 700 euros net" },
     ],
   },
-  { candidat: "ruffin", question: 1, choix: "A", mesureId: "frf-smic-1700", dateSource: "2026-11-06" },
   // 2 — fiscalité des entreprises et du capital
   {
     candidat: "melenchon", question: 2, choix: "B", mesureId: "jlm-fiscalite",

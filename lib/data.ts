@@ -97,9 +97,9 @@ export interface AvisDonnees {
 }
 
 export const AVIS_DONNEES_REELLES: AvisDonnees = {
-  dateMaj: "2026-11-21",
+  dateMaj: "2026-11-22",
   texte:
-    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées ; depuis, le judoka Teddy Riner a annoncé sa candidature le 9 novembre 2026 (franceinfo, LCP, France 24), sans étiquette de parti : il a été ajouté. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027) ; Dominique de Villepin, souvent cité dans la presse, répète ne pas être encore candidat (3 novembre 2026, France Inter), il n'est donc pas inclus. La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 26 des 37 candidats disposent à ce stade d'au moins une mesure sourcée (melenchon, attal, philippe, retailleau, le-pen, tondelier, bouamrane, dupont-aignan, glucksmann, lalanne, lisnard, platret, riner, roussel, ruffin, zemmour en ont plusieurs ; arthaud, asselineau, batho, becht, bertrand, collovati, egger, lassalle, markovic, mathieu en ont une seule) ; les 11 autres sont enrichis progressivement, en priorité par ordre alphabétique. Chaque mesure indique sa source et son niveau de confiance.",
+    "Tous les candidats officiellement déclarés selon les médias de référence (franceinfo, LCP, France 24, Le JDD) figurent dans le comparateur, par ordre alphabétique, y compris ceux dont aucune mesure sourcée n'a encore été recensée : leur carte l'indique explicitement (« aucune mesure recensée ») plutôt que d'extrapoler. La liste évolue à chaque nouvelle déclaration ou retrait de candidature : le trombinoscope de franceinfo (mis à jour au 22/10/2026) a permis d'identifier cinq candidatures qui manquaient encore au comparateur — Gilles Platret (maire de Chalon-sur-Saône, déclaré le 8 octobre 2026), Mira Markovic (Parti animaliste), Erwan Rohou (Mouvement écologiste indépendant), Christian Collovati et Augustin Billetdoux — désormais ajoutées ; depuis, le judoka Teddy Riner a annoncé sa candidature le 9 novembre 2026 (franceinfo, LCP, France 24), sans étiquette de parti : il a été ajouté. Dominique de Villepin (La France humaniste) a officialisé sa candidature le 20 novembre 2026 (LCP, France 24) : il a été ajouté. François Ruffin (Debout !) a retiré sa candidature le 21 novembre 2026, sans soutenir aucun autre candidat de gauche encore en lice (franceinfo, LCP, France 24) : il a été retiré du comparateur avec ses mesures et sa position dans la boussole. Aucune candidature n'est encore officiellement validée par le Conseil constitutionnel (parrainages attendus au plus tard le 12/03/2027). La primaire de la gauche socialiste et démocratique (PS/Place publique/GRS) a désigné Raphaël Glucksmann dès le premier tour le 11 octobre 2026 (66,17 % des voix) ; les autres candidats de cette primaire (Olivier Faure, Ségolène Royal, Emmanuel Maurel, Jérôme Guedj), qui ont annoncé soutenir le vainqueur, ont été retirés du comparateur. Marine Le Pen reste candidate du Rassemblement national ; son pourvoi en cassation est en cours, mais une décision n'est pas attendue avant le printemps/été 2027, soit après le premier tour (Jordan Bardella, réélu président du parti le 24 octobre 2026, n'est candidat qu'en cas de retrait de Marine Le Pen). 25 des 37 candidats disposent à ce stade d'au moins une mesure sourcée (melenchon, attal, philippe, retailleau, le-pen, tondelier, bouamrane, dupont-aignan, glucksmann, lalanne, lisnard, platret, riner, roussel, zemmour en ont plusieurs ; arthaud, asselineau, batho, becht, bertrand, collovati, egger, lassalle, markovic, mathieu en ont une seule) ; les 12 autres sont enrichis progressivement, en priorité par ordre alphabétique. Chaque mesure indique sa source et son niveau de confiance.",
 };
 
 // Remapping vers la taxonomie à 9 thèmes (2026-08-29) : `br-rsa` (RSA/emploi) est classée en
@@ -155,9 +155,19 @@ export const AVIS_DONNEES_REELLES: AvisDonnees = {
 // rattacher ces positions : `db-reguler-installation-medecins` (Services publics, Batho, Q10), et
 // `kb-retraite-65-ans` (Retraites et modèle social, Bouamrane, Q3). Relecture humaine du 2026-11-10 : les positions
 // Batho Q15 (RIC : proposition de Clara Egger, attribuée à tort) et Q20 (soutien à un dispositif tiers, non explicite)
-// ont été retirées avec leurs mesures. Prochaine exécution : reprendre
-// l'enrichissement par équité à partir de `roussel`, puis `ruffin`, `zemmour`, `branco`, `durif`, `kazib`,
-// `labib`, `legendre`, `mlekuz`, `philippot`, `polony` (ordre alphabétique des id restés sans mesure).
+// ont été retirées avec leurs mesures. Mesures ajoutées pour `ruffin`, `roussel`, `zemmour` et `glucksmann`
+// (10 mesures sourcées, 1 position) puis pour Teddy Riner (candidature du 9 novembre 2026, 8 mesures,
+// 7 positions recoupées) ; branche `enrichissement-candidats-sans-mesure` (PR #25, en attente de relecture
+// au 2026-11-22) en cours pour `branco`, `kazib`, `labib`.
+// Le 2026-11-22, vérification de la liste des candidats (franceinfo, LCP, France 24) : ajout de Dominique
+// de Villepin (La France humaniste, candidature officialisée le 20/11/2026) et retrait de François Ruffin
+// (candidature retirée le 21/11/2026, sans soutien à un autre candidat). Aucune mesure ni position ajoutée
+// cette exécution : l'environnement d'exécution n'autorisait aucun accès réseau sortant (WebFetch bloqué
+// vers tous les domaines, y compris les 4 médias autorisés et melenchon2027.fr), rendant impossible la
+// relecture exacte des citations exigée avant tout ajout. Prochaine exécution : reprendre l'enrichissement
+// par équité à partir de `durif` (si `branco`/`kazib`/`labib` sont fusionnés via la PR #25, poursuivre avec
+// `legendre`, `mlekuz`, `philippot`, `polony`, puis retenter `billetdoux`, `mikolajczak`, `rohou`, vérifiés
+// sans succès aux exécutions précédentes).
 export const CANDIDATS: Candidat[] = [
   {
     id: "melenchon",
@@ -2026,65 +2036,10 @@ export const CANDIDATS: Candidat[] = [
     ],
   },
   {
-    id: "ruffin",
-    nom: "François Ruffin",
-    parti: "Debout !",
-    mesures: [
-      {
-        id: "frf-smic-1700",
-        theme: "Pouvoir d'achat et économie",
-        titre: "Porter le Smic à 1 700 euros nets et indexer les salaires sur l'inflation",
-        resumeOfficiel:
-          "Invité du « 8h30 franceinfo » le 6 novembre 2026, François Ruffin réclame un Smic à 1 700 euros net, ce qu'il juge plus ambitieux que la hausse au-dessus de 1 500 euros net évoquée par le gouvernement, et l'indexation des salaires sur l'inflation.",
-        sourceOfficielle:
-          "https://www.franceinfo.fr/replay-radio/8h30-fauvelle-dely/mobilisations-sociales-salaires-ses-40-chantiers-pour-remettre-la-france-debout-le-8h30-franceinfo-de-francois-ruffin_8249932.html",
-        niveauConfiance: "confirme",
-        noteConfiance:
-          "Proposition chiffrée, répétée par le candidat et rapportée par franceinfo le 6 novembre 2026 (interview à l'occasion de la sortie de son livre « Au boulot ! »). Les modalités de l'indexation ne sont pas détaillées.",
-        impactParClasse: {
-          populaires: { score: 2, avantages: ["Hausse directe du revenu des salariés au Smic ou proches du Smic, catégorie où ils sont surreprésentés"], risques: ["Risque de destruction d'emplois peu qualifiés évoqué par certains économistes si la hausse n'est pas accompagnée d'allègements de charges, non chiffré par le candidat"], angleMort: "Le financement de la mesure et les modalités de l'indexation ne sont pas détaillés dans les sources consultées ; aucun chiffrage indépendant de l'effet net sur l'emploi." },
-          moyennes: { score: 0, avantages: ["Bénéfice direct pour les foyers dont les revenus reposent sur des salaires proches du Smic", "Effet d'entraînement possible sur les salaires juste au-dessus du Smic, non chiffré"], risques: ["Aucun effet direct pour un salarié déjà rémunéré au-dessus de 1 700 euros nets", "Si la mesure est financée par une hausse des cotisations ou de la fiscalité, cette catégorie pourrait y contribuer sans en bénéficier directement"], angleMort: "Effet très variable au sein de la catégorie selon la composition du foyer et le niveau de salaire ; financement précis non publié." },
-          aisees: { score: -1, avantages: [], risques: ["Catégorie identifiée comme contributrice probable si la hausse est financée par la fiscalité ou les cotisations patronales"], angleMort: "Le mécanisme de financement chiffré n'est pas publié ; l'effet sur cette catégorie dépendra de ce choix." },
-          retraites: { score: 0, avantages: [], risques: [], angleMort: "La mesure porte sur le salaire minimum des actifs ; son éventuel effet indirect sur les pensions n'est pas précisé dans les sources consultées." },
-        },
-      },
-      {
-        id: "frf-loyers-prix",
-        theme: "Pouvoir d'achat et économie",
-        titre: "Encadrer les loyers et contrôler les prix et les marges",
-        resumeOfficiel:
-          "Invité du « 8h30 franceinfo » le 2 juin 2026, François Ruffin cite trois priorités économiques : l'indexation des salaires sur l'inflation, « l'encadrement du prix des loyers » et « le contrôle des prix et des marges », en estimant que les Français qui travaillent perdent en pouvoir d'achat.",
-        sourceOfficielle:
-          "https://www.franceinfo.fr/replay-radio/8h30-fauvelle-dely/presidentielle-2027-sommet-choose-france-le-8h30-franceinfo-de-francois-ruffin_8013230.html",
-        niveauConfiance: "annonce",
-        noteConfiance:
-          "Déclaration directe rapportée par franceinfo le 2 juin 2026 ; le périmètre des loyers encadrés, les produits concernés par le contrôle des prix et les modalités ne sont pas précisés.",
-        impactParClasse: {
-          populaires: { score: 0, avantages: ["Les locataires, nombreux dans cette catégorie, pourraient voir la hausse de leur loyer limitée", "Un contrôle des prix pourrait limiter la hausse de certaines dépenses courantes"], risques: ["Un encadrement des loyers peut, selon certains économistes, réduire l'offre de logements locatifs, sans chiffrage dans les sources"], angleMort: "Périmètre et modalités non précisés (zones, plafonds, produits concernés) : aucun effet chiffré ne peut être attribué à cette catégorie." },
-          moyennes: { score: 0, avantages: ["Les locataires pourraient voir la hausse de leur loyer limitée"], risques: ["Un contrôle des marges pourrait peser sur les commerces et les petites entreprises, sans chiffrage"], angleMort: "Périmètre et modalités non précisés : aucun effet chiffré ne peut être attribué à cette catégorie." },
-          aisees: { score: 0, avantages: [], risques: ["Les propriétaires bailleurs et les entreprises dont les marges seraient contrôlées pourraient être affectés, sans chiffrage"], angleMort: "Périmètre et modalités non précisés : aucun effet chiffré ne peut être attribué à cette catégorie." },
-          retraites: { score: 0, avantages: ["Les retraités locataires pourraient voir la hausse de leur loyer limitée"], risques: [], angleMort: "Périmètre et modalités non précisés : aucun effet chiffré ne peut être attribué à cette catégorie." },
-        },
-      },
-      {
-        id: "frf-probite",
-        theme: "Institutions et démocratie",
-        titre: "Loi de séparation de l'argent et de l'État : Haute autorité à la probité, fin du lobbying des ministres sortants, privilèges des anciens présidents supprimés",
-        resumeOfficiel:
-          "Lors d'une conférence de presse « pour une loi de séparation de l'argent et de l'État » (2 juillet 2026), François Ruffin propose de créer une « Haute autorité à la probité », d'interdire pendant dix ans aux ministres sortants le lobbying et le conseil dans le champ de leur ancien portefeuille, de supprimer les « privilèges des anciens présidents », de garantir l'indépendance du parquet et de rendre inéligibles les personnes condamnées pour manquement au devoir de probité, atteintes graves à l'ordre social, délits sexuels ou crimes.",
-        sourceOfficielle:
-          "https://lcp.fr/actualites/presidentielle-2027-apres-la-polemique-sur-sa-bd-francois-ruffin-a-la-relance-sur-le",
-        niveauConfiance: "annonce",
-        noteConfiance:
-          "Propositions détaillées par le candidat lors d'une conférence de presse et rapportées par LCP le 2 juillet 2026 ; aucun texte de loi ni chiffrage n'est public à ce stade.",
-        impactParClasse: {
-          populaires: { score: 0, avantages: [], risques: [], angleMort: "Réforme de la probité et des institutions sans effet économique direct identifiable pour cette catégorie ; aucun chiffrage public." },
-          moyennes: { score: 0, avantages: [], risques: [], angleMort: "Réforme de la probité et des institutions sans effet économique direct identifiable pour cette catégorie ; aucun chiffrage public." },
-          aisees: { score: 0, avantages: [], risques: [], angleMort: "Réforme de la probité et des institutions sans effet économique direct identifiable pour cette catégorie ; aucun chiffrage public." },
-          retraites: { score: 0, avantages: [], risques: [], angleMort: "Réforme de la probité et des institutions sans effet économique direct identifiable pour cette catégorie ; aucun chiffrage public." },
-        },
-      },
-    ],
+    id: "villepin",
+    nom: "Dominique de Villepin",
+    parti: "La France humaniste",
+    mesures: [],
   },
   {
     id: "zemmour",
